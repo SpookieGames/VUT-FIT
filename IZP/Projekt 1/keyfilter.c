@@ -109,7 +109,7 @@ void zistenie_nasledujucich_znakov(int pocet_miest, char mesta[][251], char *vel
 }
 
 /*
-    Funkcia 'output' sluzi cisto na vypisanie vysledkov
+    Funkcia 'output' sluzi na vypisanie vysledkov na zaklade splnenia podmienok
 */
 void output(char mesta[][251], int doplnenie_index, char *velky_vstup, int pocet_znakovych_zhod, char nasledujuci_znak[], int zhoda)
 {
