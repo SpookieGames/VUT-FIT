@@ -37,7 +37,7 @@ void zoradenie_moznych_znakov(char znak[])
             }
         }
         char tmp = znak[index_minima]; //
-        znak[index_minima] = znak[i];  // Zamena znaku na urcenu poziciu
+        znak[index_minima] = znak[i];  // Zamena znaku (swap)
         znak[i] = tmp;                 //
     }
 }
