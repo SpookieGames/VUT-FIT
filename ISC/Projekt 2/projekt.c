@@ -18,7 +18,7 @@ int neparny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_neparny)
         // Zacatie overovania v 1 strednom bode (1 pismeno je stred)
         int vlavo = i;
         int vpravo = i;
-        while (vpravo < dlzka_vstupu && vlavo >= 0 && (toupper(vstup[vlavo])) == (toupper(vstup[vpravo]))) // Ohranicenie a porovnanie lavej a pravej strany (nerozlišuje veľké a malé písmená)
+        while (vpravo < dlzka_vstupu && vlavo >= 0 && (toupper(vstup[vlavo])) == (toupper(vstup[vpravo]))) // Ohranicenie a porovnanie lavej a pravej strany (nerozlisuje velke a male pismena)
         {
             int aktualna_dlzka = (vpravo - vlavo) + 1;    // Ziskanie dlzky naposledy overeneho palindromu
             if (aktualna_dlzka > maximalna_dlzka_neparny) // Ak je aktualna dlzka dlhsia ako ulozena maximalna dlzka
@@ -43,7 +43,7 @@ int parny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_parny)
         // Stred su 2 pismena
         int vlavo = i;
         int vpravo = i + 1;
-        while (vpravo < dlzka_vstupu && vlavo >= 0 && (toupper(vstup[vlavo])) == (toupper(vstup[vpravo]))) // Ohranicenie a porovnanie lavej a pravej strany (nerozlišuje veľké a malé písmená)
+        while (vpravo < dlzka_vstupu && vlavo >= 0 && (toupper(vstup[vlavo])) == (toupper(vstup[vpravo]))) // Ohranicenie a porovnanie lavej a pravej strany (nerozlisuje velke a male pismena)
         {
             int aktualna_dlzka = (vpravo - vlavo) + 1;  // Ziskanie dlzky naposledy overeneho palindromu
             if (aktualna_dlzka > maximalna_dlzka_parny) // Ak je aktualna dlzka dlhsia ako ulozena maximalna dlzka
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
     int maximalna_dlzka_neparny = neparny_palindrom(vstup, dlzka_vstupu, &zaciatok_neparny); // Volanie funkcie a navrat maximalna_dlzka_neparny a zaciatok_neparny pomocou pointera
     int maximalna_dlzka_parny = parny_palindrom(vstup, dlzka_vstupu, &zaciatok_parny);       // Volanie funkcie a navrat maximalna_dlzka_parny a zaciatok_parny pomocou pointera
 
-    // Zistenie ci je najdlhsie palindrom parny alebo neparny
+    // Zistenie ci je najdlhsi palindrom parny alebo neparny
     if (maximalna_dlzka_neparny > maximalna_dlzka_parny)
     {
         maximalna_dlzka = maximalna_dlzka_neparny;
