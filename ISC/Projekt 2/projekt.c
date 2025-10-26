@@ -3,14 +3,16 @@
 #include <string.h>
 #include <ctype.h>
 
+#define MAX_DLZKA 150 // Definicia maximalnej dlzky
+
 // Deklaracia funkcii
-int neparny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_neparny);
-int parny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_parny);
-void print(int maximalna_dlzka, int zaciatok, char vstup[]);
+int neparny_palindrom(char vstup[MAX_DLZKA], int dlzka_vstupu, int *zaciatok_neparny);
+int parny_palindrom(char vstup[MAX_DLZKA], int dlzka_vstupu, int *zaciatok_parny);
+void print(int maximalna_dlzka, int zaciatok, char vstup[MAX_DLZKA]);
 
 // Funkcia na ziskanie palindromu neparnej dlzky
 // Kazdy znak s indexom [i] vo vstupe pouzijeme ako stred palindromu a na zaklade porovnania rozsirujeme overovany retazec vlavo a vpravo
-int neparny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_neparny)
+int neparny_palindrom(char vstup[MAX_DLZKA], int dlzka_vstupu, int *zaciatok_neparny)
 {
     int maximalna_dlzka_neparny = 1; // Inicializacia premennej
     for (int i = 0; i < dlzka_vstupu; i++)
@@ -35,7 +37,7 @@ int neparny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_neparny)
 
 // Funkcia na ziskanie palindromu parnej dlzky
 // Kazde 2 znaky s indexom[i] a [i+1] vo vstupe pouzijeme ako stred palindromu a na zaklade porovnania rozsirujeme overovany retazec vlavo a vpravo
-int parny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_parny)
+int parny_palindrom(char vstup[MAX_DLZKA], int dlzka_vstupu, int *zaciatok_parny)
 {
     int maximalna_dlzka_parny = 0; // Inicializacia premennej
     for (int i = 0; i < dlzka_vstupu; i++)
@@ -60,7 +62,7 @@ int parny_palindrom(char vstup[], int dlzka_vstupu, int *zaciatok_parny)
 }
 
 // Funkcia na vypisanie vysledku
-void print(int maximalna_dlzka, int zaciatok, char vstup[])
+void print(int maximalna_dlzka, int zaciatok, char vstup[MAX_DLZKA])
 {
     char vysledny_palindrom[maximalna_dlzka + 1]; // Inicializacia premennej
     for (int i = 0; i < maximalna_dlzka; i++)
@@ -72,14 +74,11 @@ void print(int maximalna_dlzka, int zaciatok, char vstup[])
 }
 
 // Funkcia main
-int main(int argc, char *argv[])
+int main(void)
 {
-    char *vstup = argv[1]; // Nacitanie vstupu z argumentu
-    if (argc != 2)         // Overenie poctu argumentov
-    {
-        printf("Zadajte 1 argument!\n");
-        return 1;
-    }
+    char vstup[MAX_DLZKA];
+    printf("Zadajte text na overenie palindromu: \n");
+    scanf("%149s", vstup);                                                           // Nacitanie vstupu (pri zmene maximalnej dlzky treba adekvatne upravit scanf)
     int dlzka_vstupu = strlen(vstup);                                                // Ziskanie dlzky vstupu pomocou strlen
     int zaciatok_neparny = 0, zaciatok_parny = 0, maximalna_dlzka = 0, zaciatok = 0; // Inicializacia premennych
 
