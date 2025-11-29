@@ -22,15 +22,20 @@ typedef struct Scluster
 
 typedef struct Sweights
 {
-    float wb, wt, wd, ws;
+    float wb, wt, wd, ws; // vahy
 } weights;
+
+// Deklaracia funkcii
+void load_weights(char *argv[], weights *W);
+flow *load_file(const char *filename, int *count_out);
+int verify_arguments(int argc, char *argv[], weights *W);
 
 void load_weights(char *argv[], weights *W)
 {
-    W->wb = atof(argv[3]);
-    W->wt = atof(argv[4]);
-    W->wd = atof(argv[5]);
-    W->ws = atof(argv[6]);
+    W->wb = atof(argv[3]); // Mozeme pouzit atof nakolko sme vstup uz overili
+    W->wt = atof(argv[4]); //
+    W->wd = atof(argv[5]); //
+    W->ws = atof(argv[6]); //
 }
 
 flow *load_file(const char *filename, int *count_out)
@@ -39,39 +44,47 @@ flow *load_file(const char *filename, int *count_out)
     char src_ip[20];
     char dst_ip[20];
     float avg_interarrival;
-    FILE *f = fopen(filename, "r");
+
+    FILE *f = fopen(filename, "r"); // Otvorenie suboru na citanie
     if (f == NULL)
     {
         fprintf(stderr, "Failed to open file\n");
         return NULL;
     }
-    fscanf(f, "count=%d", &count);
+    fscanf(f, "count=%d", &count); // Nacitanie poctu flows z 1. riadku
     if (count < 0)
     {
         fclose(f);
         return NULL;
     }
 
-    flow *flow_array = malloc(count * sizeof(flow));
+    flow *flow_array = malloc(count * sizeof(flow)); // Alokovanie pamata pre vsetky flow
     if (flow_array == NULL)
     {
-        fprintf(stderr, "Failed to allocate memory");
+        fprintf(stderr, "Failed to allocate memory\n");
         fclose(f);
         return NULL;
     }
 
+    // Cyklus na populovanie flow_array
     for (int i = 0; i < count; i++)
     {
-        fscanf(f, "%d %s %s %d %d %d %f", &flow_id, src_ip, dst_ip, &total_bytes, &flow_duration, &packet_count, &avg_interarrival);
+        if (fscanf(f, "%d %s %s %d %d %d %f", &flow_id, src_ip, dst_ip, &total_bytes, &flow_duration, &packet_count, &avg_interarrival) != 7)
+        {
+            fprintf(stderr, "Count is incorrect\n");
+            fclose(f);
+            free(flow_array);
+            return NULL;
+        }
 
-        flow_array[i].ID = flow_id;
-        strcpy(flow_array[i].src_ip, src_ip);
-        strcpy(flow_array[i].dst_ip, dst_ip);
-        flow_array[i].b = total_bytes;
-        flow_array[i].t = flow_duration;
-        flow_array[i].d = avg_interarrival;
+        flow_array[i].ID = flow_id;           // Odovzdanie nacitanych hodnot do flow
+        strcpy(flow_array[i].src_ip, src_ip); //
+        strcpy(flow_array[i].dst_ip, dst_ip); //
+        flow_array[i].b = total_bytes;        //
+        flow_array[i].t = flow_duration;      //
+        flow_array[i].d = avg_interarrival;   //
 
-        if (packet_count <= 0)
+        if (packet_count <= 0) // Neda sa delit nulou a zaporny pocet paketov nedava zmysel
         {
             fprintf(stderr, "Packet count cannot be 0");
             fclose(f);
@@ -105,7 +118,7 @@ int verify_arguments(int argc, char *argv[], weights *W)
         fprintf(stderr, "N > 0\n");
         return 1;
     }
-    for (int i = 3; i < argc; i++)
+    for (int i = 3; i < argc; i++) // Cyklus na overenie vah
     {
         if (strtod(argv[i], &p_end) < 0.0 || *p_end != '\0' || p_end == argv[i])
         {
@@ -113,7 +126,7 @@ int verify_arguments(int argc, char *argv[], weights *W)
             return 1;
         }
     }
-    load_weights(argv, W);
+    load_weights(argv, W); // Pri overeni platnosti nacitat vahy do struct W
     return 0;
 }
 
@@ -127,7 +140,7 @@ int main(int argc, char *argv[])
     }
     const char *filename = argv[1];
     const int n = atoi(argv[2]);
-    flow *flow_array = load_file(filename, &count);
+    flow *flow_array = load_file(filename, &count); // Vytvorime pole flows
 
     if (flow_array == NULL)
     {
