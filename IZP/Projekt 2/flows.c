@@ -33,7 +33,7 @@ void load_weights(char *argv[], weights *W)
     W->ws = atof(argv[6]);
 }
 
-int load_file(const char *filename, flow **flow_array)
+flow *load_file(const char *filename, int *count_out)
 {
     int count, flow_id, flow_duration, total_bytes, packet_count;
     char src_ip[20];
@@ -43,42 +43,50 @@ int load_file(const char *filename, flow **flow_array)
     if (f == NULL)
     {
         fprintf(stderr, "Failed to open file\n");
-        return 1;
+        return NULL;
     }
     fscanf(f, "count=%d", &count);
     if (count < 0)
     {
-        return 1;
+        return NULL;
     }
 
-    *flow_array = malloc(count * sizeof(flow));
+    flow *flow_array = malloc(count * sizeof(flow));
+    if (flow_array == NULL)
+    {
+        fprintf(stderr, "Failed to allocate memory");
+        fclose(f);
+    }
+
     for (int i = 0; i < count; i++)
     {
         fscanf(f, "%d %s %s %d %d %d %f", &flow_id, src_ip, dst_ip, &total_bytes, &flow_duration, &packet_count, &avg_interarrival);
 
-        flow_array[i]->ID = flow_id;
-        strcpy(flow_array[i]->src_ip, src_ip);
-        strcpy(flow_array[i]->dst_ip, dst_ip);
-        flow_array[i]->b = total_bytes;
-        flow_array[i]->t = flow_duration;
-        flow_array[i]->d = avg_interarrival;
+        flow_array[i].ID = flow_id;
+        strcpy(flow_array[i].src_ip, src_ip);
+        strcpy(flow_array[i].dst_ip, dst_ip);
+        flow_array[i].b = total_bytes;
+        flow_array[i].t = flow_duration;
+        flow_array[i].d = avg_interarrival;
 
         if (packet_count <= 0)
         {
             fprintf(stderr, "Packet count cannot be 0");
             fclose(f);
             free(flow_array);
-            return 1;
+            return NULL;
         }
         else
         {
-            flow_array[i]->s = ((float)total_bytes / packet_count);
+            flow_array[i].s = ((float)total_bytes / packet_count);
         }
 
+        // temporary
         printf("%d %s %s %d %d %d %f\n", flow_id, src_ip, dst_ip, total_bytes, flow_duration, packet_count, avg_interarrival);
     }
     fclose(f);
-    return 0;
+    *count_out = count;
+    return flow_array;
 }
 
 // Funkcia na verifikaciu platnosti zadanych argumentov
@@ -110,19 +118,18 @@ int verify_arguments(int argc, char *argv[], weights *W)
 int main(int argc, char *argv[])
 {
     weights W;
-    flow *flow_array = NULL;
+    int count;
     if (verify_arguments(argc, argv, &W) != 0)
     {
         return 1;
     }
     const char *filename = argv[1];
     const int n = atoi(argv[2]);
-    if (load_file(filename, &flow_array) != 0)
-    {
-        return 1;
-    }
+    flow *flow_array = load_file(filename, &count);
 
+    // temporary
     // printf("%f %f %f %f\n", W.wb, W.wt, W.wd, W.ws);
+    printf("Count: %d\n", count);
 
     return 0;
 }
