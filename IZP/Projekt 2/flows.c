@@ -48,6 +48,7 @@ flow *load_file(const char *filename, int *count_out)
     fscanf(f, "count=%d", &count);
     if (count < 0)
     {
+        fclose(f);
         return NULL;
     }
 
@@ -56,6 +57,7 @@ flow *load_file(const char *filename, int *count_out)
     {
         fprintf(stderr, "Failed to allocate memory");
         fclose(f);
+        return NULL;
     }
 
     for (int i = 0; i < count; i++)
@@ -127,9 +129,15 @@ int main(int argc, char *argv[])
     const int n = atoi(argv[2]);
     flow *flow_array = load_file(filename, &count);
 
+    if (flow_array == NULL)
+    {
+        return 1;
+    }
+
     // temporary
     // printf("%f %f %f %f\n", W.wb, W.wt, W.wd, W.ws);
     printf("Count: %d\n", count);
 
+    free(flow_array);
     return 0;
 }
