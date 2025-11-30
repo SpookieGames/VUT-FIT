@@ -26,6 +26,7 @@ typedef struct Sweights
 } weights;
 
 // Deklaracia funkcii
+double calculate_distance(flow A, flow B, weights);
 void load_weights(char *argv[], weights *W);
 flow *load_file(char *filename, int *count_out);
 int verify_arguments(int argc, char *argv[], weights *W);
@@ -116,7 +117,7 @@ int verify_ips(int count, flow *flow_array)
             fprintf(stderr, "Invalid IP address\n");
             return 1;
         }
-        else if (as < 0 || as > 255 || bs < 0 || bs > 255 || cs < 0 || cs > 255 | ds < 0 || ds > 255)
+        else if (as < 0 || as > 255 || bs < 0 || bs > 255 || cs < 0 || cs > 255 || ds < 0 || ds > 255)
         {
             fprintf(stderr, "Invalid IP address\n");
             return 1;
@@ -127,13 +128,24 @@ int verify_ips(int count, flow *flow_array)
             fprintf(stderr, "Invalid IP address\n");
             return 1;
         }
-        else if (ad < 0 || ad > 255 || bd < 0 || bd > 255 || cd < 0 || cd > 255 | dd < 0 || dd > 255)
+        else if (ad < 0 || ad > 255 || bd < 0 || bd > 255 || cd < 0 || cd > 255 || dd < 0 || dd > 255)
         {
             fprintf(stderr, "Invalid IP address\n");
             return 1;
         }
     }
     return 0;
+}
+
+double calculate_distance(flow A, flow B, weights W)
+{
+    double distance;
+    float difference_b = A.b - B.b;
+    float difference_t = A.t - B.t;
+    float difference_d = A.d - B.d;
+    float difference_s = A.s - B.s;
+    distance = sqrt(((W.wb * pow(difference_b, 2)) + (W.wt * pow(difference_t, 2)) + (W.wd * pow(difference_d, 2)) + (W.ws * pow(difference_s, 2))));
+    return distance;
 }
 
 // Funkcia na verifikaciu platnosti zadanych argumentov
@@ -183,6 +195,8 @@ int main(int argc, char *argv[])
     {
         return 1;
     }
+
+    double test_distance = calculate_distance(flow_array[0], flow_array[1], W);
     // temporary
     for (int i = 0; i < count; i++)
     {
@@ -191,6 +205,7 @@ int main(int argc, char *argv[])
 
     // printf("%f %f %f %f\n", W.wb, W.wt, W.wd, W.ws);
     printf("Count: %d\n", count);
+    printf("Distance: %lf\n", test_distance);
 
     free(flow_array);
     return 0;
