@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+// #include <float.h>
 
 typedef struct Sflow
 {
@@ -16,8 +17,9 @@ typedef struct Sflow
 
 typedef struct Scluster
 {
-    /*int size;
-    int *pole;*/
+    int size;
+    int capacity;
+    int *flow_idxs;
 } cluster;
 
 typedef struct Sweights
@@ -26,6 +28,8 @@ typedef struct Sweights
 } weights;
 
 // Deklaracia funkcii
+cluster *allocate_clusters(int count);
+double calculate_cluster_distance(cluster A, cluster B, flow *flow_array, weights);
 double calculate_distance(flow A, flow B, weights);
 void load_weights(char *argv[], weights *W);
 flow *load_file(char *filename, int *count_out);
@@ -41,10 +45,10 @@ void load_weights(char *argv[], weights *W)
 
 flow *load_file(char *filename, int *count_out)
 {
-    int count, flow_id, flow_duration, total_bytes, packet_count;
-    char src_ip[16];
-    char dst_ip[16];
-    float avg_interarrival;
+    int count, flow_id, flow_duration, total_bytes, packet_count; // Docasne lokalne premenne
+    char src_ip[16];                                              //
+    char dst_ip[16];                                              //
+    float avg_interarrival;                                       //
 
     FILE *f = fopen(filename, "r"); // Otvorenie suboru na citanie
     if (f == NULL)
@@ -105,11 +109,38 @@ flow *load_file(char *filename, int *count_out)
     return flow_array;
 }
 
+// Funkcia ktora vytvori pocet clusterov = poctu flows
+cluster *allocate_clusters(int count)
+{
+    cluster *cluster_array = malloc(count * sizeof(cluster)); // Alokacia pamate pre count clusterov
+
+    if (cluster_array == NULL)
+    {
+        fprintf(stderr, "Failed to allocate memory\n");
+        return NULL;
+    }
+
+    for (int i = 0; i < count; i++)
+    {
+        cluster_array[i].flow_idxs = malloc(sizeof(int)); // Zatial nam staci pole pre 1 integer
+
+        if (cluster_array[i].flow_idxs == NULL)
+        {
+            fprintf(stderr, "Failed to allocate memory\n");
+            return NULL;
+        }
+
+        cluster_array[i].size = 1;         // Pociatocnu velkost dame na 1 nakolko budeme mat ulozeny iba 1 idx
+        cluster_array[i].flow_idxs[0] = i; // Na prvu poziciu v poli ulozime i az do count-1
+    }
+    return cluster_array;
+}
+
 // Funkcia na overenie IP adries. IP nesmie mat cislo vacsie ako 255 a mensie ako 0 medzi bodkami. Pouzil som sscanf co je posobny ako fscanf ale namiesto suboru cita z textoveho retazca
 int verify_ips(int count, flow *flow_array)
 {
-    int as, bs, cs, ds;
-    int ad, bd, cd, dd;
+    int as, bs, cs, ds; // Lokalne premenna na pracu s sscanf
+    int ad, bd, cd, dd; // Lokalne premenna na pracu s sscanf
     for (int i = 0; i < count; i++)
     {
         if (sscanf(flow_array[i].src_ip, "%d.%d.%d.%d", &as, &bs, &cs, &ds) != 4)
@@ -144,7 +175,7 @@ double calculate_distance(flow A, flow B, weights W)
     float difference_t = A.t - B.t;
     float difference_d = A.d - B.d;
     float difference_s = A.s - B.s;
-    distance = sqrt(((W.wb * pow(difference_b, 2)) + (W.wt * pow(difference_t, 2)) + (W.wd * pow(difference_d, 2)) + (W.ws * pow(difference_s, 2))));
+    distance = sqrt(((W.wb * pow(difference_b, 2)) + (W.wt * pow(difference_t, 2)) + (W.wd * pow(difference_d, 2)) + (W.ws * pow(difference_s, 2)))); // Vzorec pre vazenu Euklidovsku vzdialenost
     return distance;
 }
 
@@ -178,21 +209,26 @@ int main(int argc, char *argv[])
 {
     weights W;
     int count;
+
     if (verify_arguments(argc, argv, &W) != 0)
     {
         return 1;
     }
-    char *filename = argv[1];
-    int n = atoi(argv[2]);
-    flow *flow_array = load_file(filename, &count); // Vytvorime pole pre flows
 
-    if (flow_array == NULL)
+    char *filename = argv[1]; // Na filename pouzivam ukazaten aby sa predoslo buffer overflow
+    int n = atoi(argv[2]);
+    flow *flow_array = load_file(filename, &count);    // Vytvorime pole pre flows
+    cluster *cluster_array = allocate_clusters(count); // Vytvorime pole pre clusters
+
+    if (flow_array == NULL || cluster_array == NULL)
     {
         return 1;
     }
 
     if (verify_ips(count, flow_array) != 0)
     {
+        free(cluster_array);
+        free(flow_array);
         return 1;
     }
 
@@ -202,11 +238,16 @@ int main(int argc, char *argv[])
     {
         printf("ID: %d\n", flow_array[i].ID);
     }
+    for (int i = 0; i < count; i++)
+    {
+        printf("saved IDXs: %d\n", cluster_array[i].flow_idxs[0]);
+    }
 
     // printf("%f %f %f %f\n", W.wb, W.wt, W.wd, W.ws);
     printf("Count: %d\n", count);
     printf("Distance: %lf\n", test_distance);
 
+    free(cluster_array);
     free(flow_array);
     return 0;
 }
