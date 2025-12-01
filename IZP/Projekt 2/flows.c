@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-// #include <float.h>
 
 typedef struct Sflow
 {
@@ -28,19 +27,54 @@ typedef struct Sweights
 } weights;
 
 // Deklaracia funkcii
+void free_cluster_idxs(cluster *cluster_array, int count);
 cluster *allocate_clusters(int count);
-double calculate_cluster_distance(cluster A, cluster B, flow *flow_array, weights);
+double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weights W);
 double calculate_distance(flow A, flow B, weights);
 void load_weights(char *argv[], weights *W);
 flow *load_file(char *filename, int *count_out);
 int verify_arguments(int argc, char *argv[], weights *W);
 
+// Funkcia na nacitanie vah do struktury
 void load_weights(char *argv[], weights *W)
 {
     W->wb = atof(argv[3]); // Mozeme pouzit atof nakolko sme vstup uz overili
     W->wt = atof(argv[4]); //
     W->wd = atof(argv[5]); //
     W->ws = atof(argv[6]); //
+}
+
+// Funkcia na uvolnnie pamate v clusteroch
+void free_cluster_idxs(cluster *cluster_array, int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        free(cluster_array[i].flow_idxs);
+    }
+}
+
+// Funkcia na najdenie najmensej vzdialenosti medzi clustermi
+double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weights W)
+{
+    double min_distance = INFINITY; // Inicializujeme minimalnu vzdialenost ako nekonecno aby sme zabranili ze nieco bude vacsie ako min_distance
+
+    for (int i = 0; i < A->size; i++)
+    {
+        int idx_a = A->flow_idxs[i];
+        for (int j = 0; j < B->size; j++)
+        {
+            int idx_b = B->flow_idxs[j];
+
+            double current_distance = calculate_distance(flow_array[idx_a], flow_array[idx_b], W);
+            ;
+
+            if (current_distance < min_distance) // Zistujeme ci je aktualna vzdialenost mensia ako najdena minimalna vzdialenost
+            {
+                min_distance = current_distance;
+            }
+        }
+    }
+    return min_distance;
 }
 
 flow *load_file(char *filename, int *count_out)
@@ -130,6 +164,7 @@ cluster *allocate_clusters(int count)
             return NULL;
         }
 
+        cluster_array[i].capacity = 1;     // Celkova kapacita clusteru
         cluster_array[i].size = 1;         // Pociatocnu velkost dame na 1 nakolko budeme mat ulozeny iba 1 idx
         cluster_array[i].flow_idxs[0] = i; // Na prvu poziciu v poli ulozime i az do count-1
     }
@@ -220,14 +255,21 @@ int main(int argc, char *argv[])
     flow *flow_array = load_file(filename, &count);    // Vytvorime pole pre flows
     cluster *cluster_array = allocate_clusters(count); // Vytvorime pole pre clusters
 
-    if (flow_array == NULL || cluster_array == NULL)
+    if (flow_array == NULL)
     {
+        return 1;
+    }
+
+    if (cluster_array == NULL)
+    {
+        free(flow_array);
         return 1;
     }
 
     if (verify_ips(count, flow_array) != 0)
     {
         free(cluster_array);
+        free_cluster_idxs(cluster_array, count);
         free(flow_array);
         return 1;
     }
@@ -247,6 +289,7 @@ int main(int argc, char *argv[])
     printf("Count: %d\n", count);
     printf("Distance: %lf\n", test_distance);
 
+    free_cluster_idxs(cluster_array, count);
     free(cluster_array);
     free(flow_array);
     return 0;
