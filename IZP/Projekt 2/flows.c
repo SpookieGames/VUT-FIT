@@ -16,9 +16,9 @@ typedef struct Sflow
 
 typedef struct Scluster
 {
-    int size;
-    int capacity;
-    int *flow_idxs;
+    int size;       // Velkost clustera (kolko ma v sebe indexov)
+    int capacity;   // Kapacita (kolko indexov sa do clustera celkovo zmesti)
+    int *flow_idxs; // Ukazatel na zaciatok dynamickeho pola
 } cluster;
 
 typedef struct Sweights
@@ -27,6 +27,7 @@ typedef struct Sweights
 } weights;
 
 // Deklaracia funkcii
+void combine_clusters(cluster *A, cluster *B); // TODO
 void free_cluster_idxs(cluster *cluster_array, int count);
 cluster *allocate_clusters(int count);
 double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weights W);
@@ -240,6 +241,7 @@ int verify_arguments(int argc, char *argv[], weights *W)
     return 0;
 }
 
+// Funkcia main
 int main(int argc, char *argv[])
 {
     weights W;
