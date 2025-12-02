@@ -16,8 +16,8 @@ typedef struct Sflow
 
 typedef struct Scluster
 {
-    int size;       // Velkost clustera (kolko ma v sebe indexov)
-    int capacity;   // Kapacita (kolko indexov sa do clustera celkovo zmesti)
+    int size; // Velkost clustera (kolko ma v sebe indexov)
+    // int capacity;   // Kapacita (kolko indexov sa do clustera celkovo zmesti)
     int *flow_idxs; // Ukazatel na zaciatok dynamickeho pola
 } cluster;
 
@@ -28,7 +28,8 @@ typedef struct Sweights
 } weights;
 
 // Deklaracia funkcii
-void combine_clusters(cluster *A, cluster *B); // TODO
+void single_linkage(cluster *cluster_array, int count, flow *flow_array, weights W);
+void combine_clusters(cluster *A, cluster *B);
 void free_cluster_idxs(cluster *cluster_array, int count);
 cluster *allocate_clusters(int count);
 double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weights W);
@@ -36,11 +37,12 @@ double calculate_distance(flow A, flow B, weights);
 void load_weights(char *argv[], weights *W);
 flow *load_file(char *filename, int *count_out);
 int verify_arguments(int argc, char *argv[], weights *W);
+void output(cluster *cluster_array);
 
 // Funkcia na nacitanie vah do struktury
 void load_weights(char *argv[], weights *W)
 {
-    W->wb = atof(argv[3]); // Mozeme pouzit atof nakolko sme vstup uz overili
+    W->wb = atof(argv[3]); // Mozeme pouzit atof a atoi nakolko sme vstup uz overili
     W->wt = atof(argv[4]); //
     W->wd = atof(argv[5]); //
     W->ws = atof(argv[6]); //
@@ -74,6 +76,45 @@ double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weig
         }
     }
     return min_distance;
+}
+
+// Single linkage algoritmus
+void single_linkage(cluster *cluster_array, int count, flow *flow_array, weights W)
+{
+    int current_cluster_ammount = count; // Inicializujeme aktualny pocet clusterov na count nakolko sme si spravili funkciu v ktorej vytvorime rovnaky pocet clusterov ako flows
+    if (W.n == 0)                        // Ak je N 0 co znamena ze N nebolo zadane a mame vypisat vsetky clustery tak preskocime cely single_linkage algoritmus
+    {
+        return;
+    }
+    while (current_cluster_ammount > W.n) // Cyklus ktory bezi pokial nie je aktualny pocet clusterov rovnaky ako N
+    {
+        double min_distance = INFINITY; // Inicializujeme minimalnu vzdialenost ako nekonecno aby sme zabranili ze nieco bude vacsie ako min_distance rovnako ako pri calculate_cluster_distance
+        int idx_a = -1;                 // Lokalna premenna pre index clusteru A
+        int idx_b = -1;                 // Lokalna premenna pre index clusteru B
+        for (int a = 0; a < count; a++)
+        {
+            if (cluster_array[a].size == 0) // Prazdne clustery preskocime
+            {
+                continue;
+            }
+            for (int b = a + 1; b < count; b++)
+            {
+                if (cluster_array[b].size == 0) // Prazdne clustery preskocime
+                {
+                    continue;
+                }
+                double distance = calculate_cluster_distance(&cluster_array[a], &cluster_array[b], flow_array, W); // Vypocitame vzdialenost dvoch clusterov
+                if (distance < min_distance)
+                {
+                    min_distance = distance; // Ak je najmensia vzdialenost mensia ako aktualna vzdialenost tak nastavime najmensiu vzdialenost ako aktualnu vzdialenost
+                    idx_a = a;               // Ulozime si index A
+                    idx_b = b;               // Ulozime si index B
+                }
+            }
+        }
+        combine_clusters(&cluster_array[idx_a], &cluster_array[idx_b]); // Skombinujeme clustery s najdenymi indexami
+        current_cluster_ammount--;                                      // Po skombinovani zmensime pocet o 1
+    }
 }
 
 // Funkcia na nacitanie dat zo suboru
@@ -140,6 +181,26 @@ flow *load_file(char *filename, int *count_out)
     return flow_array;
 }
 
+// Funkcia na skombinovanie dvoch clusterov do jedneho
+void combine_clusters(cluster *A, cluster *B)
+{
+    A->flow_idxs = realloc(A->flow_idxs, ((A->size + B->size) * sizeof(int)));
+    if (A->flow_idxs == NULL)
+    {
+        fprintf(stderr, "Failed to reallocate memory"); // TODO
+        free(A->flow_idxs);
+        free(B->flow_idxs);
+        return;
+    }
+    for (int i = A->size; i < (A->size + B->size); i++)
+    {
+        A->flow_idxs[i] = B->flow_idxs[i - A->size];
+    }
+    A->size = A->size + B->size; // Zvacsi velkost v A
+    B->size = 0;                 // Nastavi velkost v B na 0 "deaktivuje cluster"
+    free(B->flow_idxs);
+}
+
 // Funkcia ktora vytvori pocet clusterov = poctu flows
 cluster *allocate_clusters(int count)
 {
@@ -157,7 +218,7 @@ cluster *allocate_clusters(int count)
             fprintf(stderr, "Failed to allocate memory\n");
             return NULL;
         }
-        cluster_array[i].capacity = 1;     // Celkova kapacita clusteru
+        // cluster_array[i].capacity = 1;     // Celkova kapacita clusteru
         cluster_array[i].size = 1;         // Pociatocnu velkost dame na 1 nakolko budeme mat ulozeny iba 1 idx
         cluster_array[i].flow_idxs[0] = i; // Na prvu poziciu v poli ulozime i az do count-1
     }
@@ -171,7 +232,7 @@ int verify_ips(int count, flow *flow_array)
     int ad, bd, cd, dd; // Lokalne premenna na pracu s sscanf
     for (int i = 0; i < count; i++)
     {
-        if (sscanf(flow_array[i].src_ip, "%d.%d.%d.%d", &as, &bs, &cs, &ds) != 4)
+        if (sscanf(flow_array[i].src_ip, "%d.%d.%d.%d", &as, &bs, &cs, &ds) != 4) // sscanf vracia pocet nacitanych znakov
         {
             fprintf(stderr, "Invalid IP address\n");
             return 1;
@@ -235,12 +296,18 @@ int verify_arguments(int argc, char *argv[], weights *W)
     }
     if (argc == 2) // Pri nezadanom N nacitame defaultne hodnoty pre vahy
     {
+        W->n = 0;
         W->wb = 1.0;
         W->wd = 1.0;
         W->ws = 1.0;
         W->wt = 1.0;
     }
     return 0;
+}
+
+void output(cluster *cluster_array)
+{
+    // TODO
 }
 
 // Funkcia main
@@ -255,7 +322,6 @@ int main(int argc, char *argv[])
     char *filename = argv[1];                          // Na filename pouzivam ukazaten aby sa predoslo buffer overflow
     flow *flow_array = load_file(filename, &count);    // Vytvorime pole pre flows
     cluster *cluster_array = allocate_clusters(count); // Vytvorime pole pre clusters
-    W.n = count;
     if (flow_array == NULL)
     {
         return 1;
@@ -267,11 +333,13 @@ int main(int argc, char *argv[])
     }
     if (verify_ips(count, flow_array) != 0)
     {
-        free(cluster_array);                     //
-        free_cluster_idxs(cluster_array, count); // Uvolnenie pamata ak mame neplatnu IP
+        free_cluster_idxs(cluster_array, count); //
+        free(cluster_array);                     // Uvolnenie pamata ak mame neplatnu IP
         free(flow_array);                        //
         return 1;
     }
+    single_linkage(cluster_array, count, flow_array, W);
+    output(cluster_array);
     // temporary
     double test_distance = calculate_distance(flow_array[0], flow_array[1], W);
 
@@ -287,7 +355,6 @@ int main(int argc, char *argv[])
     // printf("%f %f %f %f\n", W.wb, W.wt, W.wd, W.ws);
     printf("Count: %d\n", count);
     printf("Distance: %lf\n", test_distance);
-    printf("N: %d\n", W.n);
     //
     free_cluster_idxs(cluster_array, count); // Uvolnenie pamate pri bezchybnom bezani
     free(cluster_array);                     //
