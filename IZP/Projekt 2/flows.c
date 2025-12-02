@@ -195,21 +195,26 @@ flow *load_file(char *filename, int *count_out)
 // Funkcia na skombinovanie dvoch clusterov do jedneho
 void combine_clusters(cluster *A, cluster *B)
 {
-    A->flow_idxs = realloc(A->flow_idxs, ((A->size + B->size) * sizeof(int)));
-    if (A->flow_idxs == NULL)
+    int *tmp_ptr = realloc(A->flow_idxs, ((A->size + B->size) * sizeof(int)));
+    // A->flow_idxs = realloc(A->flow_idxs, ((A->size + B->size) * sizeof(int)));
+    if (tmp_ptr != NULL)
+    {
+        A->flow_idxs = tmp_ptr;
+        for (int i = A->size; i < (A->size + B->size); i++)
+        {
+            A->flow_idxs[i] = B->flow_idxs[i - A->size];
+        }
+        A->size = A->size + B->size; // Zvacsi velkost v A
+        B->size = 0;                 // Nastavi velkost v B na 0 "deaktivuje cluster"
+        free(B->flow_idxs);
+    }
+    else if (tmp_ptr == NULL)
     {
         fprintf(stderr, "Failed to reallocate memory");
         free(A->flow_idxs);
         free(B->flow_idxs);
         return;
     }
-    for (int i = A->size; i < (A->size + B->size); i++)
-    {
-        A->flow_idxs[i] = B->flow_idxs[i - A->size];
-    }
-    A->size = A->size + B->size; // Zvacsi velkost v A
-    B->size = 0;                 // Nastavi velkost v B na 0 "deaktivuje cluster"
-    free(B->flow_idxs);
 }
 
 // Funkcia ktora vytvori pocet clusterov = poctu flows
@@ -319,6 +324,7 @@ int verify_arguments(int argc, char *argv[], weights *W)
 void id_sorting(cluster *cluster_array, flow *flow_array)
 {
     // TODO
+    // qsort
 }
 
 void output(cluster *cluster_array, flow *flow_array)
