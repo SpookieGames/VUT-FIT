@@ -28,6 +28,7 @@ typedef struct Sweights
 } weights;
 
 // Deklaracia funkcii
+void id_sorting(cluster *cluster_array, flow *flow_array);
 void single_linkage(cluster *cluster_array, int count, flow *flow_array, weights W);
 void combine_clusters(cluster *A, cluster *B);
 void free_cluster_idxs(cluster *cluster_array, int count);
@@ -37,7 +38,7 @@ double calculate_distance(flow A, flow B, weights);
 void load_weights(char *argv[], weights *W);
 flow *load_file(char *filename, int *count_out);
 int verify_arguments(int argc, char *argv[], weights *W);
-void output(cluster *cluster_array);
+void output(cluster *cluster_array, flow *flow_array);
 
 // Funkcia na nacitanie vah do struktury
 void load_weights(char *argv[], weights *W)
@@ -54,7 +55,10 @@ void free_cluster_idxs(cluster *cluster_array, int count)
 {
     for (int i = 0; i < count; i++)
     {
-        free(cluster_array[i].flow_idxs);
+        if (cluster_array[i].size > 0)
+        {
+            free(cluster_array[i].flow_idxs);
+        }
     }
 }
 
@@ -112,6 +116,13 @@ void single_linkage(cluster *cluster_array, int count, flow *flow_array, weights
                 }
             }
         }
+
+        // temp
+        // Verze pro výpis skutečného Flow ID (např. 10, 11)
+        printf("Slucuji cluster s ID %d a ID %d (vzdalenost: %lf)\n", flow_array[cluster_array[idx_a].flow_idxs[0]].ID, flow_array[cluster_array[idx_b].flow_idxs[0]].ID, min_distance);
+        //
+        //
+
         combine_clusters(&cluster_array[idx_a], &cluster_array[idx_b]); // Skombinujeme clustery s najdenymi indexami
         current_cluster_ammount--;                                      // Po skombinovani zmensime pocet o 1
     }
@@ -187,7 +198,7 @@ void combine_clusters(cluster *A, cluster *B)
     A->flow_idxs = realloc(A->flow_idxs, ((A->size + B->size) * sizeof(int)));
     if (A->flow_idxs == NULL)
     {
-        fprintf(stderr, "Failed to reallocate memory"); // TODO
+        fprintf(stderr, "Failed to reallocate memory");
         free(A->flow_idxs);
         free(B->flow_idxs);
         return;
@@ -305,9 +316,17 @@ int verify_arguments(int argc, char *argv[], weights *W)
     return 0;
 }
 
-void output(cluster *cluster_array)
+void id_sorting(cluster *cluster_array, flow *flow_array)
 {
     // TODO
+}
+
+void output(cluster *cluster_array, flow *flow_array)
+{
+    // TODO
+    // Clusters:
+    // cluster 0: 10 12
+    // cluster 1: 11 13
 }
 
 // Funkcia main
@@ -339,8 +358,8 @@ int main(int argc, char *argv[])
         return 1;
     }
     single_linkage(cluster_array, count, flow_array, W);
-    output(cluster_array);
-    // temporary
+    // output(cluster_array);
+    //  temporary
     double test_distance = calculate_distance(flow_array[0], flow_array[1], W);
 
     for (int i = 0; i < count; i++)
