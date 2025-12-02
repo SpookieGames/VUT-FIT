@@ -23,6 +23,7 @@ typedef struct Scluster
 
 typedef struct Sweights
 {
+    int n;
     float wb, wt, wd, ws; // vahy
 } weights;
 
@@ -43,6 +44,7 @@ void load_weights(char *argv[], weights *W)
     W->wt = atof(argv[4]); //
     W->wd = atof(argv[5]); //
     W->ws = atof(argv[6]); //
+    W->n = atoi(argv[2]);  //
 }
 
 // Funkcia na uvolnnie pamate v clusteroch
@@ -58,17 +60,13 @@ void free_cluster_idxs(cluster *cluster_array, int count)
 double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weights W)
 {
     double min_distance = INFINITY; // Inicializujeme minimalnu vzdialenost ako nekonecno aby sme zabranili ze nieco bude vacsie ako min_distance
-
     for (int i = 0; i < A->size; i++)
     {
         int idx_a = A->flow_idxs[i];
         for (int j = 0; j < B->size; j++)
         {
             int idx_b = B->flow_idxs[j];
-
             double current_distance = calculate_distance(flow_array[idx_a], flow_array[idx_b], W);
-            ;
-
             if (current_distance < min_distance) // Zistujeme ci je aktualna vzdialenost mensia ako najdena minimalna vzdialenost
             {
                 min_distance = current_distance;
@@ -78,14 +76,14 @@ double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weig
     return min_distance;
 }
 
+// Funkcia na nacitanie dat zo suboru
 flow *load_file(char *filename, int *count_out)
 {
     int count, flow_id, flow_duration, total_bytes, packet_count; // Docasne lokalne premenne
     char src_ip[16];                                              //
     char dst_ip[16];                                              //
     float avg_interarrival;                                       //
-
-    FILE *f = fopen(filename, "r"); // Otvorenie suboru na citanie
+    FILE *f = fopen(filename, "r");                               // Otvorenie suboru na citanie
     if (f == NULL)
     {
         fprintf(stderr, "Failed to open file\n");
@@ -94,6 +92,7 @@ flow *load_file(char *filename, int *count_out)
     fscanf(f, "count=%d", &count); // Nacitanie poctu flows z 1. riadku
     if (count < 0)
     {
+        fprintf(stderr, "Count cannot be negative\n");
         fclose(f);
         return NULL;
     }
@@ -105,18 +104,16 @@ flow *load_file(char *filename, int *count_out)
         fclose(f);
         return NULL;
     }
-
     // Cyklus na populovanie flow_array
     for (int i = 0; i < count; i++)
     {
-        if (fscanf(f, "%d %15s %15s %d %d %d %f", &flow_id, src_ip, dst_ip, &total_bytes, &flow_duration, &packet_count, &avg_interarrival) != 7)
+        if (fscanf(f, "%d %15s %15s %d %d %d %f", &flow_id, src_ip, dst_ip, &total_bytes, &flow_duration, &packet_count, &avg_interarrival) != 7) // Pouzijeme fscanf a rovno overime ci je pocet nacitanych hodnot spravny
         {
             fprintf(stderr, "Count is incorrect or %s has invalid data\n", filename);
             fclose(f);
             free(flow_array);
             return NULL;
         }
-
         flow_array[i].ID = flow_id;           // Odovzdanie nacitanych hodnot do flow_array
         strcpy(flow_array[i].src_ip, src_ip); //
         strcpy(flow_array[i].dst_ip, dst_ip); //
@@ -135,7 +132,6 @@ flow *load_file(char *filename, int *count_out)
         {
             flow_array[i].s = ((float)total_bytes / packet_count);
         }
-
         // temporary
         printf("%d %s %s %d %d %d %f\n", flow_id, src_ip, dst_ip, total_bytes, flow_duration, packet_count, avg_interarrival);
     }
@@ -148,23 +144,19 @@ flow *load_file(char *filename, int *count_out)
 cluster *allocate_clusters(int count)
 {
     cluster *cluster_array = malloc(count * sizeof(cluster)); // Alokacia pamate pre count clusterov
-
     if (cluster_array == NULL)
     {
         fprintf(stderr, "Failed to allocate memory\n");
         return NULL;
     }
-
     for (int i = 0; i < count; i++)
     {
         cluster_array[i].flow_idxs = malloc(sizeof(int)); // Zatial nam staci pole pre 1 integer
-
         if (cluster_array[i].flow_idxs == NULL)
         {
             fprintf(stderr, "Failed to allocate memory\n");
             return NULL;
         }
-
         cluster_array[i].capacity = 1;     // Celkova kapacita clusteru
         cluster_array[i].size = 1;         // Pociatocnu velkost dame na 1 nakolko budeme mat ulozeny iba 1 idx
         cluster_array[i].flow_idxs[0] = i; // Na prvu poziciu v poli ulozime i az do count-1
@@ -189,7 +181,6 @@ int verify_ips(int count, flow *flow_array)
             fprintf(stderr, "Invalid IP address\n");
             return 1;
         }
-
         if (sscanf(flow_array[i].dst_ip, "%d.%d.%d.%d", &ad, &bd, &cd, &dd) != 4)
         {
             fprintf(stderr, "Invalid IP address\n");
@@ -204,13 +195,14 @@ int verify_ips(int count, flow *flow_array)
     return 0;
 }
 
+// Funkcia na vypocitanie vazenej Euklidovkej vzdialenosti medzi dvoma flowmi
 double calculate_distance(flow A, flow B, weights W)
 {
     double distance;
-    float difference_b = A.b - B.b;
-    float difference_t = A.t - B.t;
-    float difference_d = A.d - B.d;
-    float difference_s = A.s - B.s;
+    float difference_b = A.b - B.b;                                                                                                                   // Lokalne premenne pre zmensenie vzorca
+    float difference_t = A.t - B.t;                                                                                                                   //
+    float difference_d = A.d - B.d;                                                                                                                   //
+    float difference_s = A.s - B.s;                                                                                                                   //
     distance = sqrt(((W.wb * pow(difference_b, 2)) + (W.wt * pow(difference_t, 2)) + (W.wd * pow(difference_d, 2)) + (W.ws * pow(difference_s, 2)))); // Vzorec pre vazenu Euklidovsku vzdialenost
     return distance;
 }
@@ -219,25 +211,35 @@ double calculate_distance(flow A, flow B, weights W)
 int verify_arguments(int argc, char *argv[], weights *W)
 {
     char *p_end; // Potrebujeme na verifikovanie premien strtol a strtod (ukazovatel na koniec) podla dokumentacie
-    if (argc != 7)
+    if (argc > 7 || argc == 1 || argc == 3 || argc == 4 || argc == 5 || argc == 6)
     {
         fprintf(stderr, "Enter correct number of arguments!\n");
         return 1;
     }
-    if ((strtol(argv[2], &p_end, 10) <= 0) || *p_end != '\0' || p_end == argv[2]) // *pEnd != '\0' nam zarucuje ze bude precitany cely argument a nie len cast pri napr. 1n1
-    {                                                                             // pEnd == argv[2] zarucuje kontrolu ak bude hned prvy znak neplatny
-        fprintf(stderr, "N > 0\n");
-        return 1;
-    }
-    for (int i = 3; i < argc; i++) // Cyklus na overenie vah
+    if (argc == 7)
     {
-        if (strtod(argv[i], &p_end) < 0.0 || *p_end != '\0' || p_end == argv[i])
-        {
-            fprintf(stderr, "Weights >= 0\n");
+        if ((strtol(argv[2], &p_end, 10) <= 0) || *p_end != '\0' || p_end == argv[2]) // *pEnd != '\0' nam zarucuje ze bude precitany cely argument a nie len cast pri napr. 1n1
+        {                                                                             // pEnd == argv[2] zarucuje kontrolu ak bude hned prvy znak neplatny
+            fprintf(stderr, "N > 0\n");
             return 1;
         }
+        for (int i = 3; i < argc; i++) // Cyklus na overenie vah
+        {
+            if (strtod(argv[i], &p_end) < 0.0 || *p_end != '\0' || p_end == argv[i])
+            {
+                fprintf(stderr, "Weights >= 0\n");
+                return 1;
+            }
+        }
+        load_weights(argv, W); // Pri overeni platnosti nacitat vahy do struct W
     }
-    load_weights(argv, W); // Pri overeni platnosti nacitat vahy do struct W
+    if (argc == 2) // Pri nezadanom N nacitame defaultne hodnoty pre vahy
+    {
+        W->wb = 1.0;
+        W->wd = 1.0;
+        W->ws = 1.0;
+        W->wt = 1.0;
+    }
     return 0;
 }
 
@@ -246,38 +248,33 @@ int main(int argc, char *argv[])
 {
     weights W;
     int count;
-
     if (verify_arguments(argc, argv, &W) != 0)
     {
         return 1;
     }
-
-    char *filename = argv[1]; // Na filename pouzivam ukazaten aby sa predoslo buffer overflow
-    int n = atoi(argv[2]);
+    char *filename = argv[1];                          // Na filename pouzivam ukazaten aby sa predoslo buffer overflow
     flow *flow_array = load_file(filename, &count);    // Vytvorime pole pre flows
     cluster *cluster_array = allocate_clusters(count); // Vytvorime pole pre clusters
-
+    W.n = count;
     if (flow_array == NULL)
     {
         return 1;
     }
-
     if (cluster_array == NULL)
     {
         free(flow_array);
         return 1;
     }
-
     if (verify_ips(count, flow_array) != 0)
     {
-        free(cluster_array);
-        free_cluster_idxs(cluster_array, count);
-        free(flow_array);
+        free(cluster_array);                     //
+        free_cluster_idxs(cluster_array, count); // Uvolnenie pamata ak mame neplatnu IP
+        free(flow_array);                        //
         return 1;
     }
-
-    double test_distance = calculate_distance(flow_array[0], flow_array[1], W);
     // temporary
+    double test_distance = calculate_distance(flow_array[0], flow_array[1], W);
+
     for (int i = 0; i < count; i++)
     {
         printf("ID: %d\n", flow_array[i].ID);
@@ -290,9 +287,10 @@ int main(int argc, char *argv[])
     // printf("%f %f %f %f\n", W.wb, W.wt, W.wd, W.ws);
     printf("Count: %d\n", count);
     printf("Distance: %lf\n", test_distance);
-
-    free_cluster_idxs(cluster_array, count);
-    free(cluster_array);
-    free(flow_array);
+    printf("N: %d\n", W.n);
+    //
+    free_cluster_idxs(cluster_array, count); // Uvolnenie pamate pri bezchybnom bezani
+    free(cluster_array);                     //
+    free(flow_array);                        //
     return 0;
 }
