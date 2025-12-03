@@ -374,10 +374,10 @@ void output(cluster *cluster_array, flow *flow_array, weights W)
     printf("Clusters:\n");
     for (int i = 0; i < W.n; i++)
     {
-        printf("cluster %d: ", i);
+        printf("cluster %d:", i);
         for (int j = 0; j < cluster_array[i].size; j++)
         {
-            printf("%d ", flow_array[cluster_array[i].flow_idxs[j]].ID);
+            printf(" %d", flow_array[cluster_array[i].flow_idxs[j]].ID);
         }
         printf("\n");
     }
@@ -392,8 +392,16 @@ int main(int argc, char *argv[])
     {
         return 1;
     }
-    char *filename = argv[1];                          // Na filename pouzivam ukazaten aby sa predoslo buffer overflow
-    flow *flow_array = load_file(filename, &count);    // Vytvorime pole pre flows
+    char *filename = argv[1];                       // Na filename pouzivam ukazaten aby sa predoslo buffer overflow
+    flow *flow_array = load_file(filename, &count); // Vytvorime pole pre flows
+    if (W.n > count)
+    {
+        W.n = count;
+    }
+    if (W.n == 0)
+    {
+        W.n = count;
+    }
     cluster *cluster_array = allocate_clusters(count); // Vytvorime pole pre clusters
     if (flow_array == NULL)
     {
