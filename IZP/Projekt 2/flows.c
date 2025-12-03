@@ -8,27 +8,27 @@ typedef struct Sflow
     int ID; // flow ID
     char src_ip[16];
     char dst_ip[16];
-    int b;   // total_bytes
-    int t;   // flow_duration
-    float d; // avg_interarrival_time
-    float s; // total_bytes / packet_count
+    int b;    // total_bytes
+    int t;    // flow_duration
+    double d; // avg_interarrival_time
+    double s; // total_bytes / packet_count
 } flow;
 
 typedef struct Scluster
 {
-    int size; // Velkost clustera (kolko ma v sebe indexov)
-    // int capacity;   // Kapacita (kolko indexov sa do clustera celkovo zmesti)
-    int *flow_idxs; // Ukazatel na zaciatok dynamickeho pola
+    int min_flow_id; // Najmensi ID
+    int size;        // Velkost clustera (kolko ma v sebe indexov)
+    int *flow_idxs;  // Ukazatel na zaciatok dynamickeho pola
 } cluster;
 
 typedef struct Sweights
 {
     int n;
-    float wb, wt, wd, ws; // vahy
+    double wb, wt, wd, ws; // vahy
 } weights;
 
 // Deklaracia funkcii
-void id_sorting(cluster *cluster_array, flow *flow_array);
+void id_sorting(cluster *cluster_array, flow *flow_array, int count);
 void single_linkage(cluster *cluster_array, int count, flow *flow_array, weights W);
 void combine_clusters(cluster *A, cluster *B);
 void free_cluster_idxs(cluster *cluster_array, int count);
@@ -38,7 +38,9 @@ double calculate_distance(flow A, flow B, weights);
 void load_weights(char *argv[], weights *W);
 flow *load_file(char *filename, int *count_out);
 int verify_arguments(int argc, char *argv[], weights *W);
-void output(cluster *cluster_array, flow *flow_array);
+void output(cluster *cluster_array, flow *flow_array, weights W);
+int compare_ints(const void *a, const void *b);
+int compare_clusters(const void *a, const void *b);
 
 // Funkcia na nacitanie vah do struktury
 void load_weights(char *argv[], weights *W)
@@ -116,13 +118,6 @@ void single_linkage(cluster *cluster_array, int count, flow *flow_array, weights
                 }
             }
         }
-
-        // temp
-        // Verze pro výpis skutečného Flow ID (např. 10, 11)
-        printf("Slucuji cluster s ID %d a ID %d (vzdalenost: %lf)\n", flow_array[cluster_array[idx_a].flow_idxs[0]].ID, flow_array[cluster_array[idx_b].flow_idxs[0]].ID, min_distance);
-        //
-        //
-
         combine_clusters(&cluster_array[idx_a], &cluster_array[idx_b]); // Skombinujeme clustery s najdenymi indexami
         current_cluster_ammount--;                                      // Po skombinovani zmensime pocet o 1
     }
@@ -134,7 +129,7 @@ flow *load_file(char *filename, int *count_out)
     int count, flow_id, flow_duration, total_bytes, packet_count; // Docasne lokalne premenne
     char src_ip[16];                                              //
     char dst_ip[16];                                              //
-    float avg_interarrival;                                       //
+    double avg_interarrival;                                      //
     FILE *f = fopen(filename, "r");                               // Otvorenie suboru na citanie
     if (f == NULL)
     {
@@ -159,7 +154,7 @@ flow *load_file(char *filename, int *count_out)
     // Cyklus na populovanie flow_array
     for (int i = 0; i < count; i++)
     {
-        if (fscanf(f, "%d %15s %15s %d %d %d %f", &flow_id, src_ip, dst_ip, &total_bytes, &flow_duration, &packet_count, &avg_interarrival) != 7) // Pouzijeme fscanf a rovno overime ci je pocet nacitanych hodnot spravny
+        if (fscanf(f, "%d %15s %15s %d %d %d %lf", &flow_id, src_ip, dst_ip, &total_bytes, &flow_duration, &packet_count, &avg_interarrival) != 7) // Pouzijeme fscanf a rovno overime ci je pocet nacitanych hodnot spravny
         {
             fprintf(stderr, "Count is incorrect or %s has invalid data\n", filename);
             fclose(f);
@@ -182,10 +177,8 @@ flow *load_file(char *filename, int *count_out)
         }
         else
         {
-            flow_array[i].s = ((float)total_bytes / packet_count);
+            flow_array[i].s = ((double)total_bytes / packet_count);
         }
-        // temporary
-        printf("%d %s %s %d %d %d %f\n", flow_id, src_ip, dst_ip, total_bytes, flow_duration, packet_count, avg_interarrival);
     }
     fclose(f);
     *count_out = count;
@@ -196,7 +189,6 @@ flow *load_file(char *filename, int *count_out)
 void combine_clusters(cluster *A, cluster *B)
 {
     int *tmp_ptr = realloc(A->flow_idxs, ((A->size + B->size) * sizeof(int)));
-    // A->flow_idxs = realloc(A->flow_idxs, ((A->size + B->size) * sizeof(int)));
     if (tmp_ptr != NULL)
     {
         A->flow_idxs = tmp_ptr;
@@ -234,7 +226,6 @@ cluster *allocate_clusters(int count)
             fprintf(stderr, "Failed to allocate memory\n");
             return NULL;
         }
-        // cluster_array[i].capacity = 1;     // Celkova kapacita clusteru
         cluster_array[i].size = 1;         // Pociatocnu velkost dame na 1 nakolko budeme mat ulozeny iba 1 idx
         cluster_array[i].flow_idxs[0] = i; // Na prvu poziciu v poli ulozime i az do count-1
     }
@@ -276,10 +267,10 @@ int verify_ips(int count, flow *flow_array)
 double calculate_distance(flow A, flow B, weights W)
 {
     double distance;
-    float difference_b = A.b - B.b;                                                                                                                   // Lokalne premenne pre zmensenie vzorca
-    float difference_t = A.t - B.t;                                                                                                                   //
-    float difference_d = A.d - B.d;                                                                                                                   //
-    float difference_s = A.s - B.s;                                                                                                                   //
+    double difference_b = A.b - B.b;                                                                                                                  // Lokalne premenne pre zmensenie vzorca
+    double difference_t = A.t - B.t;                                                                                                                  //
+    double difference_d = A.d - B.d;                                                                                                                  //
+    double difference_s = A.s - B.s;                                                                                                                  //
     distance = sqrt(((W.wb * pow(difference_b, 2)) + (W.wt * pow(difference_t, 2)) + (W.wd * pow(difference_d, 2)) + (W.ws * pow(difference_s, 2)))); // Vzorec pre vazenu Euklidovsku vzdialenost
     return distance;
 }
@@ -321,18 +312,75 @@ int verify_arguments(int argc, char *argv[], weights *W)
     return 0;
 }
 
-void id_sorting(cluster *cluster_array, flow *flow_array)
+// Pomocne funkcie pre qsort
+// Ak return < 0 ide pred, ak return 0 tak sa rovnaju a ak return > 0 tak ide za
+int compare_ints(const void *a, const void *b)
 {
-    // TODO
-    // qsort
+    if (*(int *)a < *(int *)b)
+        return -1;
+    if (*(int *)a == *(int *)b)
+        return 0;
+    if (*(int *)a > *(int *)b)
+        return 1;
+    return 0;
+}
+int compare_clusters(const void *a, const void *b)
+{
+    cluster *A = (cluster *)a;
+    cluster *B = (cluster *)b;
+    // Osetrenie nulovych clusterov
+    if (A->size == 0 && B->size == 0)
+        return 0;
+    if (A->size == 0)
+        return 1;
+    if (B->size == 0)
+        return -1;
+
+    if (A->min_flow_id < B->min_flow_id)
+        return -1;
+    if (A->min_flow_id == B->min_flow_id)
+        return 0;
+    if (A->min_flow_id > B->min_flow_id)
+        return 1;
+    return 0;
 }
 
-void output(cluster *cluster_array, flow *flow_array)
+// Funkcia na zoradenie ID
+void id_sorting(cluster *cluster_array, flow *flow_array, int count)
 {
-    // TODO
-    // Clusters:
-    // cluster 0: 10 12
-    // cluster 1: 11 13
+    for (int i = 0; i < count; i++)
+    {
+        if (cluster_array[i].size > 0) // Nulove clustery ignorujeme
+        {
+            qsort(cluster_array[i].flow_idxs, cluster_array[i].size, sizeof(int), compare_ints); // Volanie qsort, vytvorili sme si pomocnu funkciu compare_ints z dokumentacie
+            int min = flow_array[cluster_array[i].flow_idxs[0]].ID;                              // Inicializujeme minimalne ID v clusteri
+            for (int j = 1; j < cluster_array[i].size; j++)
+            {
+                int idx = cluster_array[i].flow_idxs[j]; // Najdeme si idx z pola v clusteri
+                if (flow_array[idx].ID < min)
+                {
+                    min = flow_array[idx].ID; // Porovname a ak je aktualne ID mensie ako mininum tak ho nastavime ako nove minimum
+                }
+            }
+            cluster_array[i].min_flow_id = min;
+        }
+    }
+    qsort(cluster_array, count, sizeof(cluster), compare_clusters); // Volanie qsort, vytvorili sme si pomocnu funkciu compare_clusters z dokumentacie
+}
+
+// Funkcia na vypis vysledka
+void output(cluster *cluster_array, flow *flow_array, weights W)
+{
+    printf("Clusters:\n");
+    for (int i = 0; i < W.n; i++)
+    {
+        printf("cluster %d: ", i);
+        for (int j = 0; j < cluster_array[i].size; j++)
+        {
+            printf("%d ", flow_array[cluster_array[i].flow_idxs[j]].ID);
+        }
+        printf("\n");
+    }
 }
 
 // Funkcia main
@@ -364,23 +412,8 @@ int main(int argc, char *argv[])
         return 1;
     }
     single_linkage(cluster_array, count, flow_array, W);
-    // output(cluster_array);
-    //  temporary
-    double test_distance = calculate_distance(flow_array[0], flow_array[1], W);
-
-    for (int i = 0; i < count; i++)
-    {
-        printf("ID: %d\n", flow_array[i].ID);
-    }
-    for (int i = 0; i < count; i++)
-    {
-        printf("saved IDXs: %d\n", cluster_array[i].flow_idxs[0]);
-    }
-
-    // printf("%f %f %f %f\n", W.wb, W.wt, W.wd, W.ws);
-    printf("Count: %d\n", count);
-    printf("Distance: %lf\n", test_distance);
-    //
+    id_sorting(cluster_array, flow_array, count);
+    output(cluster_array, flow_array, W);
     free_cluster_idxs(cluster_array, count); // Uvolnenie pamate pri bezchybnom bezani
     free(cluster_array);                     //
     free(flow_array);                        //
