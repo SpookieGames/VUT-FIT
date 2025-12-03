@@ -1,8 +1,10 @@
+// Nacitanie potrebnych kniznic
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
 
+// Struktury flow, cluster a weights
 typedef struct Sflow
 {
     int ID; // flow ID
