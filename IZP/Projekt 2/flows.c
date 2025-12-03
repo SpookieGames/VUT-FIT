@@ -23,7 +23,7 @@ typedef struct Scluster
 
 typedef struct Sweights
 {
-    int n;
+    int n;                 // N
     double wb, wt, wd, ws; // vahy
 } weights;
 
@@ -39,7 +39,6 @@ void load_weights(char *argv[], weights *W);
 flow *load_file(char *filename, int *count_out);
 int verify_arguments(int argc, char *argv[], weights *W);
 void output(cluster *cluster_array, flow *flow_array, weights W);
-int compare_ints(const void *a, const void *b);
 int compare_clusters(const void *a, const void *b);
 
 // Funkcia na nacitanie vah do struktury
@@ -52,7 +51,7 @@ void load_weights(char *argv[], weights *W)
     W->n = atoi(argv[2]);  //
 }
 
-// Funkcia na uvolnnie pamate v clusteroch
+// Funkcia na uvolnenie pamate v clusteroch
 void free_cluster_idxs(cluster *cluster_array, int count)
 {
     for (int i = 0; i < count; i++)
@@ -87,11 +86,7 @@ double calculate_cluster_distance(cluster *A, cluster *B, flow *flow_array, weig
 // Single linkage algoritmus
 void single_linkage(cluster *cluster_array, int count, flow *flow_array, weights W)
 {
-    int current_cluster_ammount = count; // Inicializujeme aktualny pocet clusterov na count nakolko sme si spravili funkciu v ktorej vytvorime rovnaky pocet clusterov ako flows
-    if (W.n == 0)                        // Ak je N 0 co znamena ze N nebolo zadane a mame vypisat vsetky clustery tak preskocime cely single_linkage algoritmus
-    {
-        return;
-    }
+    int current_cluster_ammount = count;  // Inicializujeme aktualny pocet clusterov na count nakolko sme si spravili funkciu v ktorej vytvorime rovnaky pocet clusterov ako flows
     while (current_cluster_ammount > W.n) // Cyklus ktory bezi pokial nie je aktualny pocet clusterov rovnaky ako N
     {
         double min_distance = INFINITY; // Inicializujeme minimalnu vzdialenost ako nekonecno aby sme zabranili ze nieco bude vacsie ako min_distance rovnako ako pri calculate_cluster_distance
@@ -312,30 +307,18 @@ int verify_arguments(int argc, char *argv[], weights *W)
     return 0;
 }
 
-// Pomocne funkcie pre qsort
+// Pomocna funkcia pre qsort
 // Ak return < 0 ide pred, ak return 0 tak sa rovnaju a ak return > 0 tak ide za
-int compare_ints(const void *a, const void *b)
-{
-    if (*(int *)a < *(int *)b)
-        return -1;
-    if (*(int *)a == *(int *)b)
-        return 0;
-    if (*(int *)a > *(int *)b)
-        return 1;
-    return 0;
-}
 int compare_clusters(const void *a, const void *b)
 {
     cluster *A = (cluster *)a;
     cluster *B = (cluster *)b;
-    // Osetrenie nulovych clusterov
-    if (A->size == 0 && B->size == 0)
-        return 0;
-    if (A->size == 0)
-        return 1;
-    if (B->size == 0)
+    if (A->size == 0 && B->size == 0) // Osetrenie nulovych (neaktivnych) clusterov
+        return 0;                     //
+    if (A->size == 0)                 //
+        return 1;                     //
+    if (B->size == 0)                 //
         return -1;
-
     if (A->min_flow_id < B->min_flow_id)
         return -1;
     if (A->min_flow_id == B->min_flow_id)
@@ -345,27 +328,34 @@ int compare_clusters(const void *a, const void *b)
     return 0;
 }
 
-// Funkcia na zoradenie ID
+// Funkcia na zoradenie ID, Bubble sort na ID a qsort na finalne zoradenie clusterov
 void id_sorting(cluster *cluster_array, flow *flow_array, int count)
 {
     for (int i = 0; i < count; i++)
     {
-        if (cluster_array[i].size > 0) // Nulove clustery ignorujeme
+        if (cluster_array[i].size > 1)
         {
-            qsort(cluster_array[i].flow_idxs, cluster_array[i].size, sizeof(int), compare_ints); // Volanie qsort, vytvorili sme si pomocnu funkciu compare_ints z dokumentacie
-            int min = flow_array[cluster_array[i].flow_idxs[0]].ID;                              // Inicializujeme minimalne ID v clusteri
-            for (int j = 1; j < cluster_array[i].size; j++)
+            for (int j = 0; j < cluster_array[i].size - 1; j++)
             {
-                int idx = cluster_array[i].flow_idxs[j]; // Najdeme si idx z pola v clusteri
-                if (flow_array[idx].ID < min)
+                for (int k = 0; k < cluster_array[i].size - j - 1; k++)
                 {
-                    min = flow_array[idx].ID; // Porovname a ak je aktualne ID mensie ako mininum tak ho nastavime ako nove minimum
+                    int idx1 = cluster_array[i].flow_idxs[k];
+                    int idx2 = cluster_array[i].flow_idxs[k + 1];
+                    if (flow_array[idx1].ID > flow_array[idx2].ID) // Porovnavame skutocne ID, nie iba indexy
+                    {
+                        int temp = cluster_array[i].flow_idxs[k];                          // Vymena indexov
+                        cluster_array[i].flow_idxs[k] = cluster_array[i].flow_idxs[k + 1]; //
+                        cluster_array[i].flow_idxs[k + 1] = temp;                          //
+                    }
                 }
             }
-            cluster_array[i].min_flow_id = min;
+        }
+        if (cluster_array[i].size > 0)
+        {
+            cluster_array[i].min_flow_id = flow_array[cluster_array[i].flow_idxs[0]].ID; // Nastavime najmensie realne ID najdene v clusteri aby sme nasledne mohli pouzit qsort
         }
     }
-    qsort(cluster_array, count, sizeof(cluster), compare_clusters); // Volanie qsort, vytvorili sme si pomocnu funkciu compare_clusters z dokumentacie
+    qsort(cluster_array, count, sizeof(cluster), compare_clusters);
 }
 
 // Funkcia na vypis vysledka
@@ -392,7 +382,7 @@ int main(int argc, char *argv[])
     {
         return 1;
     }
-    char *filename = argv[1];                       // Na filename pouzivam ukazaten aby sa predoslo buffer overflow
+    char *filename = argv[1];                       // Na filename pouzivam ukazatel aby sa predoslo buffer overflow
     flow *flow_array = load_file(filename, &count); // Vytvorime pole pre flows
     if (W.n > count)
     {
@@ -415,7 +405,7 @@ int main(int argc, char *argv[])
     if (verify_ips(count, flow_array) != 0)
     {
         free_cluster_idxs(cluster_array, count); //
-        free(cluster_array);                     // Uvolnenie pamata ak mame neplatnu IP
+        free(cluster_array);                     // Uvolnenie pamate ak mame neplatnu IP
         free(flow_array);                        //
         return 1;
     }
