@@ -372,7 +372,7 @@ void id_sorting(cluster *cluster_array, flow *flow_array, int count)
 {
     for (int i = 0; i < count; i++)
     {
-        if (cluster_array[i].size > 1)
+        if (cluster_array[i].size > 1) // Preskakujeme prazdne a jedno prvkove clustery nakolko take netreba zoradit
         {
             for (int j = 0; j < cluster_array[i].size - 1; j++)
             {
@@ -391,13 +391,13 @@ void id_sorting(cluster *cluster_array, flow *flow_array, int count)
             }
         }
 
-        if (cluster_array[i].size > 0)
+        if (cluster_array[i].size > 0) // Preskakujeme prazdne clustery
         {
             cluster_array[i].min_flow_id = flow_array[cluster_array[i].flow_idxs[0]].ID; // Nastavime najmensie realne ID najdene v clusteri aby sme nasledne mohli pouzit qsort
         }
     }
 
-    qsort(cluster_array, count, sizeof(cluster), compare_clusters);
+    qsort(cluster_array, count, sizeof(cluster), compare_clusters); // Finalne usporiadanie pomocou najdeneho minimalneho ID
 }
 
 // Funkcia na vypis vysledka
