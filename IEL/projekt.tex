@@ -277,10 +277,242 @@ Použijeme náhradný Théveninov obvod pripojený k~záťaži $R_6$:
     \caption*{Náhradný Théveninov obvod so záťažou $R_6$}
 \end{figure}
 
+% ---------------- ÚLOHA 3 ----------------
+\section*{Úloha 3: Metóda uzlových napätí (Variant C)}
+
+\subsection*{Zadané hodnoty}
+Hodnoty sú prevzaté zo zadania pre skupinu C:
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|l|c|c|c|c|c|}
+        \hline
+        \textbf{Parameter} & $U_1$            & $U_2$            & $I$                 & $R_1$          & $R_2$          \\ \hline
+        \textbf{Hodnota}   & \qty{110}{\volt} & \qty{100}{\volt} & \qty{0.75}{\ampere} & \qty{44}{\ohm} & \qty{31}{\ohm} \\ \hline
+        \hline
+        \textbf{Parameter} & $R_3$            & $R_4$            & $R_5$               & $R_6$          &                \\ \hline
+        \textbf{Hodnota}   & \qty{56}{\ohm}   & \qty{20}{\ohm}   & \qty{30}{\ohm}      & \qty{60}{\ohm} &                \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{files/obr/Pr3_2025.pdf}
+    \caption*{Schéma zapojenia pre Úlohu 3}
+\end{figure}
+
+\subsection*{Postup výpočtu}
+
+\textbf{1. Stanovenie uzlov a vodivostí:}
+\begin{itemize}
+    \item \textbf{Referenčný uzol (0):} Spodný pravý uzol (spojenie $R_4, R_5, U_2$).
+    \item \textbf{Uzol A:} Horný ľavý (spojenie $R_1, R_2, R_3, I$).
+    \item \textbf{Uzol B:} Horný pravý (spojenie $R_3, R_5, R_6, I$).
+    \item \textbf{Uzol C:} Spodný ľavý (spojenie $R_2, R_4, U_1$).
+\end{itemize}
+
+Vodivosti vyjadríme ako zlomky ($G_i = 1/R_i$):
+\begin{align*}
+    G_1 & = \frac{1}{44}\,\si{\siemens}, \quad
+    G_2 = \frac{1}{31}\,\si{\siemens}, \quad
+    G_3 = \frac{1}{56}\,\si{\siemens}          \\
+    G_4 & = \frac{1}{20}\,\si{\siemens}, \quad
+    G_5 = \frac{1}{30}\,\si{\siemens}, \quad
+    G_6 = \frac{1}{60}\,\si{\siemens}
+\end{align*}
+
+\textbf{2. Zostavenie rovníc pre uzlové napätia (Maticový zápis):}
+Aplikáciou I. Kirchhoffovho zákona pre uzly A, B a C získame sústavu lineárnych rovníc. Do matice priamo dosadíme vyjadrené zlomky:
+
+\begin{equation*}
+    \resizebox{1\hsize}{!}{$
+            \begin{pmatrix}
+                \frac{1}{44} + \frac{1}{31} + \frac{1}{56} & -\frac{1}{56}                              & -(\frac{1}{44} + \frac{1}{31})             \\[1em]
+                -\frac{1}{56}                              & \frac{1}{56} + \frac{1}{30} + \frac{1}{60} & 0                                          \\[1em]
+                -(\frac{1}{44} + \frac{1}{31})             & 0                                          & \frac{1}{44} + \frac{1}{31} + \frac{1}{20}
+            \end{pmatrix}
+            \cdot
+            \begin{pmatrix}
+                U_A \\ U_B \\ U_C
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                \frac{3}{4} + \frac{110}{44} \\[1em]
+                \frac{100}{60} - \frac{3}{4} \\[1em]
+                -\frac{110}{44}
+            \end{pmatrix}
+        $}
+\end{equation*}
+
+\textbf{3. Riešenie sústavy:}
+Vyriešením maticovej rovnice získame uzlové napätia:
+\begin{align*}
+    U_A & \doteq \qty{55.4550}{\volt} \\
+    U_B & \doteq \qty{28.1039}{\volt} \\
+    U_C & \doteq \qty{5.2312}{\volt}
+\end{align*}
+
+\textbf{4. Výpočet požadovaných veličín na $R_4$:}
+Napätie na rezistore $R_4$ je dané potenciálom uzla C (vzhľadom na referenčnú zem).
+Šípka pre $U_{R4}$ v zadaní smeruje doľava (proti orientácii napätia $U_C$ voči zemi):
+\begin{equation*}
+    U_{R4} = -U_C = -\qty{5.2312}{\volt}
+\end{equation*}
+
+Prúd rezistorom $R_4$ (orientácia šípky doľava, teda od zeme k uzlu C):
+\begin{equation*}
+    I_{R4} = \frac{0 - U_C}{R_4} = \frac{-5.2312}{20} \doteq \mathbf{-\qty{0.2616}{\ampere}}
+\end{equation*}
+
+\newpage
+
+% ---------------- ÚLOHA 4 ----------------
+\section*{Úloha 4: Metóda slučkových prúdov (Variant H)}
+
+\subsection*{Zadané hodnoty}
+Hodnoty sú prevzaté zo zadania pre skupinu H:
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|l|c|c|c|c|c|}
+        \hline
+        \textbf{Parameter} & $U_1$                   & $U_2$                  & $R_1$                   & $R_2$                  & $f$              \\ \hline
+        \textbf{Hodnota}   & \qty{5}{\volt}          & \qty{6}{\volt}         & \qty{10}{\ohm}          & \qty{10}{\ohm}         & \qty{95}{\hertz} \\ \hline
+        \hline
+        \textbf{Parameter} & $L_1$                   & $L_2$                  & $C_1$                   & $C_2$                  &                  \\ \hline
+        \textbf{Hodnota}   & \qty{160}{\milli\henry} & \qty{75}{\milli\henry} & \qty{155}{\micro\farad} & \qty{70}{\micro\farad} &                  \\ \hline
+    \end{tabular}
+\end{table}
+
+Napájacie napätia sú definované vzťahmi:
+\begin{align*}
+    u_1(t) & = U_1 \cdot \sin(2\pi f t) = 5 \cdot \sin(2\pi \cdot 95 \cdot t) \\
+    u_2(t) & = U_2 \cdot \sin(2\pi f t) = 6 \cdot \sin(2\pi \cdot 95 \cdot t)
+\end{align*}
+
+Cieľom je určiť modul $|U_{L2}|$ a fázu $\varphi_{L2}$ napätia na cievke $L_2$, ktoré je dané vzťahom:
+$$ u_{L2}(t) = |U_{L2}| \cdot \sin(2\pi f t + \varphi_{L2}) $$
+
+\begin{figure}[H]
+    \centering
+    % Predpokladám názov súboru podľa vzoru ostatných úloh, skontroluj si cestu
+    \includegraphics[width=0.6\linewidth]{files/obr/Pr4_2025.pdf}
+    \caption*{Schéma zapojenia pre Úlohu 4}
+\end{figure}
+
+\subsection*{Postup výpočtu}
+
+% Sem doplníš svoje riešenie metódou slučkových prúdov...
+
+\newpage
+
+% ---------------- ÚLOHA 5 ----------------
+\section*{Úloha 5: Prechodový dej v RC obvode (Variant G)}
+
+\subsection*{Zadané hodnoty}
+Hodnoty sú prevzaté zo zadania pre skupinu G:
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Parameter} & $U$             & $C$             & $R$             & $u_C(0)$       \\ \hline
+        \textbf{Hodnota}   & \qty{28}{\volt} & \qty{2}{\farad} & \qty{100}{\ohm} & \qty{5}{\volt} \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\linewidth]{files/obr/Pr5_2025.pdf}
+    \caption*{Schéma zapojenia RC obvodu}
+\end{figure}
+
+\subsection*{1. Zostavenie diferenciálnej rovnice}
+Vychádzame zo základných fyzikálnych vzťahov (Ohmov zákon a II. Kirchhoffov zákon):
+
+\begin{enumerate}
+    \item $i = \frac{u_R}{R}$ (Ohmov zákon)
+    \item $u_R + u_C - U = 0 \implies u_R = U - u_C$ (II. Kirchhoffov zákon)
+    \item $u_C' = \frac{i}{C} \implies i = C \cdot u_C'$ (Definícia prúdu kondenzátorom)
+\end{enumerate}
+
+Dosadením vzťahu (1) a (3) do rovnice (2) vyjadríme napätie na rezistore pomocou derivácie napätia na kondenzátore:
+$$ R \cdot C \cdot u_C' + u_C = U $$
+
+Vydelením rovnice súčinom $R \cdot C$ dostaneme nehomogénnu lineárnu diferenciálnu rovnicu 1. rádu (D.R.):
+\begin{equation}
+    u_C' + \frac{1}{R \cdot C} u_C = \frac{U}{R \cdot C}, \quad u_C(0) = u_{CP}
+    \label{eq:diff_obecna}
+\end{equation}
+
+Dosadenie hodnôt ($R \cdot C = 100 \cdot 2 = 200$):
+\begin{equation}
+    u_C' + \frac{1}{200} u_C = \frac{28}{200} \implies u_C' + \frac{1}{200} u_C = \frac{7}{50}
+    \label{eq:diff_num}
+\end{equation}
+
+\subsection*{2. Analytické riešenie metódou variácie konštanty}
+
+\textbf{A) Riešenie homogénnej časti:}
+Položíme pravú stranu rovnú nule:
+$$ u_C' + \frac{1}{R \cdot C} u_C = 0 $$
+Charakteristická rovnica:
+$$ \lambda + \frac{1}{R \cdot C} = 0 \implies \lambda = -\frac{1}{R \cdot C} = -\frac{1}{200} $$
+Tvar homogénneho riešenia (kde $K$ nahradíme funkciou času $K(t)$ pre variáciu):
+\begin{equation}
+    u_C(t) = K(t) \cdot e^{\lambda t} = K(t) \cdot e^{-\frac{t}{200}}
+\end{equation}
+
+\textbf{B) Variácia konštanty:}
+Zderivujeme predpokladané riešenie $u_C(t)$ podľa pravidla o derivácii súčinu:
+$$ u_C'(t) = K'(t) \cdot e^{-\frac{t}{200}} + K(t) \cdot \left( -\frac{1}{200} \right) \cdot e^{-\frac{t}{200}} $$
+
+Dosadíme $u_C(t)$ a $u_C'(t)$ do pôvodnej nehomogénnej rovnice \eqref{eq:diff_num}:
+$$ \underbrace{K'(t) \cdot e^{-\frac{t}{200}} - \frac{1}{200} K(t) \cdot e^{-\frac{t}{200}}}_{u_C'(t)} + \frac{1}{200} \cdot \underbrace{\left( K(t) \cdot e^{-\frac{t}{200}} \right)}_{u_C(t)} = \frac{28}{200} $$
+
+Členy s $K(t)$ sa odčítajú:
+$$ K'(t) \cdot e^{-\frac{t}{200}} = \frac{28}{200} $$
+
+Vyjadríme $K'(t)$:
+$$ K'(t) = \frac{28}{200} \cdot e^{\frac{t}{200}} $$
+
+Integrujeme pre získanie $K(t)$ ($k$ je integračná konštanta):
+$$ K(t) = \int \frac{28}{200} \cdot e^{\frac{t}{200}} \, \mathrm{d}t = \frac{28}{200} \cdot 200 \cdot e^{\frac{t}{200}} + k = 28 \cdot e^{\frac{t}{200}} + k $$
+
+\textbf{C) Všeobecné riešenie:}
+Dosadíme $K(t)$ naspäť do vzťahu pre $u_C(t)$:
+$$ u_C(t) = \left( 28 \cdot e^{\frac{t}{200}} + k \right) \cdot e^{-\frac{t}{200}} $$
+$$ u_C(t) = 28 \cdot e^{0} + k \cdot e^{-\frac{t}{200}} = 28 + k \cdot e^{-\frac{t}{200}} $$
+
+\textbf{D) Výpočet konštanty $k$ z počiatočných podmienok:}
+Pre $t=0$ platí $u_C(0) = \qty{5}{\volt}$.
+$$ 5 = 28 + k \cdot e^{0} \implies k = 5 - 28 = -23 $$
+
+\textbf{Výsledná rovnica napätia na kondenzátore:}
+\begin{equation}
+    u_C(t) = 28 - 23 \cdot e^{-\frac{t}{200}} \quad [\si{\volt}]
+\end{equation}
+
+\subsection*{3. Kontrola výpočtu (Skúška)}
+Dosadíme výsledok do zostavenej diferenciálnej rovnice \eqref{eq:diff_num}.
+
+Ľavá strana (L):
+$$ u_C'(t) = -23 \cdot \left( -\frac{1}{200} \right) \cdot e^{-\frac{t}{200}} = \frac{23}{200} e^{-\frac{t}{200}} $$
+$$ L = u_C'(t) + \frac{1}{200} u_C(t) = \frac{23}{200} e^{-\frac{t}{200}} + \frac{1}{200} \left( 28 - 23 e^{-\frac{t}{200}} \right) $$
+$$ L = \frac{23}{200} e^{-\frac{t}{200}} + \frac{28}{200} - \frac{23}{200} e^{-\frac{t}{200}} = \frac{28}{200} = \frac{7}{50} $$
+
+Pravá strana (P):
+$$ P = \frac{U}{RC} = \frac{28}{200} = \frac{7}{50} $$
+
+$$ L = P \quad $$
+
 \newpage
 
 % ---------------- PREHĽAD VÝSLEDKOV ----------------
-\section*{Prehľad výsledkov} % Opravené z "Přehled výsledků"
+\section*{Prehľad výsledkov}
 
 \begin{table}[h!]
     \centering
@@ -288,16 +520,16 @@ Použijeme náhradný Théveninov obvod pripojený k~záťaži $R_6$:
     \setlength{\tabcolsep}{12pt}
     \begin{tabular}{|c|c|l|}
         \hline
-        \textbf{Úloha}     & \textbf{Variant}       & \textbf{Výsledky}                \\ \hline % Opravené z "Varianta"
-        \multirow{2}{*}{1} & \multirow{2}{*}{H}     & $U_{R1} = \qty{36.7519}{\volt}$  \\
-                           &                        & $I_{R1} = \qty{0.0541}{\ampere}$ \\ \hline
-        \multirow{2}{*}{2} & \multirow{2}{*}{G}     & $U_{R6} = \qty{41.1250}{\volt}$  \\
-                           &                        & $I_{R6} = \qty{0.1645}{\ampere}$ \\ \hline
-        \multirow{2}{*}{3} & \multirow{2}{*}{\dots} & $U_{R4} = \dots \, \si{\volt}$   \\
-                           &                        & $I_{R4} = \dots \, \si{\ampere}$ \\ \hline
-        \multirow{2}{*}{4} & \multirow{2}{*}{\dots} & $|U_{L2}| = \dots \, \si{\volt}$ \\
-                           &                        & $\varphi_{L2} = \dots ^\circ$    \\ \hline
-        5                  & \dots                  & $u_c(t) = \dots$                 \\ \hline
+        \textbf{Úloha}     & \textbf{Variant}   & \textbf{Výsledky}                                         \\ \hline
+        \multirow{2}{*}{1} & \multirow{2}{*}{H} & $U_{R1} = \qty{36.7519}{\volt}$                           \\
+                           &                    & $I_{R1} = \qty{0.0541}{\ampere}$                          \\ \hline
+        \multirow{2}{*}{2} & \multirow{2}{*}{G} & $U_{R6} = \qty{41.1250}{\volt}$                           \\
+                           &                    & $I_{R6} = \qty{0.1645}{\ampere}$                          \\ \hline
+        \multirow{2}{*}{3} & \multirow{2}{*}{C} & $U_{R4} = \qty{-5.2312}{\volt}$                           \\
+                           &                    & $I_{R4} = \qty{-0.2616}{\ampere}$                         \\ \hline
+        \multirow{2}{*}{4} & \multirow{2}{*}{H} & $|U_{L2}| = \dots \, \si{\volt}$                          \\
+                           &                    & $\varphi_{L2} = \dots ^\circ$                             \\ \hline
+        5                  & G                  & $u_C(t) = 28 - 23 \cdot e^{-\frac{t}{200}} \, \si{\volt}$ \\ \hline
     \end{tabular}
     \caption*{Súhrnná tabuľka výsledkov}
 \end{table}
