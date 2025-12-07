@@ -50,7 +50,7 @@
 
         \vspace{2cm}
 
-        % Logo
+        % Logo - uisti sa, že máš súbor na správnom mieste
         \includegraphics[width=0.5\linewidth]{files/logo_cz.png}
 
         \vspace{2cm}
@@ -80,7 +80,7 @@
 \end{titlepage}
 
 % ---------------- ÚLOHA 1 ----------------
-\section*{Úloha 1: Metóda postupného zjednodušovania (Variant H)}
+\section*{Úloha 1: Metóda postupného zjednodušovania (Varianta H)}
 
 \subsection*{Zadané hodnoty}
 Hodnoty sú prevzaté zo zadania pre skupinu H:
@@ -150,7 +150,6 @@ Súčet odporov v~trojuholníku: $\sum R_\Delta = R_{57} + R_4 + R_6 = \qty{2110
 \textbf{3. Výpočet celkového odporu $\R{ekv}$:}
 
 Obvod zjednodušíme na dve paralelné vetvy ($R_{12B}$ a~$R_{3C}$) v~sérii s~$R_8$ a~$R_A$.
-
 \begin{align*}
     R_{12B} & = R_{12} + R_B = 318.7500 + 136.6351 = \qty{455.3851}{\ohm} \\
     R_{3C}  & = R_3 + R_C = 260 + 127.8199 = \qty{387.8199}{\ohm}
@@ -190,7 +189,7 @@ Celkový odpor obvodu:
 \newpage
 
 % ---------------- ÚLOHA 2 ----------------
-\section*{Úloha 2: Théveninova veta (Variant G)}
+\section*{Úloha 2: Théveninova veta (Varianta G)}
 
 \subsection*{Zadané hodnoty}
 Hodnoty sú prevzaté zo zadania pre skupinu G:
@@ -212,7 +211,8 @@ Hodnoty sú prevzaté zo zadania pre skupinu G:
 \end{figure}
 
 \subsection*{1. Výpočet napätia naprázdno ($U_i$)}
-Najskôr stanovíme napätie na svorkách rezistora $R_4$ pri odpojenej záťaži $R_6$. Obvod zjednodušíme postupným zlučovaním odporov.
+Najskôr stanovíme napätie na svorkách rezistora $R_4$ pri odpojenej záťaži $R_6$.
+Obvod zjednodušíme postupným zlučovaním odporov.
 
 \begin{figure}[H]
     \centering
@@ -247,7 +247,6 @@ Pretože $U_{R45} = U_{R2345}$, môžeme určiť prúd tečúci vetvou s~rezisto
 
 \subsection*{2. Výpočet Théveninovho odporu ($R_i$)}
 Pre výpočet vnútorného odporu nahradíme zdroj napätia skratom a~vyjadríme odpor videný zo svoriek rezistora $R_6$ (t.~j. paralelne k~$R_4$).
-
 \begin{align*}
     R_{123}  & = \frac{R_1 \cdot R_{23}}{R_1 + R_{23}} = \frac{315 \cdot 795}{315 + 795} \doteq \qty{225.608}{\ohm}             \\
     R_{1235} & = R_{123} + R_5 = 225.608 + 120 = \qty{345.608}{\ohm}                                                            \\
@@ -277,8 +276,10 @@ Použijeme náhradný Théveninov obvod pripojený k~záťaži $R_6$:
     \caption*{Náhradný Théveninov obvod so záťažou $R_6$}
 \end{figure}
 
+\newpage
+
 % ---------------- ÚLOHA 3 ----------------
-\section*{Úloha 3: Metóda uzlových napätí (Variant C)}
+\section*{Úloha 3: Metóda uzlových napätí (Varianta C)}
 
 \subsection*{Zadané hodnoty}
 Hodnoty sú prevzaté zo zadania pre skupinu C:
@@ -323,7 +324,8 @@ Vodivosti vyjadríme ako zlomky ($G_i = 1/R_i$):
 \end{align*}
 
 \textbf{2. Zostavenie rovníc pre uzlové napätia (Maticový zápis):}
-Aplikáciou I. Kirchhoffovho zákona pre uzly A, B a C získame sústavu lineárnych rovníc. Do matice priamo dosadíme vyjadrené zlomky:
+Aplikáciou I. Kirchhoffovho zákona pre uzly A, B a C získame sústavu lineárnych rovníc.
+Do matice priamo dosadíme vyjadrené zlomky:
 
 \begin{equation*}
     \resizebox{1\hsize}{!}{$
@@ -368,7 +370,7 @@ Prúd rezistorom $R_4$ (orientácia šípky doľava, teda od zeme k uzlu C):
 \newpage
 
 % ---------------- ÚLOHA 4 ----------------
-\section*{Úloha 4: Metóda slučkových prúdov (Variant H)}
+\section*{Úloha 4: Metóda slučkových prúdov (Varianta H)}
 
 \subsection*{Zadané hodnoty}
 Hodnoty sú prevzaté zo zadania pre skupinu H:
@@ -397,19 +399,18 @@ $$ u_{L2}(t) = |U_{L2}| \cdot \sin(2\pi f t + \varphi_{L2}) $$
 
 \begin{figure}[H]
     \centering
-    % Predpokladám názov súboru podľa vzoru ostatných úloh, skontroluj si cestu
     \includegraphics[width=0.6\linewidth]{files/obr/Pr4_2025.pdf}
     \caption*{Schéma zapojenia pre Úlohu 4}
 \end{figure}
 
-\subsection*{Postup výpočtu}
+%\subsection*{Postup výpočtu}
 
 % Sem doplníš svoje riešenie metódou slučkových prúdov...
 
 \newpage
 
 % ---------------- ÚLOHA 5 ----------------
-\section*{Úloha 5: Prechodový dej v RC obvode (Variant G)}
+\section*{Úloha 5: Prechodový dej v RC obvode (Varianta G)}
 
 \subsection*{Zadané hodnoty}
 Hodnoty sú prevzaté zo zadania pre skupinu G:
@@ -419,7 +420,8 @@ Hodnoty sú prevzaté zo zadania pre skupinu G:
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|l|c|c|c|c|}
         \hline
-        \textbf{Parameter} & $U$             & $C$             & $R$             & $u_C(0)$       \\ \hline
+        \textbf{Parameter} & $U$
+                           & $C$             & $R$             & $u_C(0)$                         \\ \hline
         \textbf{Hodnota}   & \qty{28}{\volt} & \qty{2}{\farad} & \qty{100}{\ohm} & \qty{5}{\volt} \\ \hline
     \end{tabular}
 \end{table}
@@ -471,7 +473,8 @@ Zderivujeme predpokladané riešenie $u_C(t)$ podľa pravidla o derivácii súč
 $$ u_C'(t) = K'(t) \cdot e^{-\frac{t}{200}} + K(t) \cdot \left( -\frac{1}{200} \right) \cdot e^{-\frac{t}{200}} $$
 
 Dosadíme $u_C(t)$ a $u_C'(t)$ do pôvodnej nehomogénnej rovnice \eqref{eq:diff_num}:
-$$ \underbrace{K'(t) \cdot e^{-\frac{t}{200}} - \frac{1}{200} K(t) \cdot e^{-\frac{t}{200}}}_{u_C'(t)} + \frac{1}{200} \cdot \underbrace{\left( K(t) \cdot e^{-\frac{t}{200}} \right)}_{u_C(t)} = \frac{28}{200} $$
+$$ \underbrace{K'(t) \cdot e^{-\frac{t}{200}} - \frac{1}{200} K(t) \cdot
+        e^{-\frac{t}{200}}}_{u_C'(t)} + \frac{1}{200} \cdot \underbrace{\left( K(t) \cdot e^{-\frac{t}{200}} \right)}_{u_C(t)} = \frac{28}{200} $$
 
 Členy s $K(t)$ sa odčítajú:
 $$ K'(t) \cdot e^{-\frac{t}{200}} = \frac{28}{200} $$
@@ -520,7 +523,7 @@ $$ L = P \quad $$
     \setlength{\tabcolsep}{12pt}
     \begin{tabular}{|c|c|l|}
         \hline
-        \textbf{Úloha}     & \textbf{Variant}   & \textbf{Výsledky}                                         \\ \hline
+        \textbf{Úloha}     & \textbf{Varianta}  & \textbf{Výsledky}                                         \\ \hline
         \multirow{2}{*}{1} & \multirow{2}{*}{H} & $U_{R1} = \qty{36.7519}{\volt}$                           \\
                            &                    & $I_{R1} = \qty{0.0541}{\ampere}$                          \\ \hline
         \multirow{2}{*}{2} & \multirow{2}{*}{G} & $U_{R6} = \qty{41.1250}{\volt}$                           \\
