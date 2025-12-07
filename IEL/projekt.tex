@@ -20,7 +20,8 @@
     output-decimal-marker = {,}, % Desatinná čiarka vo výstupe
     per-mode = symbol,
     group-digits = false, % Vypnutie medzier pre tisíce (voliteľné)
-    exponent-product = \cdot
+    exponent-product = \cdot,
+    inter-unit-product = \ensuremath{{}\cdot{}}
 }
 
 % ---------------- NASTAVENIA ----------------
@@ -37,7 +38,7 @@
 \setlength{\parskip}{1em}
 
 % Vlastné príkazy pre zjednodušenie zápisu
-\newcommand{\R}[1]{R_{\mathrm{#1}}} % Napr. \R{ekv} spraví R_ekv (stojaté)
+\newcommand{\R}[1]{R_{\mathrm{#1}}} 
 
 \begin{document}
 
@@ -50,7 +51,7 @@
 
         \vspace{2cm}
 
-        % Logo - uisti sa, že máš súbor na správnom mieste
+        % Logo
         \includegraphics[width=0.5\linewidth]{files/logo_cz.png}
 
         \vspace{2cm}
@@ -112,8 +113,8 @@ Celkové napätie: $U = U_1 + U_2 = 135 + 80 = \qty{215}{\volt}$.
 
 Odpor $R_{12}$ (paralelná kombinácia $R_1, R_2$) a $R_{57}$ (sériová kombinácia $R_5, R_7$):
 \begin{align*}
-    R_{12} & = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{680 \cdot 600}{680 + 600} = \qty{318.7500}{\ohm} \\
-    R_{57} & = R_5 + R_7 = 575 + 355 = \qty{930.0000}{\ohm}
+    R_{12} & = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{680 \cdot 600}{680 + 600} = \qty{318,7500}{\ohm} \\
+    R_{57} & = R_5 + R_7 = 575 + 355 = \qty{930,0000}{\ohm}
 \end{align*}
 
 \begin{figure}[H]
@@ -128,9 +129,9 @@ Trojuholník tvorený odpormi $R_{57}, R_4, R_6$ nahradíme hviezdou $R_A, R_B, 
 Súčet odporov v~trojuholníku: $\sum R_\Delta = R_{57} + R_4 + R_6 = \qty{2110}{\ohm}$.
 
 \begin{align*}
-    R_A & = \frac{R_{57} \cdot R_6}{\sum R_\Delta} = \frac{930 \cdot 870}{2110} \doteq \qty{383.4597}{\ohm} \\
-    R_B & = \frac{R_{57} \cdot R_4}{\sum R_\Delta} = \frac{930 \cdot 310}{2110} \doteq \qty{136.6351}{\ohm} \\
-    R_C & = \frac{R_6 \cdot R_4}{\sum R_\Delta} = \frac{870 \cdot 310}{2110} \doteq \qty{127.8199}{\ohm}
+    R_A & = \frac{R_{57} \cdot R_6}{\sum R_\Delta} = \frac{930 \cdot 870}{2110} \doteq \qty{383,4597}{\ohm} \\
+    R_B & = \frac{R_{57} \cdot R_4}{\sum R_\Delta} = \frac{930 \cdot 310}{2110} \doteq \qty{136,6351}{\ohm} \\
+    R_C & = \frac{R_6 \cdot R_4}{\sum R_\Delta} = \frac{870 \cdot 310}{2110} \doteq \qty{127,8199}{\ohm}
 \end{align*}
 
 \begin{figure}[H]
@@ -151,18 +152,18 @@ Súčet odporov v~trojuholníku: $\sum R_\Delta = R_{57} + R_4 + R_6 = \qty{2110
 
 Obvod zjednodušíme na dve paralelné vetvy ($R_{12B}$ a~$R_{3C}$) v~sérii s~$R_8$ a~$R_A$.
 \begin{align*}
-    R_{12B} & = R_{12} + R_B = 318.7500 + 136.6351 = \qty{455.3851}{\ohm} \\
-    R_{3C}  & = R_3 + R_C = 260 + 127.8199 = \qty{387.8199}{\ohm}
+    R_{12B} & = R_{12} + R_B = \num{318,7500} + \num{136,6351} = \qty{455,3851}{\ohm} \\
+    R_{3C}  & = R_3 + R_C = 260 + \num{127,8199} = \qty{387,8199}{\ohm}
 \end{align*}
 
 Ekvivalentný odpor paralelnej časti $\R{p}$:
 \begin{equation*}
-    \R{p} = \frac{R_{12B} \cdot R_{3C}}{R_{12B} + R_{3C}} = \frac{455.3851 \cdot 387.8199}{455.3851 + 387.8199} \doteq \qty{209.4470}{\ohm}
+    \R{p} = \frac{R_{12B} \cdot R_{3C}}{R_{12B} + R_{3C}} = \frac{\num{455,3851} \cdot \num{387,8199}}{\num{455,3851} + \num{387,8199}} \doteq \qty{209,4470}{\ohm}
 \end{equation*}
 
 Celkový odpor obvodu:
 \begin{equation*}
-    \R{ekv} = R_8 + R_A + \R{p} = 265 + 383.4597 + 209.4470 \doteq \qty{857.9067}{\ohm}
+    \R{ekv} = R_8 + R_A + \R{p} = 265 + \num{383,4597} + \num{209,4470} \doteq \qty{857,9067}{\ohm}
 \end{equation*}
 
 \begin{figure}[H]
@@ -175,15 +176,15 @@ Celkový odpor obvodu:
 \textbf{4. Výpočet celkového prúdu a~spätný dopočet:}
 
 \begin{align*}
-    I                                                    & = \frac{U}{\R{ekv}} = \frac{215}{857.9067} \doteq \qty{0.2506}{\ampere}                  \\[1em]
-    \text{Napätie na paralelnej časti } U_{\mathrm{p}}:  &                                                                                          \\
-    U_{\mathrm{p}}                                       & = \R{p} \cdot I = 209.4470 \cdot 0.2506 \doteq \qty{52.4897}{\volt}                      \\[1em]
-    \text{Prúd vetvou s~odporom } R_1 \; (I_{12B}):      &                                                                                          \\
-    I_{12B}                                              & = \frac{U_{\mathrm{p}}}{R_{12B}} = \frac{52.4897}{455.3851} \doteq \qty{0.1153}{\ampere} \\[1em]
-    \text{Napätie na odpore } R_1 \; (U_{R1} = U_{R12}): &                                                                                          \\
-    U_{R1}                                               & = R_{12} \cdot I_{12B} = 318.7500 \cdot 0.1153 \doteq \mathbf{\qty{36.7519}{\volt}}      \\[1em]
-    \text{Výsledný prúd odporom } R_1:                   &                                                                                          \\
-    I_{R1}                                               & = \frac{U_{R1}}{R_1} = \frac{36.7519}{680} \doteq \mathbf{\qty{0.0541}{\ampere}}
+    I                                                    & = \frac{U}{\R{ekv}} = \frac{215}{\num{857,9067}} \doteq \qty{0,2506}{\ampere}                        \\[1em]
+    \text{Napätie na paralelnej časti } U_{\mathrm{p}}:  &                                                                                                      \\
+    U_{\mathrm{p}}                                       & = \R{p} \cdot I = \num{209,4470} \cdot \num{0,2506} \doteq \qty{52,4897}{\volt}                      \\[1em]
+    \text{Prúd vetvou s~odporom } R_1 \; (I_{12B}):      &                                                                                                      \\
+    I_{12B}                                              & = \frac{U_{\mathrm{p}}}{R_{12B}} = \frac{\num{52,4897}}{\num{455,3851}} \doteq \qty{0,1153}{\ampere} \\[1em]
+    \text{Napätie na odpore } R_1 \; (U_{R1} = U_{R12}): &                                                                                                      \\
+    U_{R1}                                               & = R_{12} \cdot I_{12B} = \num{318,7500} \cdot \num{0,1153} \doteq \mathbf{\qty{36,7519}{\volt}}      \\[1em]
+    \text{Výsledný prúd odporom } R_1:                   &                                                                                                      \\
+    I_{R1}                                               & = \frac{U_{R1}}{R_1} = \frac{\num{36,7519}}{680} \doteq \mathbf{\qty{0,0541}{\ampere}}
 \end{align*}
 
 \newpage
@@ -226,31 +227,31 @@ Obvod zjednodušíme postupným zlučovaním odporov.
 \begin{align*}
     R_{23}   & = R_2 + R_3 = 615 + 180 = \qty{795}{\ohm}                                                                  \\
     R_{45}   & = R_4 + R_5 = 460 + 120 = \qty{580}{\ohm}                                                                  \\
-    R_{2345} & = \frac{R_{23} \cdot R_{45}}{R_{23} + R_{45}} = \frac{795 \cdot 580}{795 + 580} \doteq \qty{335.345}{\ohm} \\
-    \R{ekv}  & = R_1 + R_{2345} = 315 + 335.345 = \qty{650.345}{\ohm}
+    R_{2345} & = \frac{R_{23} \cdot R_{45}}{R_{23} + R_{45}} = \frac{795 \cdot 580}{795 + 580} \doteq \qty{335,345}{\ohm} \\
+    \R{ekv}  & = R_1 + R_{2345} = 315 + \num{335,345} = \qty{650,345}{\ohm}
 \end{align*}
 
 Ďalej vypočítame celkový prúd zo zdroja a~rozloženie napätia:
 
 \begin{align*}
-    I_{G}     & = \frac{U_1}{\R{ekv}} = \frac{180}{650.345} \doteq \qty{0.2768}{\ampere} \\
-    U_{R1}    & = R_1 \cdot I_{G} = 315 \cdot 0.2768 \doteq \qty{87.192}{\volt}          \\
-    U_{R2345} & = U_1 - U_{R1} = 180 - 87.192 = \qty{92.808}{\volt}
+    I_{G}     & = \frac{U_1}{\R{ekv}} = \frac{180}{\num{650,345}} \doteq \qty{0,2768}{\ampere} \\
+    U_{R1}    & = R_1 \cdot I_{G} = 315 \cdot \num{0,2768} \doteq \qty{87,192}{\volt}          \\
+    U_{R2345} & = U_1 - U_{R1} = 180 - \num{87,192} = \qty{92,808}{\volt}
 \end{align*}
 
 Pretože $U_{R45} = U_{R2345}$, môžeme určiť prúd tečúci vetvou s~rezistorom $R_4$:
 
 \begin{align*}
-    I_{R4} & = I_{R45} = \frac{U_{R45}}{R_{45}} = \frac{92.808}{580} = \qty{0.16}{\ampere} \\
-    U_i    & = U_{R4} = R_4 \cdot I_{R4} = 460 \cdot 0.16 = \qty{73.6}{\volt}
+    I_{R4} & = I_{R45} = \frac{U_{R45}}{R_{45}} = \frac{\num{92,808}}{580} = \qty{0,16}{\ampere} \\
+    U_i    & = U_{R4} = R_4 \cdot I_{R4} = 460 \cdot \num{0,16} = \qty{73,6}{\volt}
 \end{align*}
 
 \subsection*{2. Výpočet Théveninovho odporu ($R_i$)}
 Pre výpočet vnútorného odporu nahradíme zdroj napätia skratom a~vyjadríme odpor videný zo svoriek rezistora $R_6$ (t.~j. paralelne k~$R_4$).
 \begin{align*}
-    R_{123}  & = \frac{R_1 \cdot R_{23}}{R_1 + R_{23}} = \frac{315 \cdot 795}{315 + 795} \doteq \qty{225.608}{\ohm}             \\
-    R_{1235} & = R_{123} + R_5 = 225.608 + 120 = \qty{345.608}{\ohm}                                                            \\
-    R_i      & = \frac{R_{1235} \cdot R_4}{R_{1235} + R_4} = \frac{345.608 \cdot 460}{345.608 + 460} \doteq \qty{197.343}{\ohm}
+    R_{123}  & = \frac{R_1 \cdot R_{23}}{R_1 + R_{23}} = \frac{315 \cdot 795}{315 + 795} \doteq \qty{225,608}{\ohm}                         \\
+    R_{1235} & = R_{123} + R_5 = \num{225,608} + 120 = \qty{345,608}{\ohm}                                                                  \\
+    R_i      & = \frac{R_{1235} \cdot R_4}{R_{1235} + R_4} = \frac{\num{345,608} \cdot 460}{\num{345,608} + 460} \doteq \qty{197,343}{\ohm}
 \end{align*}
 
 \begin{figure}[H]
@@ -266,8 +267,8 @@ Pre výpočet vnútorného odporu nahradíme zdroj napätia skratom a~vyjadríme
 Použijeme náhradný Théveninov obvod pripojený k~záťaži $R_6$:
 
 \begin{align*}
-    I_{R6} & = \frac{U_i}{R_i + R_6} = \frac{73.6}{197.343 + 250} \doteq \qty{0.1645}{\ampere} \\
-    U_{R6} & = R_6 \cdot I_{R6} = 250 \cdot 0.1645 \doteq \mathbf{\qty{41.125}{\volt}}
+    I_{R6} & = \frac{U_i}{R_i + R_6} = \frac{73,6}{\num{197,343} + 250} \doteq \mathbf{\qty{0,1645}{\ampere}} \\
+    U_{R6} & = R_6 \cdot I_{R6} = 250 \cdot \num{0,1645} \doteq \mathbf{\qty{41,125}{\volt}}
 \end{align*}
 
 \begin{figure}[H]
@@ -290,7 +291,7 @@ Hodnoty sú prevzaté zo zadania pre skupinu C:
     \begin{tabular}{|l|c|c|c|c|c|}
         \hline
         \textbf{Parameter} & $U_1$            & $U_2$            & $I$                 & $R_1$          & $R_2$          \\ \hline
-        \textbf{Hodnota}   & \qty{110}{\volt} & \qty{100}{\volt} & \qty{0.75}{\ampere} & \qty{44}{\ohm} & \qty{31}{\ohm} \\ \hline
+        \textbf{Hodnota}   & \qty{110}{\volt} & \qty{100}{\volt} & \qty{0,75}{\ampere} & \qty{44}{\ohm} & \qty{31}{\ohm} \\ \hline
         \hline
         \textbf{Parameter} & $R_3$            & $R_4$            & $R_5$               & $R_6$          &                \\ \hline
         \textbf{Hodnota}   & \qty{56}{\ohm}   & \qty{20}{\ohm}   & \qty{30}{\ohm}      & \qty{60}{\ohm} &                \\ \hline
@@ -350,21 +351,21 @@ Do matice priamo dosadíme vyjadrené zlomky:
 \textbf{3. Riešenie sústavy:}
 Vyriešením maticovej rovnice získame uzlové napätia:
 \begin{align*}
-    U_A & \doteq \qty{55.4550}{\volt} \\
-    U_B & \doteq \qty{28.1039}{\volt} \\
-    U_C & \doteq \qty{5.2312}{\volt}
+    U_A & \doteq \qty{55,4550}{\volt} \\
+    U_B & \doteq \qty{28,1039}{\volt} \\
+    U_C & \doteq \qty{5,2312}{\volt}
 \end{align*}
 
 \textbf{4. Výpočet požadovaných veličín na $R_4$:}
 Napätie na rezistore $R_4$ je dané potenciálom uzla C (vzhľadom na referenčnú zem).
 Šípka pre $U_{R4}$ v zadaní smeruje doľava (proti orientácii napätia $U_C$ voči zemi):
 \begin{equation*}
-    U_{R4} = -U_C = -\qty{5.2312}{\volt}
+    U_{R4} = -U_C = -\qty{5,2312}{\volt}
 \end{equation*}
 
 Prúd rezistorom $R_4$ (orientácia šípky doľava, teda od zeme k uzlu C):
 \begin{equation*}
-    I_{R4} = \frac{0 - U_C}{R_4} = \frac{-5.2312}{20} \doteq \mathbf{-\qty{0.2616}{\ampere}}
+    I_{R4} = \frac{0 - U_C}{R_4} = \frac{-\num{5,2312}}{20} \doteq \mathbf{-\qty{0,2616}{\ampere}}
 \end{equation*}
 
 \newpage
@@ -408,22 +409,20 @@ $$ u_{L2}(t) = |U_{L2}| \cdot \sin(2\pi f t + \varphi_{L2}) $$
 \textbf{1. Výpočet uhlovej frekvencie a impedancií:}
 
 \begin{align*}
-    \omega & = 2\pi f = 190\pi \doteq \qty{596.9026}{\radian\per\second} \\[1em]
-    Z_{R1} & = R_1 = \qty{10.0000}{\ohm}                                 \\
-    Z_{R2} & = R_2 = \qty{10.0000}{\ohm}                                 \\
-    Z_{C1} & = \frac{1}{j\omega C_1} \doteq -j\qty{10.8085}{\ohm}        \\
-    Z_{C2} & = \frac{1}{j\omega C_2} \doteq -j\qty{23.9331}{\ohm}        \\
-    Z_{L1} & = j\omega L_1 \doteq j\qty{95.5044}{\ohm}                   \\
-    Z_{L2} & = j\omega L_2 \doteq j\qty{44.7677}{\ohm}
+    \omega & = 2\pi f = 190\pi \doteq \qty{596,9026}{\radian\per\second} \\[1em]
+    Z_{R1} & = R_1 = \qty{10,0000}{\ohm}                                 \\
+    Z_{R2} & = R_2 = \qty{10,0000}{\ohm}                                 \\
+    Z_{C1} & = \frac{1}{j\omega C_1} \doteq -j\qty{10,8085}{\ohm}        \\
+    Z_{C2} & = \frac{1}{j\omega C_2} \doteq -j\qty{23,9331}{\ohm}        \\
+    Z_{L1} & = j\omega L_1 \doteq j\qty{95,5044}{\ohm}                   \\
+    Z_{L2} & = j\omega L_2 \doteq j\qty{44,7677}{\ohm}
 \end{align*}
-
-
 
 \textbf{2. Rovnice pre slučkové prúdy (Kirchhoffove zákony):}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{files/4/slucky.pdf}
-    \caption*{fill me}
+    \caption*{Orientácia slučiek v obvode}
 \end{figure}
 
 Pre slučky $I_A, I_B, I_C$ platia nasledujúce rovnice:
@@ -454,30 +453,30 @@ Maticový zápis sústavy:
 
 Riešením sústavy rovníc dostávame komplexné prúdy (zaokrúhlené na 4 desatinné miesta):
 \begin{align*}
-    I_A & = 0.3620 + j0.5890 \, \si{\ampere} \\
-    I_B & = 0.4070 + j0.1930 \, \si{\ampere} \\
-    I_C & = 0.2630 + j0.1930 \, \si{\ampere}
+    I_A & = \num{0,3620} + j\num{0,5890} \, \si{\ampere} \\
+    I_B & = \num{0,4070} + j\num{0,1930} \, \si{\ampere} \\
+    I_C & = \num{0,2630} + j\num{0,1930} \, \si{\ampere}
 \end{align*}
 
 \textbf{4. Výpočet napätia na cievke $L_2$:}
 
 Napätie určíme ako súčin impedancie $Z_{L2}$ a prúdu $I_C$:
 \begin{align*}
-    U_{L2} & = Z_{L2} \cdot I_C                    \\
-    U_{L2} & = (j44.7677) \cdot (0.2630 + j0.1930) \\
-    U_{L2} & = j11.7739 + (j^2 \cdot 8.6402)       \\
-    U_{L2} & = -8.6402 + j11.7739 \, \si{\volt}
+    U_{L2} & = Z_{L2} \cdot I_C                                      \\
+    U_{L2} & = (j\num{44,7677}) \cdot (\num{0,2630} + j\num{0,1930}) \\
+    U_{L2} & = j\num{11,7739} + (j^2 \cdot \num{8,6402})             \\
+    U_{L2} & = \num{-8,6402} + j\num{11,7739} \, \si{\volt}
 \end{align*}
 
 Výpočet modulu $|U_{L2}|$:
 \begin{equation*}
-    |U_{L2}| = \sqrt{(-8.6402)^2 + (11.7739)^2} \doteq \mathbf{\qty{14.6016}{\volt}}
+    |U_{L2}| = \sqrt{(\num{-8,6402})^2 + (\num{11,7739})^2} \doteq \mathbf{\qty{14,6016}{\volt}}
 \end{equation*}
 
 Výpočet fázy $\varphi_{L2}$ (II. kvadrant):
 \begin{align*}
-    \varphi_{L2} & = 180^\circ - \arctan\left(\frac{11.7739}{8.6402}\right)            \\
-    \varphi_{L2} & = 180^\circ - 53.7256^\circ \doteq \mathbf{\qty{126.2744}{\degree}}
+    \varphi_{L2} & = 180^\circ - \arctan\left(\frac{\num{11,7739}}{\num{8,6402}}\right)      \\
+    \varphi_{L2} & = 180^\circ - \num{53,7256}^\circ \doteq \mathbf{\qty{126,2744}{\degree}}
 \end{align*}
 
 \newpage
@@ -493,8 +492,7 @@ Hodnoty sú prevzaté zo zadania pre skupinu G:
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{|l|c|c|c|c|}
         \hline
-        \textbf{Parameter} & $U$
-                           & $C$             & $R$             & $u_C(0)$                         \\ \hline
+        \textbf{Parameter} & $U$             & $C$             & $R$             & $u_C(0)$       \\ \hline
         \textbf{Hodnota}   & \qty{28}{\volt} & \qty{2}{\farad} & \qty{100}{\ohm} & \qty{5}{\volt} \\ \hline
     \end{tabular}
 \end{table}
@@ -546,8 +544,7 @@ Zderivujeme predpokladané riešenie $u_C(t)$ podľa pravidla o derivácii súč
 $$ u_C'(t) = K'(t) \cdot e^{-\frac{t}{200}} + K(t) \cdot \left( -\frac{1}{200} \right) \cdot e^{-\frac{t}{200}} $$
 
 Dosadíme $u_C(t)$ a $u_C'(t)$ do pôvodnej nehomogénnej rovnice \eqref{eq:diff_num}:
-$$ \underbrace{K'(t) \cdot e^{-\frac{t}{200}} - \frac{1}{200} K(t) \cdot
-        e^{-\frac{t}{200}}}_{u_C'(t)} + \frac{1}{200} \cdot \underbrace{\left( K(t) \cdot e^{-\frac{t}{200}} \right)}_{u_C(t)} = \frac{28}{200} $$
+$$ \underbrace{K'(t) \cdot e^{-\frac{t}{200}} - \frac{1}{200} K(t) \cdot e^{-\frac{t}{200}}}_{u_C'(t)} + \frac{1}{200} \cdot \underbrace{\left( K(t) \cdot e^{-\frac{t}{200}} \right)}_{u_C(t)} = \frac{28}{200} $$
 
 Členy s $K(t)$ sa odčítajú:
 $$ K'(t) \cdot e^{-\frac{t}{200}} = \frac{28}{200} $$
@@ -597,14 +594,14 @@ $$ L = P \quad $$
     \begin{tabular}{|c|c|l|}
         \hline
         \textbf{Úloha}     & \textbf{Varianta}  & \textbf{Výsledky}                                         \\ \hline
-        \multirow{2}{*}{1} & \multirow{2}{*}{H} & $U_{R1} = \qty{36.7519}{\volt}$                           \\
-                           &                    & $I_{R1} = \qty{0.0541}{\ampere}$                          \\ \hline
-        \multirow{2}{*}{2} & \multirow{2}{*}{G} & $U_{R6} = \qty{41.1250}{\volt}$                           \\
-                           &                    & $I_{R6} = \qty{0.1645}{\ampere}$                          \\ \hline
-        \multirow{2}{*}{3} & \multirow{2}{*}{C} & $U_{R4} = \qty{-5.2312}{\volt}$                           \\
-                           &                    & $I_{R4} = \qty{-0.2616}{\ampere}$                         \\ \hline
-        \multirow{2}{*}{4} & \multirow{2}{*}{H} & $|U_{L2}| = \qty{14.6016}{\volt}$                         \\
-                           &                    & $\varphi_{L2} = \qty{126.2744}{\degree}$                  \\ \hline
+        \multirow{2}{*}{1} & \multirow{2}{*}{H} & $U_{R1} = \qty{36,7519}{\volt}$                           \\
+                           &                    & $I_{R1} = \qty{0,0541}{\ampere}$                          \\ \hline
+        \multirow{2}{*}{2} & \multirow{2}{*}{G} & $U_{R6} = \qty{41,1250}{\volt}$                           \\
+                           &                    & $I_{R6} = \qty{0,1645}{\ampere}$                          \\ \hline
+        \multirow{2}{*}{3} & \multirow{2}{*}{C} & $U_{R4} = \qty{-5,2312}{\volt}$                           \\
+                           &                    & $I_{R4} = \qty{-0,2616}{\ampere}$                         \\ \hline
+        \multirow{2}{*}{4} & \multirow{2}{*}{H} & $|U_{L2}| = \qty{14,6016}{\volt}$                         \\
+                           &                    & $\varphi_{L2} = \qty{126,2744}{\degree}$                  \\ \hline
         5                  & G                  & $u_C(t) = 28 - 23 \cdot e^{-\frac{t}{200}} \, \si{\volt}$ \\ \hline
     \end{tabular}
     \caption*{Súhrnná tabuľka výsledkov}
