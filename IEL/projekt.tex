@@ -403,9 +403,82 @@ $$ u_{L2}(t) = |U_{L2}| \cdot \sin(2\pi f t + \varphi_{L2}) $$
     \caption*{Schéma zapojenia pre Úlohu 4}
 \end{figure}
 
-%\subsection*{Postup výpočtu}
+\subsection*{Postup výpočtu}
 
-% Sem doplníš svoje riešenie metódou slučkových prúdov...
+\textbf{1. Výpočet uhlovej frekvencie a impedancií:}
+
+\begin{align*}
+    \omega & = 2\pi f = 190\pi \doteq \qty{596.9026}{\radian\per\second} \\[1em]
+    Z_{R1} & = R_1 = \qty{10.0000}{\ohm}                                 \\
+    Z_{R2} & = R_2 = \qty{10.0000}{\ohm}                                 \\
+    Z_{C1} & = \frac{1}{j\omega C_1} \doteq -j\qty{10.8085}{\ohm}        \\
+    Z_{C2} & = \frac{1}{j\omega C_2} \doteq -j\qty{23.9331}{\ohm}        \\
+    Z_{L1} & = j\omega L_1 \doteq j\qty{95.5044}{\ohm}                   \\
+    Z_{L2} & = j\omega L_2 \doteq j\qty{44.7677}{\ohm}
+\end{align*}
+
+
+
+\textbf{2. Rovnice pre slučkové prúdy (Kirchhoffove zákony):}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{files/4/slucky.pdf}
+    \caption*{fill me}
+\end{figure}
+
+Pre slučky $I_A, I_B, I_C$ platia nasledujúce rovnice:
+\begin{align*}
+    i_A: & \quad Z_{C1}I_A + R_1(I_A - I_B) - U_2 = 0                       \\
+    i_B: & \quad -U_1 + I_B Z_{C2} + R_1(I_B - I_A) + Z_{L1}(I_B - I_C) = 0 \\
+    i_C: & \quad U_2 + Z_{L2}I_C + R_2 I_C + Z_{L1}(I_C - I_B) = 0
+\end{align*}
+
+Maticový zápis sústavy:
+\begin{equation*}
+    \begin{pmatrix}
+        Z_{C1} + R_1 & -R_1                  & 0                     \\
+        -R_1         & Z_{L1} + Z_{C2} + R_1 & -Z_{L1}               \\
+        0            & -Z_{L1}               & Z_{L1} + R_2 + Z_{L2}
+    \end{pmatrix}
+    \cdot
+    \begin{pmatrix}
+        I_A \\ I_B \\ I_C
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        U_2 \\ U_1 \\ -U_2
+    \end{pmatrix}
+\end{equation*}
+
+\textbf{3. Výpočet prúdov:}
+
+Riešením sústavy rovníc dostávame komplexné prúdy (zaokrúhlené na 4 desatinné miesta):
+\begin{align*}
+    I_A & = 0.3620 + j0.5890 \, \si{\ampere} \\
+    I_B & = 0.4070 + j0.1930 \, \si{\ampere} \\
+    I_C & = 0.2630 + j0.1930 \, \si{\ampere}
+\end{align*}
+
+\textbf{4. Výpočet napätia na cievke $L_2$:}
+
+Napätie určíme ako súčin impedancie $Z_{L2}$ a prúdu $I_C$:
+\begin{align*}
+    U_{L2} & = Z_{L2} \cdot I_C                    \\
+    U_{L2} & = (j44.7677) \cdot (0.2630 + j0.1930) \\
+    U_{L2} & = j11.7739 + (j^2 \cdot 8.6402)       \\
+    U_{L2} & = -8.6402 + j11.7739 \, \si{\volt}
+\end{align*}
+
+Výpočet modulu $|U_{L2}|$:
+\begin{equation*}
+    |U_{L2}| = \sqrt{(-8.6402)^2 + (11.7739)^2} \doteq \mathbf{\qty{14.6016}{\volt}}
+\end{equation*}
+
+Výpočet fázy $\varphi_{L2}$ (II. kvadrant):
+\begin{align*}
+    \varphi_{L2} & = 180^\circ - \arctan\left(\frac{11.7739}{8.6402}\right)            \\
+    \varphi_{L2} & = 180^\circ - 53.7256^\circ \doteq \mathbf{\qty{126.2744}{\degree}}
+\end{align*}
 
 \newpage
 
@@ -530,8 +603,8 @@ $$ L = P \quad $$
                            &                    & $I_{R6} = \qty{0.1645}{\ampere}$                          \\ \hline
         \multirow{2}{*}{3} & \multirow{2}{*}{C} & $U_{R4} = \qty{-5.2312}{\volt}$                           \\
                            &                    & $I_{R4} = \qty{-0.2616}{\ampere}$                         \\ \hline
-        \multirow{2}{*}{4} & \multirow{2}{*}{H} & $|U_{L2}| = \dots \, \si{\volt}$                          \\
-                           &                    & $\varphi_{L2} = \dots ^\circ$                             \\ \hline
+        \multirow{2}{*}{4} & \multirow{2}{*}{H} & $|U_{L2}| = \qty{14.6016}{\volt}$                         \\
+                           &                    & $\varphi_{L2} = \qty{126.2744}{\degree}$                  \\ \hline
         5                  & G                  & $u_C(t) = 28 - 23 \cdot e^{-\frac{t}{200}} \, \si{\volt}$ \\ \hline
     \end{tabular}
     \caption*{Súhrnná tabuľka výsledkov}
