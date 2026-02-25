@@ -1,0 +1,7 @@
+add_test([=[EmptyTree.InsertNode]=]  [==[/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test]==] [==[--gtest_filter=EmptyTree.InsertNode]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[EmptyTree.InsertNode]=]  PROPERTIES WORKING_DIRECTORY [==[/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[EmptyTree.DeleteNode]=]  [==[/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test]==] [==[--gtest_filter=EmptyTree.DeleteNode]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[EmptyTree.DeleteNode]=]  PROPERTIES WORKING_DIRECTORY [==[/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[EmptyTree.FindNode]=]  [==[/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test]==] [==[--gtest_filter=EmptyTree.FindNode]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[EmptyTree.FindNode]=]  PROPERTIES WORKING_DIRECTORY [==[/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set(  black_box_test_TESTS EmptyTree.InsertNode EmptyTree.DeleteNode EmptyTree.FindNode)
