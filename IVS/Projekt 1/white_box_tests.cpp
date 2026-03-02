@@ -3,13 +3,13 @@
 // Purpose:     White Box - test suite
 //
 // $NoKeywords: $ivs_project_1 $white_box_tests.cpp
-// $Author:     JMENO PRIJMENI <xlogin00@stud.fit.vutbr.cz>
+// $Author:     Michal Holeša <xholesm00@stud.fit.vutbr.cz>
 // $Date:       $2025-02-19
 //============================================================================//
 /**
  * @file white_box_tests.cpp
- * @author JMENO PRIJMENI
- * 
+ * @author Michal Holeša
+ *
  * @brief Implementace testu hasovaci tabulky.
  */
 
@@ -27,9 +27,21 @@
 //     - Vsechny funkce z white_box_code.h
 //     - Chovani techto metod testuje pro prazdnou i neprazdnou tabulku.
 // 2. Chovani tabulky v hranicnich pripadech
-//     - Otestujte chovani pri kolizich ruznych klicu se stejnym hashem 
-//     - Otestujte chovani pri kolizich hashu namapovane na stejne misto v 
+//     - Otestujte chovani pri kolizich ruznych klicu se stejnym hashem
+//     - Otestujte chovani pri kolizich hashu namapovane na stejne misto v
 //       indexu
+
+class SuffixAutomatonTest : public ::testing::Test
+{
+protected:
+    SuffixAutomaton empty;
+    SuffixAutomaton abc;
+
+    void SetUp() override
+    {
+        abc = SuffixAutomaton("abc");
+    }
+};
 //============================================================================//
 
 /*** Konec souboru white_box_tests.cpp ***/
