@@ -188,16 +188,84 @@ size_t Graph::edgeCount() const
 
 size_t Graph::nodeDegree(size_t nodeId) const
 {
-    return 42;
+    // Obchadzanie getNode nakolko sa to compileru nepacilo kvoli const
+    bool exists = false;
+    for (size_t i = 0; i < a_nodes.size(); i++)
+    {
+        if (a_nodes[i]->id == nodeId)
+        {
+            exists = true;
+            break;
+        }
+    }
+
+    if (!exists)
+    {
+        throw std::out_of_range("Uzol neexistuje"); // Vypisanie chyby ak sa uzol nenasiel v grafe
+    }
+
+    int degree = 0;
+    for (int i = 0; i < a_edges.size(); i++)
+    {
+        if (a_edges[i].a == nodeId || a_edges[i].b == nodeId)
+        {
+            degree++;
+        }
+    }
+    return degree;
 }
 
 size_t Graph::graphDegree() const
 {
-    return 42;
+    int maximum = 0;
+
+    for (int i = 0; i < a_nodes.size(); i++)
+    {
+        int degree = nodeDegree(a_nodes[i]->id);
+        if (degree > maximum)
+        {
+            maximum = degree;
+        }
+    }
+    return maximum;
 }
 
 void Graph::coloring()
 {
+    // Prejdenie cez vsetky uzly
+    for (int i = 0; i < a_nodes.size(); i++)
+    {
+        int color = 1; // Zacneme farbou 1 nakolko 0 je predvolena farba pre vseky uzly
+        bool check = false;
+
+        // Cyklus while bezi dokym nenajdeme vhodnu farbu
+        while (!check)
+        {
+            check = true;
+            for (int j = 0; j < a_edges.size(); j++)
+            {
+                Node *neighbor;
+
+                // Zistenie ci hrana vedie z alebo do uzla
+                if (a_edges[j].a == a_nodes[i]->id)
+                {
+                    neighbor = getNode(a_edges[j].b);
+                }
+                else if (a_edges[j].b == a_nodes[i]->id)
+                {
+                    neighbor = getNode(a_edges[j].a);
+                }
+
+                if (neighbor->color == color)
+                {
+                    check = false;
+                    color++;
+                    break;
+                }
+            }
+        }
+        a_nodes[i]->color = color;
+    }
 }
 
 void Graph::clear()

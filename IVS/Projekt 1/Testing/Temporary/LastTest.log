@@ -1,10 +1,10 @@
-Start testing: Mar 02 20:53 CET
+Start testing: Mar 03 00:01 CET
 ----------------------------------------------------------
 1/47 Testing: EmptyTree.InsertNode
 1/47 Test: EmptyTree.InsertNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=EmptyTree.InsertNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyTree.InsertNode" start time: Mar 02 20:53 CET
+"EmptyTree.InsertNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -20,10 +20,10 @@ Note: Google Test filter = EmptyTree.InsertNode
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.04 sec
+Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyTree.InsertNode" end time: Mar 02 20:53 CET
+"EmptyTree.InsertNode" end time: Mar 03 00:01 CET
 "EmptyTree.InsertNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -31,7 +31,7 @@ Test Passed.
 2/47 Test: EmptyTree.DeleteNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=EmptyTree.DeleteNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyTree.DeleteNode" start time: Mar 02 20:53 CET
+"EmptyTree.DeleteNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -50,7 +50,7 @@ Note: Google Test filter = EmptyTree.DeleteNode
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyTree.DeleteNode" end time: Mar 02 20:53 CET
+"EmptyTree.DeleteNode" end time: Mar 03 00:01 CET
 "EmptyTree.DeleteNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -58,7 +58,7 @@ Test Passed.
 3/47 Test: EmptyTree.FindNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=EmptyTree.FindNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyTree.FindNode" start time: Mar 02 20:53 CET
+"EmptyTree.FindNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -77,7 +77,7 @@ Note: Google Test filter = EmptyTree.FindNode
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyTree.FindNode" end time: Mar 02 20:53 CET
+"EmptyTree.FindNode" end time: Mar 03 00:01 CET
 "EmptyTree.FindNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -85,7 +85,7 @@ Test Passed.
 4/47 Test: NonEmptyTree.InsertNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=NonEmptyTree.InsertNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyTree.InsertNode" start time: Mar 02 20:53 CET
+"NonEmptyTree.InsertNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -104,7 +104,7 @@ Note: Google Test filter = NonEmptyTree.InsertNode
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyTree.InsertNode" end time: Mar 02 20:53 CET
+"NonEmptyTree.InsertNode" end time: Mar 03 00:01 CET
 "NonEmptyTree.InsertNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -112,7 +112,7 @@ Test Passed.
 5/47 Test: NonEmptyTree.DeleteNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=NonEmptyTree.DeleteNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyTree.DeleteNode" start time: Mar 02 20:53 CET
+"NonEmptyTree.DeleteNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -131,7 +131,7 @@ Note: Google Test filter = NonEmptyTree.DeleteNode
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyTree.DeleteNode" end time: Mar 02 20:53 CET
+"NonEmptyTree.DeleteNode" end time: Mar 03 00:01 CET
 "NonEmptyTree.DeleteNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -139,7 +139,7 @@ Test Passed.
 6/47 Test: NonEmptyTree.FindNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=NonEmptyTree.FindNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyTree.FindNode" start time: Mar 02 20:53 CET
+"NonEmptyTree.FindNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -158,7 +158,7 @@ Note: Google Test filter = NonEmptyTree.FindNode
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyTree.FindNode" end time: Mar 02 20:53 CET
+"NonEmptyTree.FindNode" end time: Mar 03 00:01 CET
 "NonEmptyTree.FindNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -166,7 +166,7 @@ Test Passed.
 7/47 Test: TreeAxioms.Axiom1
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=TreeAxioms.Axiom1" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"TreeAxioms.Axiom1" start time: Mar 02 20:53 CET
+"TreeAxioms.Axiom1" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -185,7 +185,7 @@ Note: Google Test filter = TreeAxioms.Axiom1
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"TreeAxioms.Axiom1" end time: Mar 02 20:53 CET
+"TreeAxioms.Axiom1" end time: Mar 03 00:01 CET
 "TreeAxioms.Axiom1" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -193,7 +193,7 @@ Test Passed.
 8/47 Test: TreeAxioms.Axiom2
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=TreeAxioms.Axiom2" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"TreeAxioms.Axiom2" start time: Mar 02 20:53 CET
+"TreeAxioms.Axiom2" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -212,7 +212,7 @@ Note: Google Test filter = TreeAxioms.Axiom2
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"TreeAxioms.Axiom2" end time: Mar 02 20:53 CET
+"TreeAxioms.Axiom2" end time: Mar 03 00:01 CET
 "TreeAxioms.Axiom2" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -220,7 +220,7 @@ Test Passed.
 9/47 Test: TreeAxioms.Axiom3
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/black_box_test" "--gtest_filter=TreeAxioms.Axiom3" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"TreeAxioms.Axiom3" start time: Mar 02 20:53 CET
+"TreeAxioms.Axiom3" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -239,7 +239,7 @@ Note: Google Test filter = TreeAxioms.Axiom3
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"TreeAxioms.Axiom3" end time: Mar 02 20:53 CET
+"TreeAxioms.Axiom3" end time: Mar 03 00:01 CET
 "TreeAxioms.Axiom3" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -247,7 +247,7 @@ Test Passed.
 10/47 Test: SuffixAutomatonTest.EmptyAutomaton
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/white_box_test" "--gtest_filter=SuffixAutomatonTest.EmptyAutomaton" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"SuffixAutomatonTest.EmptyAutomaton" start time: Mar 02 20:53 CET
+"SuffixAutomatonTest.EmptyAutomaton" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -263,10 +263,10 @@ Note: Google Test filter = SuffixAutomatonTest.EmptyAutomaton
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.04 sec
+Test time =   0.08 sec
 ----------------------------------------------------------
 Test Passed.
-"SuffixAutomatonTest.EmptyAutomaton" end time: Mar 02 20:53 CET
+"SuffixAutomatonTest.EmptyAutomaton" end time: Mar 03 00:01 CET
 "SuffixAutomatonTest.EmptyAutomaton" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -274,7 +274,7 @@ Test Passed.
 11/47 Test: SuffixAutomatonTest.Contains
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/white_box_test" "--gtest_filter=SuffixAutomatonTest.Contains" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"SuffixAutomatonTest.Contains" start time: Mar 02 20:53 CET
+"SuffixAutomatonTest.Contains" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -293,7 +293,7 @@ Note: Google Test filter = SuffixAutomatonTest.Contains
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"SuffixAutomatonTest.Contains" end time: Mar 02 20:53 CET
+"SuffixAutomatonTest.Contains" end time: Mar 03 00:01 CET
 "SuffixAutomatonTest.Contains" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -301,7 +301,7 @@ Test Passed.
 12/47 Test: SuffixAutomatonTest.AddElement
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/white_box_test" "--gtest_filter=SuffixAutomatonTest.AddElement" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"SuffixAutomatonTest.AddElement" start time: Mar 02 20:53 CET
+"SuffixAutomatonTest.AddElement" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -320,7 +320,7 @@ Note: Google Test filter = SuffixAutomatonTest.AddElement
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"SuffixAutomatonTest.AddElement" end time: Mar 02 20:53 CET
+"SuffixAutomatonTest.AddElement" end time: Mar 03 00:01 CET
 "SuffixAutomatonTest.AddElement" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -328,7 +328,7 @@ Test Passed.
 13/47 Test: SuffixAutomatonTest.ClearAutomaton
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/white_box_test" "--gtest_filter=SuffixAutomatonTest.ClearAutomaton" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"SuffixAutomatonTest.ClearAutomaton" start time: Mar 02 20:53 CET
+"SuffixAutomatonTest.ClearAutomaton" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -347,7 +347,7 @@ Note: Google Test filter = SuffixAutomatonTest.ClearAutomaton
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"SuffixAutomatonTest.ClearAutomaton" end time: Mar 02 20:53 CET
+"SuffixAutomatonTest.ClearAutomaton" end time: Mar 03 00:01 CET
 "SuffixAutomatonTest.ClearAutomaton" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -355,7 +355,7 @@ Test Passed.
 14/47 Test: SuffixAutomatonTest.ComplexSequence
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/white_box_test" "--gtest_filter=SuffixAutomatonTest.ComplexSequence" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"SuffixAutomatonTest.ComplexSequence" start time: Mar 02 20:53 CET
+"SuffixAutomatonTest.ComplexSequence" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -371,10 +371,10 @@ Note: Google Test filter = SuffixAutomatonTest.ComplexSequence
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.04 sec
+Test time =   0.05 sec
 ----------------------------------------------------------
 Test Passed.
-"SuffixAutomatonTest.ComplexSequence" end time: Mar 02 20:53 CET
+"SuffixAutomatonTest.ComplexSequence" end time: Mar 03 00:01 CET
 "SuffixAutomatonTest.ComplexSequence" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -382,7 +382,7 @@ Test Passed.
 15/47 Test: NonEmptyGraph.nodes
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.nodes" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.nodes" start time: Mar 02 20:53 CET
+"NonEmptyGraph.nodes" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -395,13 +395,13 @@ Note: Google Test filter = NonEmptyGraph.nodes
 [----------] 1 test from NonEmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (1 ms total)
+[==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.nodes" end time: Mar 02 20:53 CET
+"NonEmptyGraph.nodes" end time: Mar 03 00:01 CET
 "NonEmptyGraph.nodes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -409,7 +409,7 @@ Test Passed.
 16/47 Test: NonEmptyGraph.edges
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.edges" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.edges" start time: Mar 02 20:53 CET
+"NonEmptyGraph.edges" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -422,13 +422,13 @@ Note: Google Test filter = NonEmptyGraph.edges
 [----------] 1 test from NonEmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.edges" end time: Mar 02 20:53 CET
+"NonEmptyGraph.edges" end time: Mar 03 00:01 CET
 "NonEmptyGraph.edges" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -436,7 +436,7 @@ Test Passed.
 17/47 Test: NonEmptyGraph.addNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.addNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.addNode" start time: Mar 02 20:53 CET
+"NonEmptyGraph.addNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -446,16 +446,16 @@ Note: Google Test filter = NonEmptyGraph.addNode
 [----------] 1 test from NonEmptyGraph
 [ RUN      ] NonEmptyGraph.addNode
 [       OK ] NonEmptyGraph.addNode (0 ms)
-[----------] 1 test from NonEmptyGraph (0 ms total)
+[----------] 1 test from NonEmptyGraph (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.addNode" end time: Mar 02 20:53 CET
+"NonEmptyGraph.addNode" end time: Mar 03 00:01 CET
 "NonEmptyGraph.addNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -463,7 +463,7 @@ Test Passed.
 18/47 Test: NonEmptyGraph.addEdge
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.addEdge" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.addEdge" start time: Mar 02 20:53 CET
+"NonEmptyGraph.addEdge" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -476,13 +476,13 @@ Note: Google Test filter = NonEmptyGraph.addEdge
 [----------] 1 test from NonEmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.07 sec
+Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.addEdge" end time: Mar 02 20:53 CET
+"NonEmptyGraph.addEdge" end time: Mar 03 00:01 CET
 "NonEmptyGraph.addEdge" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -490,7 +490,7 @@ Test Passed.
 19/47 Test: NonEmptyGraph.addMultipleEdges
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.addMultipleEdges" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.addMultipleEdges" start time: Mar 02 20:53 CET
+"NonEmptyGraph.addMultipleEdges" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -503,13 +503,13 @@ Note: Google Test filter = NonEmptyGraph.addMultipleEdges
 [----------] 1 test from NonEmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.addMultipleEdges" end time: Mar 02 20:53 CET
+"NonEmptyGraph.addMultipleEdges" end time: Mar 03 00:01 CET
 "NonEmptyGraph.addMultipleEdges" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -517,7 +517,7 @@ Test Passed.
 20/47 Test: NonEmptyGraph.getNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.getNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.getNode" start time: Mar 02 20:53 CET
+"NonEmptyGraph.getNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -536,7 +536,7 @@ Note: Google Test filter = NonEmptyGraph.getNode
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.getNode" end time: Mar 02 20:53 CET
+"NonEmptyGraph.getNode" end time: Mar 03 00:01 CET
 "NonEmptyGraph.getNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -544,7 +544,7 @@ Test Passed.
 21/47 Test: NonEmptyGraph.containsEdge
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.containsEdge" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.containsEdge" start time: Mar 02 20:53 CET
+"NonEmptyGraph.containsEdge" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -563,7 +563,7 @@ Note: Google Test filter = NonEmptyGraph.containsEdge
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.containsEdge" end time: Mar 02 20:53 CET
+"NonEmptyGraph.containsEdge" end time: Mar 03 00:01 CET
 "NonEmptyGraph.containsEdge" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -571,7 +571,7 @@ Test Passed.
 22/47 Test: NonEmptyGraph.removeNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.removeNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.removeNode" start time: Mar 02 20:53 CET
+"NonEmptyGraph.removeNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -590,7 +590,7 @@ Note: Google Test filter = NonEmptyGraph.removeNode
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.removeNode" end time: Mar 02 20:53 CET
+"NonEmptyGraph.removeNode" end time: Mar 03 00:01 CET
 "NonEmptyGraph.removeNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -598,7 +598,7 @@ Test Passed.
 23/47 Test: NonEmptyGraph.removeEdge
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.removeEdge" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.removeEdge" start time: Mar 02 20:53 CET
+"NonEmptyGraph.removeEdge" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -608,16 +608,16 @@ Note: Google Test filter = NonEmptyGraph.removeEdge
 [----------] 1 test from NonEmptyGraph
 [ RUN      ] NonEmptyGraph.removeEdge
 [       OK ] NonEmptyGraph.removeEdge (0 ms)
-[----------] 1 test from NonEmptyGraph (0 ms total)
+[----------] 1 test from NonEmptyGraph (1 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.removeEdge" end time: Mar 02 20:53 CET
+"NonEmptyGraph.removeEdge" end time: Mar 03 00:01 CET
 "NonEmptyGraph.removeEdge" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -625,7 +625,7 @@ Test Passed.
 24/47 Test: NonEmptyGraph.nodeCount
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.nodeCount" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.nodeCount" start time: Mar 02 20:53 CET
+"NonEmptyGraph.nodeCount" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -641,10 +641,10 @@ Note: Google Test filter = NonEmptyGraph.nodeCount
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.nodeCount" end time: Mar 02 20:53 CET
+"NonEmptyGraph.nodeCount" end time: Mar 03 00:01 CET
 "NonEmptyGraph.nodeCount" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -652,7 +652,7 @@ Test Passed.
 25/47 Test: NonEmptyGraph.edgeCount
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.edgeCount" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.edgeCount" start time: Mar 02 20:53 CET
+"NonEmptyGraph.edgeCount" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -668,10 +668,10 @@ Note: Google Test filter = NonEmptyGraph.edgeCount
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.edgeCount" end time: Mar 02 20:53 CET
+"NonEmptyGraph.edgeCount" end time: Mar 03 00:01 CET
 "NonEmptyGraph.edgeCount" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -679,7 +679,7 @@ Test Passed.
 26/47 Test: NonEmptyGraph.nodeDegree
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.nodeDegree" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.nodeDegree" start time: Mar 02 20:53 CET
+"NonEmptyGraph.nodeDegree" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -688,49 +688,17 @@ Note: Google Test filter = NonEmptyGraph.nodeDegree
 [----------] Global test environment set-up.
 [----------] 1 test from NonEmptyGraph
 [ RUN      ] NonEmptyGraph.nodeDegree
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:198: Failure
-Expected equality of these values:
-  graph.nodeDegree(1)
-    Which is: 42
-  2
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:199: Failure
-Expected equality of these values:
-  graph.nodeDegree(4)
-    Which is: 42
-  2
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:200: Failure
-Expected equality of these values:
-  graph.nodeDegree(5)
-    Which is: 42
-  3
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:201: Failure
-Expected equality of these values:
-  graph.nodeDegree(6)
-    Which is: 42
-  3
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:202: Failure
-Expected equality of these values:
-  graph.nodeDegree(7)
-    Which is: 42
-  2
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:203: Failure
-Expected: graph.nodeDegree(9) throws an exception of type std::out_of_range.
-  Actual: it throws nothing.
-[  FAILED  ] NonEmptyGraph.nodeDegree (0 ms)
+[       OK ] NonEmptyGraph.nodeDegree (0 ms)
 [----------] 1 test from NonEmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 0 tests.
-[  FAILED  ] 1 test, listed below:
-[  FAILED  ] NonEmptyGraph.nodeDegree
-
- 1 FAILED TEST
+[  PASSED  ] 1 test.
 <end of output>
 Test time =   0.06 sec
 ----------------------------------------------------------
-Test Failed.
-"NonEmptyGraph.nodeDegree" end time: Mar 02 20:53 CET
+Test Passed.
+"NonEmptyGraph.nodeDegree" end time: Mar 03 00:01 CET
 "NonEmptyGraph.nodeDegree" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -738,7 +706,7 @@ Test Failed.
 27/47 Test: NonEmptyGraph.graphDegree
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.graphDegree" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.graphDegree" start time: Mar 02 20:53 CET
+"NonEmptyGraph.graphDegree" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -747,26 +715,17 @@ Note: Google Test filter = NonEmptyGraph.graphDegree
 [----------] Global test environment set-up.
 [----------] 1 test from NonEmptyGraph
 [ RUN      ] NonEmptyGraph.graphDegree
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:207: Failure
-Expected equality of these values:
-  graph.graphDegree()
-    Which is: 42
-  3
-[  FAILED  ] NonEmptyGraph.graphDegree (0 ms)
+[       OK ] NonEmptyGraph.graphDegree (0 ms)
 [----------] 1 test from NonEmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 0 tests.
-[  FAILED  ] 1 test, listed below:
-[  FAILED  ] NonEmptyGraph.graphDegree
-
- 1 FAILED TEST
+[  PASSED  ] 1 test.
 <end of output>
 Test time =   0.06 sec
 ----------------------------------------------------------
-Test Failed.
-"NonEmptyGraph.graphDegree" end time: Mar 02 20:53 CET
+Test Passed.
+"NonEmptyGraph.graphDegree" end time: Mar 03 00:01 CET
 "NonEmptyGraph.graphDegree" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -774,7 +733,7 @@ Test Failed.
 28/47 Test: NonEmptyGraph.coloring
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.coloring" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.coloring" start time: Mar 02 20:53 CET
+"NonEmptyGraph.coloring" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -803,17 +762,17 @@ Expected: (graph.getNode(edge.a)->color) != (graph.getNode(edge.b)->color), actu
 [----------] 1 test from NonEmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 0 tests.
 [  FAILED  ] 1 test, listed below:
 [  FAILED  ] NonEmptyGraph.coloring
 
  1 FAILED TEST
 <end of output>
-Test time =   0.07 sec
+Test time =   0.06 sec
 ----------------------------------------------------------
 Test Failed.
-"NonEmptyGraph.coloring" end time: Mar 02 20:53 CET
+"NonEmptyGraph.coloring" end time: Mar 03 00:01 CET
 "NonEmptyGraph.coloring" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -821,7 +780,7 @@ Test Failed.
 29/47 Test: NonEmptyGraph.clear
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=NonEmptyGraph.clear" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"NonEmptyGraph.clear" start time: Mar 02 20:53 CET
+"NonEmptyGraph.clear" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -840,7 +799,7 @@ Note: Google Test filter = NonEmptyGraph.clear
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"NonEmptyGraph.clear" end time: Mar 02 20:53 CET
+"NonEmptyGraph.clear" end time: Mar 03 00:01 CET
 "NonEmptyGraph.clear" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -848,7 +807,7 @@ Test Passed.
 30/47 Test: EmptyGraph.nodes
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.nodes" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.nodes" start time: Mar 02 20:53 CET
+"EmptyGraph.nodes" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -864,10 +823,10 @@ Note: Google Test filter = EmptyGraph.nodes
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.nodes" end time: Mar 02 20:53 CET
+"EmptyGraph.nodes" end time: Mar 03 00:01 CET
 "EmptyGraph.nodes" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -875,7 +834,7 @@ Test Passed.
 31/47 Test: EmptyGraph.edges
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.edges" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.edges" start time: Mar 02 20:53 CET
+"EmptyGraph.edges" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -891,10 +850,10 @@ Note: Google Test filter = EmptyGraph.edges
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.edges" end time: Mar 02 20:53 CET
+"EmptyGraph.edges" end time: Mar 03 00:01 CET
 "EmptyGraph.edges" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -902,7 +861,7 @@ Test Passed.
 32/47 Test: EmptyGraph.addNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.addNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.addNode" start time: Mar 02 20:53 CET
+"EmptyGraph.addNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -921,7 +880,7 @@ Note: Google Test filter = EmptyGraph.addNode
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.addNode" end time: Mar 02 20:53 CET
+"EmptyGraph.addNode" end time: Mar 03 00:01 CET
 "EmptyGraph.addNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -929,7 +888,7 @@ Test Passed.
 33/47 Test: EmptyGraph.addEdge
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.addEdge" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.addEdge" start time: Mar 02 20:53 CET
+"EmptyGraph.addEdge" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -948,7 +907,7 @@ Note: Google Test filter = EmptyGraph.addEdge
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.addEdge" end time: Mar 02 20:53 CET
+"EmptyGraph.addEdge" end time: Mar 03 00:01 CET
 "EmptyGraph.addEdge" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -956,7 +915,7 @@ Test Passed.
 34/47 Test: EmptyGraph.addMultipleEdges
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.addMultipleEdges" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.addMultipleEdges" start time: Mar 02 20:53 CET
+"EmptyGraph.addMultipleEdges" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -966,7 +925,7 @@ Note: Google Test filter = EmptyGraph.addMultipleEdges
 [----------] 1 test from EmptyGraph
 [ RUN      ] EmptyGraph.addMultipleEdges
 [       OK ] EmptyGraph.addMultipleEdges (0 ms)
-[----------] 1 test from EmptyGraph (0 ms total)
+[----------] 1 test from EmptyGraph (1 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (1 ms total)
@@ -975,7 +934,7 @@ Note: Google Test filter = EmptyGraph.addMultipleEdges
 Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.addMultipleEdges" end time: Mar 02 20:53 CET
+"EmptyGraph.addMultipleEdges" end time: Mar 03 00:01 CET
 "EmptyGraph.addMultipleEdges" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -983,7 +942,7 @@ Test Passed.
 35/47 Test: EmptyGraph.getNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.getNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.getNode" start time: Mar 02 20:53 CET
+"EmptyGraph.getNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1002,7 +961,7 @@ Note: Google Test filter = EmptyGraph.getNode
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.getNode" end time: Mar 02 20:53 CET
+"EmptyGraph.getNode" end time: Mar 03 00:01 CET
 "EmptyGraph.getNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1010,7 +969,7 @@ Test Passed.
 36/47 Test: EmptyGraph.containsEdge
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.containsEdge" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.containsEdge" start time: Mar 02 20:53 CET
+"EmptyGraph.containsEdge" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1029,7 +988,7 @@ Note: Google Test filter = EmptyGraph.containsEdge
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.containsEdge" end time: Mar 02 20:53 CET
+"EmptyGraph.containsEdge" end time: Mar 03 00:01 CET
 "EmptyGraph.containsEdge" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1037,7 +996,7 @@ Test Passed.
 37/47 Test: EmptyGraph.removeNode
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.removeNode" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.removeNode" start time: Mar 02 20:53 CET
+"EmptyGraph.removeNode" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1056,7 +1015,7 @@ Note: Google Test filter = EmptyGraph.removeNode
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.removeNode" end time: Mar 02 20:53 CET
+"EmptyGraph.removeNode" end time: Mar 03 00:01 CET
 "EmptyGraph.removeNode" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1064,7 +1023,7 @@ Test Passed.
 38/47 Test: EmptyGraph.removeEdge
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.removeEdge" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.removeEdge" start time: Mar 02 20:53 CET
+"EmptyGraph.removeEdge" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1077,13 +1036,13 @@ Note: Google Test filter = EmptyGraph.removeEdge
 [----------] 1 test from EmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
+[==========] 1 test from 1 test suite ran. (1 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.removeEdge" end time: Mar 02 20:53 CET
+"EmptyGraph.removeEdge" end time: Mar 03 00:01 CET
 "EmptyGraph.removeEdge" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1091,7 +1050,7 @@ Test Passed.
 39/47 Test: EmptyGraph.nodeCount
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.nodeCount" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.nodeCount" start time: Mar 02 20:53 CET
+"EmptyGraph.nodeCount" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1107,10 +1066,10 @@ Note: Google Test filter = EmptyGraph.nodeCount
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.nodeCount" end time: Mar 02 20:53 CET
+"EmptyGraph.nodeCount" end time: Mar 03 00:01 CET
 "EmptyGraph.nodeCount" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1118,7 +1077,7 @@ Test Passed.
 40/47 Test: EmptyGraph.edgeCount
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.edgeCount" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.edgeCount" start time: Mar 02 20:53 CET
+"EmptyGraph.edgeCount" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1134,10 +1093,10 @@ Note: Google Test filter = EmptyGraph.edgeCount
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.06 sec
+Test time =   0.07 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.edgeCount" end time: Mar 02 20:53 CET
+"EmptyGraph.edgeCount" end time: Mar 03 00:01 CET
 "EmptyGraph.edgeCount" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1145,7 +1104,7 @@ Test Passed.
 41/47 Test: EmptyGraph.nodeDegree
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.nodeDegree" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.nodeDegree" start time: Mar 02 20:53 CET
+"EmptyGraph.nodeDegree" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1154,24 +1113,17 @@ Note: Google Test filter = EmptyGraph.nodeDegree
 [----------] Global test environment set-up.
 [----------] 1 test from EmptyGraph
 [ RUN      ] EmptyGraph.nodeDegree
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:312: Failure
-Expected: graph.nodeDegree(1) throws an exception of type std::out_of_range.
-  Actual: it throws nothing.
-[  FAILED  ] EmptyGraph.nodeDegree (0 ms)
+[       OK ] EmptyGraph.nodeDegree (0 ms)
 [----------] 1 test from EmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 0 tests.
-[  FAILED  ] 1 test, listed below:
-[  FAILED  ] EmptyGraph.nodeDegree
-
- 1 FAILED TEST
+[  PASSED  ] 1 test.
 <end of output>
 Test time =   0.06 sec
 ----------------------------------------------------------
-Test Failed.
-"EmptyGraph.nodeDegree" end time: Mar 02 20:53 CET
+Test Passed.
+"EmptyGraph.nodeDegree" end time: Mar 03 00:01 CET
 "EmptyGraph.nodeDegree" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1179,7 +1131,7 @@ Test Failed.
 42/47 Test: EmptyGraph.graphDegree
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.graphDegree" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.graphDegree" start time: Mar 02 20:53 CET
+"EmptyGraph.graphDegree" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1188,26 +1140,17 @@ Note: Google Test filter = EmptyGraph.graphDegree
 [----------] Global test environment set-up.
 [----------] 1 test from EmptyGraph
 [ RUN      ] EmptyGraph.graphDegree
-/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_tests.cpp:316: Failure
-Expected equality of these values:
-  graph.graphDegree()
-    Which is: 42
-  0
-[  FAILED  ] EmptyGraph.graphDegree (0 ms)
+[       OK ] EmptyGraph.graphDegree (0 ms)
 [----------] 1 test from EmptyGraph (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 0 tests.
-[  FAILED  ] 1 test, listed below:
-[  FAILED  ] EmptyGraph.graphDegree
-
- 1 FAILED TEST
+[  PASSED  ] 1 test.
 <end of output>
 Test time =   0.06 sec
 ----------------------------------------------------------
-Test Failed.
-"EmptyGraph.graphDegree" end time: Mar 02 20:53 CET
+Test Passed.
+"EmptyGraph.graphDegree" end time: Mar 03 00:01 CET
 "EmptyGraph.graphDegree" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1215,7 +1158,7 @@ Test Failed.
 43/47 Test: EmptyGraph.coloring
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.coloring" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.coloring" start time: Mar 02 20:53 CET
+"EmptyGraph.coloring" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1234,7 +1177,7 @@ Note: Google Test filter = EmptyGraph.coloring
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.coloring" end time: Mar 02 20:53 CET
+"EmptyGraph.coloring" end time: Mar 03 00:01 CET
 "EmptyGraph.coloring" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1242,7 +1185,7 @@ Test Passed.
 44/47 Test: EmptyGraph.clear
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=EmptyGraph.clear" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"EmptyGraph.clear" start time: Mar 02 20:53 CET
+"EmptyGraph.clear" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1261,7 +1204,7 @@ Note: Google Test filter = EmptyGraph.clear
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"EmptyGraph.clear" end time: Mar 02 20:53 CET
+"EmptyGraph.clear" end time: Mar 03 00:01 CET
 "EmptyGraph.clear" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1269,7 +1212,7 @@ Test Passed.
 45/47 Test: Edges.equal
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=Edges.equal" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"Edges.equal" start time: Mar 02 20:53 CET
+"Edges.equal" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1288,7 +1231,7 @@ Note: Google Test filter = Edges.equal
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"Edges.equal" end time: Mar 02 20:53 CET
+"Edges.equal" end time: Mar 03 00:01 CET
 "Edges.equal" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1296,7 +1239,7 @@ Test Passed.
 46/47 Test: Edges.nonEqual
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=Edges.nonEqual" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"Edges.nonEqual" start time: Mar 02 20:53 CET
+"Edges.nonEqual" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1315,7 +1258,7 @@ Note: Google Test filter = Edges.nonEqual
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"Edges.nonEqual" end time: Mar 02 20:53 CET
+"Edges.nonEqual" end time: Mar 03 00:01 CET
 "Edges.nonEqual" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -1323,7 +1266,7 @@ Test Passed.
 47/47 Test: Edges.toStringStream
 Command: "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/tdd_test" "--gtest_filter=Edges.toStringStream" "--gtest_also_run_disabled_tests"
 Directory: /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1
-"Edges.toStringStream" start time: Mar 02 20:53 CET
+"Edges.toStringStream" start time: Mar 03 00:01 CET
 Output:
 ----------------------------------------------------------
 Running main() from /mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -1342,8 +1285,8 @@ Note: Google Test filter = Edges.toStringStream
 Test time =   0.06 sec
 ----------------------------------------------------------
 Test Passed.
-"Edges.toStringStream" end time: Mar 02 20:53 CET
+"Edges.toStringStream" end time: Mar 03 00:01 CET
 "Edges.toStringStream" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Mar 02 20:53 CET
+End testing: Mar 03 00:01 CET

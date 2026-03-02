@@ -31,13 +31,13 @@
             <td class="headerValue">tdd_test_coverage.info.cleaned</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">97.6&nbsp;%</td>
-            <td class="headerCovTableEntry">82</td>
-            <td class="headerCovTableEntry">80</td>
+            <td class="headerCovTableEntryHi">98.2&nbsp;%</td>
+            <td class="headerCovTableEntry">113</td>
+            <td class="headerCovTableEntry">111</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-02 21:05:30</td>
+            <td class="headerValue">2026-03-03 00:21:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -49,9 +49,9 @@
             <td></td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryMed">79.4&nbsp;%</td>
-            <td class="headerCovTableEntry">68</td>
-            <td class="headerCovTableEntry">54</td>
+            <td class="headerCovTableEntryMed">85.0&nbsp;%</td>
+            <td class="headerCovTableEntry">100</td>
+            <td class="headerCovTableEntry">85</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -176,13 +176,13 @@
 <span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaGNC">          17 : }</span></span>
 <span id="L106"><span class="lineNum">     106</span>                 :             : </span>
 <span id="L107"><span class="lineNum">     107</span>                 :             : // For cyklus na najdenie ID zhody</span>
-<span id="L108"><span class="lineNum">     108</span>                 :<span class="tlaGNC">         220 : Node *Graph::getNode(size_t nodeId)</span></span>
+<span id="L108"><span class="lineNum">     108</span>                 :<span class="tlaGNC">         237 : Node *Graph::getNode(size_t nodeId)</span></span>
 <span id="L109"><span class="lineNum">     109</span>                 :             : {</span>
-<span id="L110"><span class="lineNum">     110</span>         [<span class="tlaGBC" title="Branch 0 was taken 602 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 91 times"> + </span>]:<span class="tlaGNC">         693 :     for (int i = 0; i &lt; a_nodes.size(); i++)</span></span>
+<span id="L110"><span class="lineNum">     110</span>         [<span class="tlaGBC" title="Branch 0 was taken 651 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 91 times"> + </span>]:<span class="tlaGNC">         742 :     for (int i = 0; i &lt; a_nodes.size(); i++)</span></span>
 <span id="L111"><span class="lineNum">     111</span>                 :             :     {</span>
-<span id="L112"><span class="lineNum">     112</span>         [<span class="tlaGBC" title="Branch 0 was taken 129 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 473 times"> + </span>]:<span class="tlaGNC">         602 :         if (a_nodes[i]-&gt;id == nodeId)</span></span>
+<span id="L112"><span class="lineNum">     112</span>         [<span class="tlaGBC" title="Branch 0 was taken 146 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 505 times"> + </span>]:<span class="tlaGNC">         651 :         if (a_nodes[i]-&gt;id == nodeId)</span></span>
 <span id="L113"><span class="lineNum">     113</span>                 :             :         {</span>
-<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">         129 :             return a_nodes[i];</span></span>
+<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">         146 :             return a_nodes[i];</span></span>
 <span id="L115"><span class="lineNum">     115</span>                 :             :         }</span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :     }</span>
 <span id="L117"><span class="lineNum">     117</span>                 :             : </span>
@@ -258,34 +258,103 @@
 <span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaGNC">           2 :     return a_edges.size();</span></span>
 <span id="L187"><span class="lineNum">     187</span>                 :             : }</span>
 <span id="L188"><span class="lineNum">     188</span>                 :             : </span>
-<span id="L189"><span class="lineNum">     189</span>                 :<span class="tlaGNC">           7 : size_t Graph::nodeDegree(size_t nodeId) const</span></span>
+<span id="L189"><span class="lineNum">     189</span>                 :<span class="tlaGNC">          12 : size_t Graph::nodeDegree(size_t nodeId) const</span></span>
 <span id="L190"><span class="lineNum">     190</span>                 :             : {</span>
-<span id="L191"><span class="lineNum">     191</span>                 :<span class="tlaGNC">           7 :     return 42;</span></span>
-<span id="L192"><span class="lineNum">     192</span>                 :             : }</span>
-<span id="L193"><span class="lineNum">     193</span>                 :             : </span>
-<span id="L194"><span class="lineNum">     194</span>                 :<span class="tlaGNC">           2 : size_t Graph::graphDegree() const</span></span>
-<span id="L195"><span class="lineNum">     195</span>                 :             : {</span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">           2 :     return 42;</span></span>
-<span id="L197"><span class="lineNum">     197</span>                 :             : }</span>
-<span id="L198"><span class="lineNum">     198</span>                 :             : </span>
-<span id="L199"><span class="lineNum">     199</span>                 :<span class="tlaGNC">           2 : void Graph::coloring()</span></span>
-<span id="L200"><span class="lineNum">     200</span>                 :             : {</span>
-<span id="L201"><span class="lineNum">     201</span>                 :<span class="tlaGNC">           2 : }</span></span>
-<span id="L202"><span class="lineNum">     202</span>                 :             : </span>
-<span id="L203"><span class="lineNum">     203</span>                 :<span class="tlaGNC">          32 : void Graph::clear()</span></span>
-<span id="L204"><span class="lineNum">     204</span>                 :             : {</span>
-<span id="L205"><span class="lineNum">     205</span>                 :             :     // Uvolnime vsetky uzly</span>
-<span id="L206"><span class="lineNum">     206</span>         [<span class="tlaGBC" title="Branch 0 was taken 88 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 32 times"> + </span>]:<span class="tlaGNC">         120 :     for (int i = 0; i &lt; a_nodes.size(); i++)</span></span>
-<span id="L207"><span class="lineNum">     207</span>                 :             :     {</span>
-<span id="L208"><span class="lineNum">     208</span>         [<span class="tlaGBC" title="Branch 0 was taken 88 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          88 :         delete a_nodes[i];</span></span>
-<span id="L209"><span class="lineNum">     209</span>                 :             :     }</span>
-<span id="L210"><span class="lineNum">     210</span>                 :             : </span>
-<span id="L211"><span class="lineNum">     211</span>                 :             :     // Vyprazdnenie vektorov</span>
-<span id="L212"><span class="lineNum">     212</span>                 :<span class="tlaGNC">          32 :     a_nodes.clear();</span></span>
-<span id="L213"><span class="lineNum">     213</span>                 :<span class="tlaGNC">          32 :     a_edges.clear();</span></span>
-<span id="L214"><span class="lineNum">     214</span>                 :<span class="tlaGNC">          32 : }</span></span>
-<span id="L215"><span class="lineNum">     215</span>                 :             : </span>
-<span id="L216"><span class="lineNum">     216</span>                 :             : /*** Konec souboru tdd_code.cpp ***/</span>
+<span id="L191"><span class="lineNum">     191</span>                 :             :     // Obchadzanie getNode nakolko sa to compileru nepacilo kvoli const</span>
+<span id="L192"><span class="lineNum">     192</span>                 :<span class="tlaGNC">          12 :     bool exists = false;</span></span>
+<span id="L193"><span class="lineNum">     193</span>         [<span class="tlaGBC" title="Branch 0 was taken 35 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          37 :     for (size_t i = 0; i &lt; a_nodes.size(); i++)</span></span>
+<span id="L194"><span class="lineNum">     194</span>                 :             :     {</span>
+<span id="L195"><span class="lineNum">     195</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 25 times"> + </span>]:<span class="tlaGNC">          35 :         if (a_nodes[i]-&gt;id == nodeId)</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :             :         {</span>
+<span id="L197"><span class="lineNum">     197</span>                 :<span class="tlaGNC">          10 :             exists = true;</span></span>
+<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">          10 :             break;</span></span>
+<span id="L199"><span class="lineNum">     199</span>                 :             :         }</span>
+<span id="L200"><span class="lineNum">     200</span>                 :             :     }</span>
+<span id="L201"><span class="lineNum">     201</span>                 :             : </span>
+<span id="L202"><span class="lineNum">     202</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          12 :     if (!exists)</span></span>
+<span id="L203"><span class="lineNum">     203</span>                 :             :     {</span>
+<span id="L204"><span class="lineNum">     204</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           2 :         throw std::out_of_range(&quot;Uzol neexistuje&quot;); // Vypisanie chyby ak sa uzol nenasiel v grafe</span></span>
+<span id="L205"><span class="lineNum">     205</span>                 :             :     }</span>
+<span id="L206"><span class="lineNum">     206</span>                 :             : </span>
+<span id="L207"><span class="lineNum">     207</span>                 :<span class="tlaGNC">          10 :     int degree = 0;</span></span>
+<span id="L208"><span class="lineNum">     208</span>         [<span class="tlaGBC" title="Branch 0 was taken 60 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          70 :     for (int i = 0; i &lt; a_edges.size(); i++)</span></span>
+<span id="L209"><span class="lineNum">     209</span>                 :             :     {</span>
+<span id="L210"><span class="lineNum">     210</span>   [<span class="tlaGBC" title="Branch 0 was taken 48 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 36 times"> + </span> :<span class="tlaGNC">          60 :         if (a_edges[i].a == nodeId || a_edges[i].b == nodeId)</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 24 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 36 times"> + </span>]
+<span id="L211"><span class="lineNum">     211</span>                 :             :         {</span>
+<span id="L212"><span class="lineNum">     212</span>                 :<span class="tlaGNC">          24 :             degree++;</span></span>
+<span id="L213"><span class="lineNum">     213</span>                 :             :         }</span>
+<span id="L214"><span class="lineNum">     214</span>                 :             :     }</span>
+<span id="L215"><span class="lineNum">     215</span>                 :<span class="tlaGNC">          10 :     return degree;</span></span>
+<span id="L216"><span class="lineNum">     216</span>                 :             : }</span>
+<span id="L217"><span class="lineNum">     217</span>                 :             : </span>
+<span id="L218"><span class="lineNum">     218</span>                 :<span class="tlaGNC">           2 : size_t Graph::graphDegree() const</span></span>
+<span id="L219"><span class="lineNum">     219</span>                 :             : {</span>
+<span id="L220"><span class="lineNum">     220</span>                 :<span class="tlaGNC">           2 :     int maximum = 0;</span></span>
+<span id="L221"><span class="lineNum">     221</span>                 :             : </span>
+<span id="L222"><span class="lineNum">     222</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           7 :     for (int i = 0; i &lt; a_nodes.size(); i++)</span></span>
+<span id="L223"><span class="lineNum">     223</span>                 :             :     {</span>
+<span id="L224"><span class="lineNum">     224</span>                 :<span class="tlaGNC">           5 :         int degree = nodeDegree(a_nodes[i]-&gt;id);</span></span>
+<span id="L225"><span class="lineNum">     225</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           5 :         if (degree &gt; maximum)</span></span>
+<span id="L226"><span class="lineNum">     226</span>                 :             :         {</span>
+<span id="L227"><span class="lineNum">     227</span>                 :<span class="tlaGNC">           2 :             maximum = degree;</span></span>
+<span id="L228"><span class="lineNum">     228</span>                 :             :         }</span>
+<span id="L229"><span class="lineNum">     229</span>                 :             :     }</span>
+<span id="L230"><span class="lineNum">     230</span>                 :<span class="tlaGNC">           2 :     return maximum;</span></span>
+<span id="L231"><span class="lineNum">     231</span>                 :             : }</span>
+<span id="L232"><span class="lineNum">     232</span>                 :             : </span>
+<span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">           2 : void Graph::coloring()</span></span>
+<span id="L234"><span class="lineNum">     234</span>                 :             : {</span>
+<span id="L235"><span class="lineNum">     235</span>                 :             :     // Prejdenie cez vsetky uzly</span>
+<span id="L236"><span class="lineNum">     236</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           7 :     for (int i = 0; i &lt; a_nodes.size(); i++)</span></span>
+<span id="L237"><span class="lineNum">     237</span>                 :             :     {</span>
+<span id="L238"><span class="lineNum">     238</span>                 :<span class="tlaGNC">           5 :         int color = 1; // Zacneme farbou 1 nakolko 0 je predvolena farba pre vseky uzly</span></span>
+<span id="L239"><span class="lineNum">     239</span>                 :<span class="tlaGNC">           5 :         bool check = false;</span></span>
+<span id="L240"><span class="lineNum">     240</span>                 :             : </span>
+<span id="L241"><span class="lineNum">     241</span>                 :             :         // Cyklus while bezi dokym nenajdeme vhodnu farbu</span>
+<span id="L242"><span class="lineNum">     242</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">          19 :         while (!check)</span></span>
+<span id="L243"><span class="lineNum">     243</span>                 :             :         {</span>
+<span id="L244"><span class="lineNum">     244</span>                 :<span class="tlaGNC">           9 :             check = true;</span></span>
+<span id="L245"><span class="lineNum">     245</span>         [<span class="tlaGBC" title="Branch 0 was taken 44 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">          49 :             for (int j = 0; j &lt; a_edges.size(); j++)</span></span>
+<span id="L246"><span class="lineNum">     246</span>                 :             :             {</span>
+<span id="L247"><span class="lineNum">     247</span>                 :             :                 Node *neighbor;</span>
+<span id="L248"><span class="lineNum">     248</span>                 :             : </span>
+<span id="L249"><span class="lineNum">     249</span>                 :             :                 // Zistenie ci hrana vedie z alebo do uzla</span>
+<span id="L250"><span class="lineNum">     250</span>         [<span class="tlaGBC" title="Branch 0 was taken 7 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 37 times"> + </span>]:<span class="tlaGNC">          44 :                 if (a_edges[j].a == a_nodes[i]-&gt;id)</span></span>
+<span id="L251"><span class="lineNum">     251</span>                 :             :                 {</span>
+<span id="L252"><span class="lineNum">     252</span>                 :<span class="tlaGNC">           7 :                     neighbor = getNode(a_edges[j].b);</span></span>
+<span id="L253"><span class="lineNum">     253</span>                 :             :                 }</span>
+<span id="L254"><span class="lineNum">     254</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 27 times"> + </span>]:<span class="tlaGNC">          37 :                 else if (a_edges[j].b == a_nodes[i]-&gt;id)</span></span>
+<span id="L255"><span class="lineNum">     255</span>                 :             :                 {</span>
+<span id="L256"><span class="lineNum">     256</span>                 :<span class="tlaGNC">          10 :                     neighbor = getNode(a_edges[j].a);</span></span>
+<span id="L257"><span class="lineNum">     257</span>                 :             :                 }</span>
+<span id="L258"><span class="lineNum">     258</span>                 :             : </span>
+<span id="L259"><span class="lineNum">     259</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 40 times"> + </span>]:<span class="tlaGNC">          44 :                 if (neighbor-&gt;color == color)</span></span>
+<span id="L260"><span class="lineNum">     260</span>                 :             :                 {</span>
+<span id="L261"><span class="lineNum">     261</span>                 :<span class="tlaGNC">           4 :                     check = false;</span></span>
+<span id="L262"><span class="lineNum">     262</span>                 :<span class="tlaGNC">           4 :                     color++;</span></span>
+<span id="L263"><span class="lineNum">     263</span>                 :<span class="tlaGNC">           4 :                     break;</span></span>
+<span id="L264"><span class="lineNum">     264</span>                 :             :                 }</span>
+<span id="L265"><span class="lineNum">     265</span>                 :             :             }</span>
+<span id="L266"><span class="lineNum">     266</span>                 :             :         }</span>
+<span id="L267"><span class="lineNum">     267</span>                 :<span class="tlaGNC">           5 :         a_nodes[i]-&gt;color = color;</span></span>
+<span id="L268"><span class="lineNum">     268</span>                 :             :     }</span>
+<span id="L269"><span class="lineNum">     269</span>                 :<span class="tlaGNC">           2 : }</span></span>
+<span id="L270"><span class="lineNum">     270</span>                 :             : </span>
+<span id="L271"><span class="lineNum">     271</span>                 :<span class="tlaGNC">          32 : void Graph::clear()</span></span>
+<span id="L272"><span class="lineNum">     272</span>                 :             : {</span>
+<span id="L273"><span class="lineNum">     273</span>                 :             :     // Uvolnime vsetky uzly</span>
+<span id="L274"><span class="lineNum">     274</span>         [<span class="tlaGBC" title="Branch 0 was taken 88 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 32 times"> + </span>]:<span class="tlaGNC">         120 :     for (int i = 0; i &lt; a_nodes.size(); i++)</span></span>
+<span id="L275"><span class="lineNum">     275</span>                 :             :     {</span>
+<span id="L276"><span class="lineNum">     276</span>         [<span class="tlaGBC" title="Branch 0 was taken 88 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          88 :         delete a_nodes[i];</span></span>
+<span id="L277"><span class="lineNum">     277</span>                 :             :     }</span>
+<span id="L278"><span class="lineNum">     278</span>                 :             : </span>
+<span id="L279"><span class="lineNum">     279</span>                 :             :     // Vyprazdnenie vektorov</span>
+<span id="L280"><span class="lineNum">     280</span>                 :<span class="tlaGNC">          32 :     a_nodes.clear();</span></span>
+<span id="L281"><span class="lineNum">     281</span>                 :<span class="tlaGNC">          32 :     a_edges.clear();</span></span>
+<span id="L282"><span class="lineNum">     282</span>                 :<span class="tlaGNC">          32 : }</span></span>
+<span id="L283"><span class="lineNum">     283</span>                 :             : </span>
+<span id="L284"><span class="lineNum">     284</span>                 :             : /*** Konec souboru tdd_code.cpp ***/</span>
         </pre>
               </td>
             </tr>
