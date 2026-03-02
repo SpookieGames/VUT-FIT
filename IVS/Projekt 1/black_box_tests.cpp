@@ -49,12 +49,14 @@ TEST_F(EmptyTree, InsertNode)
     ASSERT_NE(result.second, nullptr);
     EXPECT_EQ(result.second->key, 10);
 }
+
 // Vymazanie neexistujuceho uzla
 TEST_F(EmptyTree, DeleteNode)
 {
     bool result = tree.DeleteNode(0);
     EXPECT_FALSE(result);
 }
+
 // Hladanie uzla ktory neexsituje
 TEST_F(EmptyTree, FindNode)
 {
@@ -91,11 +93,13 @@ TEST_F(NonEmptyTree, InsertNode)
     ASSERT_NE(result2.second, nullptr);
     EXPECT_EQ(result2.second->key, 10);
 }
+
 TEST_F(NonEmptyTree, DeleteNode)
 {
     EXPECT_TRUE(tree.DeleteNode(5));  // Existujuci uzol
     EXPECT_FALSE(tree.DeleteNode(1)); // Neexistujuci uzol
 }
+
 // Hladanie uzla
 TEST_F(NonEmptyTree, FindNode)
 {
@@ -120,14 +124,70 @@ protected:
     }
 };
 
+// Vsetky listove uzly su cierne
 TEST_F(TreeAxioms, Axiom1)
 {
-    std::vector<Node_t *> outNonLeafNodes;
-    tree.GetNonLeafNodes(outNonLeafNodes);
+    std::vector<Node_t *> outLeafNodes;
+    tree.GetLeafNodes(outLeafNodes);
 
-    for (Node_t *leaf : outNonLeafNodes)
+    for (Node_t *leaf : outLeafNodes)
     {
-        EXPECT_EQ(leaf->color, BinaryTree::BLACK);
+        EXPECT_EQ(leaf->color, BinaryTree::BLACK); // Porovnanie farby
     }
 }
+
+// Ak je uzol cerveny oba jeho potomkovia su cierny
+TEST_F(TreeAxioms, Axiom2)
+{
+    std::vector<Node_t *> outAllNodes;
+    tree.GetAllNodes(outAllNodes);
+
+    for (Node_t *leaf : outAllNodes)
+    {
+        ASSERT_NE(leaf, nullptr);
+
+        if (leaf->color == BinaryTree::RED) // Ak je uzol cerveny tak pokracujeme
+        {
+            ASSERT_NE(leaf->pLeft, nullptr);
+            ASSERT_EQ(leaf->pLeft->color, BinaryTree::BLACK); // Porovnanie farby
+            ASSERT_NE(leaf->pRight, nullptr);
+            ASSERT_EQ(leaf->pRight->color, BinaryTree::BLACK); // Porovnanie farby
+        }
+    }
+}
+
+// Overenie poctu ciest ku korenu
+TEST_F(TreeAxioms, Axiom3)
+{
+    std::vector<Node_t *> outLeafNodes;
+    tree.GetLeafNodes(outLeafNodes);
+    int global_count = -1;
+
+    for (Node_t *leaf : outLeafNodes)
+    {
+        Node_t *current = leaf; // Pomocny ukazatel aby sa neprepisal leaf
+        int count = 0;
+
+        while (current != nullptr)
+        {
+            if (current->color == BinaryTree::BLACK) // Ak je list cierny, tak zvysime count
+            {
+                count++;
+            }
+
+            current = current->pParent; // Posunieme ukazatel dalej
+        }
+
+        if (global_count == -1)
+        {
+            global_count = count;
+        }
+
+        else
+        {
+            EXPECT_EQ(count, global_count);
+        }
+    }
+}
+
 /*** Konec souboru black_box_tests.cpp ***/
