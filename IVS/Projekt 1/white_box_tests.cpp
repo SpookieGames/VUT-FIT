@@ -42,6 +42,36 @@ protected:
         abc = SuffixAutomaton("abc");
     }
 };
+
+TEST_F(SuffixAutomatonTest, EmptyAutomaton)
+{
+    EXPECT_EQ(empty.size(), 1); // Pociatocta velkost je 1
+
+    EXPECT_TRUE(empty.contains(""));
+    EXPECT_FALSE(empty.contains("a"));
+}
+
+// Overenie ci retazec obsahuje vsetky podretazce
+TEST_F(SuffixAutomatonTest, Contains)
+{
+    EXPECT_TRUE(abc.contains("a"));
+    EXPECT_TRUE(abc.contains("b"));
+    EXPECT_TRUE(abc.contains("c"));
+    EXPECT_TRUE(abc.contains("ab"));
+    EXPECT_TRUE(abc.contains("bc"));
+    EXPECT_TRUE(abc.contains("abc"));
+
+    EXPECT_FALSE(abc.contains("cb"));
+    EXPECT_FALSE(abc.contains("abcd"));
+    EXPECT_FALSE(abc.contains("x"));
+}
+
+TEST_F(SuffixAutomatonTest, AddElement)
+{
+    empty.add_element('a');
+    EXPECT_TRUE(empty.contains("a"));
+    EXPECT_EQ(empty.size(), 2); // pribudol stav
+}
 //============================================================================//
 
 /*** Konec souboru white_box_tests.cpp ***/
