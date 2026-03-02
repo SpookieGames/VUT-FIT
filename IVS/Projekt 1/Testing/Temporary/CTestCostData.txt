@@ -1,66 +1,53 @@
-EmptyTree.InsertNode 7 0.00576189
-EmptyTree.DeleteNode 7 0.00578047
-EmptyTree.FindNode 7 0.00620452
-NonEmptyGraph.nodes 0 0
-NonEmptyGraph.edges 0 0
-NonEmptyGraph.addNode 0 0
-NonEmptyGraph.addEdge 0 0
-NonEmptyGraph.addMultipleEdges 0 0
-NonEmptyGraph.getNode 0 0
-NonEmptyGraph.containsEdge 0 0
-NonEmptyGraph.removeNode 0 0
-NonEmptyGraph.removeEdge 0 0
-NonEmptyGraph.nodeCount 0 0
-NonEmptyGraph.edgeCount 0 0
+EmptyTree.InsertNode 9 0.00427458
+EmptyTree.DeleteNode 9 0.00410985
+EmptyTree.FindNode 9 0.0043325
+NonEmptyGraph.nodes 2 0.0319717
+NonEmptyGraph.edges 2 0.0320951
+NonEmptyGraph.addNode 2 0.0303771
+NonEmptyGraph.addEdge 2 0.0328883
+NonEmptyGraph.addMultipleEdges 2 0.0312292
+NonEmptyGraph.getNode 2 0.0299739
+NonEmptyGraph.containsEdge 2 0.0323294
+NonEmptyGraph.removeNode 2 0.0323017
+NonEmptyGraph.removeEdge 2 0.0314588
+NonEmptyGraph.nodeCount 2 0.0318312
+NonEmptyGraph.edgeCount 2 0.0313085
 NonEmptyGraph.nodeDegree 0 0
 NonEmptyGraph.graphDegree 0 0
 NonEmptyGraph.coloring 0 0
-NonEmptyGraph.clear 7 0.00923478
-EmptyGraph.nodes 7 0.00975131
-EmptyGraph.edges 7 0.009312
-EmptyGraph.addNode 0 0
-EmptyGraph.addEdge 0 0
-EmptyGraph.addMultipleEdges 0 0
-EmptyGraph.getNode 7 0.00925221
-EmptyGraph.containsEdge 7 0.00904412
-EmptyGraph.removeNode 0 0
-EmptyGraph.removeEdge 0 0
-EmptyGraph.nodeCount 0 0
-EmptyGraph.edgeCount 0 0
+NonEmptyGraph.clear 9 0.00700979
+EmptyGraph.nodes 9 0.00680796
+EmptyGraph.edges 9 0.00704407
+EmptyGraph.addNode 2 0.0309462
+EmptyGraph.addEdge 2 0.031322
+EmptyGraph.addMultipleEdges 2 0.033852
+EmptyGraph.getNode 9 0.00666116
+EmptyGraph.containsEdge 9 0.00681673
+EmptyGraph.removeNode 2 0.0315739
+EmptyGraph.removeEdge 2 0.0300335
+EmptyGraph.nodeCount 2 0.0306639
+EmptyGraph.edgeCount 2 0.0311441
 EmptyGraph.nodeDegree 0 0
 EmptyGraph.graphDegree 0 0
-EmptyGraph.coloring 7 0.00934297
-EmptyGraph.clear 7 0.0108334
-Edges.equal 7 0.0092111
-Edges.nonEqual 7 0.00974538
-Edges.toStringStream 7 0.00971804
-NonEmptyTree.InsertNode 6 0.00681714
-NonEmptyTree.DeleteNode 6 0.00667277
-NonEmptyTree.FindNode 6 0.00695028
-TreeAxioms.Axiom1 5 0.00807555
-TreeAxioms.Axiom2 4 0.00961457
-TreeAxioms.Axiom3 2 0.0199338
+EmptyGraph.coloring 9 0.00690862
+EmptyGraph.clear 9 0.00669922
+Edges.equal 9 0.00682847
+Edges.nonEqual 9 0.00675423
+Edges.toStringStream 9 0.00674199
+NonEmptyTree.InsertNode 8 0.00458792
+NonEmptyTree.DeleteNode 8 0.00473223
+NonEmptyTree.FindNode 8 0.00473987
+TreeAxioms.Axiom1 7 0.0053185
+TreeAxioms.Axiom2 6 0.0064601
+TreeAxioms.Axiom3 4 0.0099362
+SuffixAutomatonTest.EmptyAutomaton 2 0.0201881
+SuffixAutomatonTest.Contains 2 0.0197011
+SuffixAutomatonTest.AddElement 2 0.0208741
+SuffixAutomatonTest.ClearAutomaton 2 0.0206557
+SuffixAutomatonTest.ComplexSequence 1 0.044912
 ---
-NonEmptyGraph.nodes
-NonEmptyGraph.edges
-NonEmptyGraph.addNode
-NonEmptyGraph.addEdge
-NonEmptyGraph.addMultipleEdges
-NonEmptyGraph.getNode
-NonEmptyGraph.containsEdge
-NonEmptyGraph.removeNode
-NonEmptyGraph.removeEdge
-NonEmptyGraph.nodeCount
-NonEmptyGraph.edgeCount
 NonEmptyGraph.nodeDegree
 NonEmptyGraph.graphDegree
 NonEmptyGraph.coloring
-EmptyGraph.addNode
-EmptyGraph.addEdge
-EmptyGraph.addMultipleEdges
-EmptyGraph.removeNode
-EmptyGraph.removeEdge
-EmptyGraph.nodeCount
-EmptyGraph.edgeCount
 EmptyGraph.nodeDegree
 EmptyGraph.graphDegree

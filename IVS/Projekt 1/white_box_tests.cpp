@@ -70,8 +70,31 @@ TEST_F(SuffixAutomatonTest, AddElement)
 {
     empty.add_element('a');
     EXPECT_TRUE(empty.contains("a"));
-    EXPECT_EQ(empty.size(), 2); // pribudol stav
+    EXPECT_EQ(empty.size(), 2); // Mala by sa zvacsit velkost o 1
 }
+
+TEST_F(SuffixAutomatonTest, ClearAutomaton)
+{
+    abc.clear();
+
+    // Po vycisteni ma byt automat prazdny
+    EXPECT_EQ(abc.size(), 1);
+    EXPECT_FALSE(abc.contains("a"));
+}
+
+TEST_F(SuffixAutomatonTest, ComplexSequence)
+{
+    SuffixAutomaton complex;
+    complex.add_sequence("pododdiel"); // Komplexnejsie slovo s opakovanymi pismenami
+
+    EXPECT_TRUE(complex.contains("pod"));
+    EXPECT_TRUE(complex.contains("odd"));
+    EXPECT_TRUE(complex.contains("iel"));
+    EXPECT_TRUE(complex.contains("dod"));
+
+    EXPECT_FALSE(complex.contains("odie"));
+}
+
 //============================================================================//
 
 /*** Konec souboru white_box_tests.cpp ***/
