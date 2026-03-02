@@ -134,10 +134,46 @@ bool Graph::containsEdge(const Edge &edge) const
 
 void Graph::removeNode(size_t nodeId)
 {
+    // Overenie ci uzol vobec existuje
+    if (getNode(nodeId) == nullptr)
+    {
+        throw std::out_of_range("Uzol neexistuje");
+    }
+
+    // Zmazanie hran ktore obsahuju mazany uzol, odzadu aby sa neposuval index
+    for (int i = a_edges.size() - 1; i >= 0; i--)
+    {
+        if (a_edges[i].a == nodeId || a_edges[i].b == nodeId)
+        {
+            a_edges.erase(a_edges.begin() + i);
+        }
+    }
+
+    // Zmazanie uzla z pamate a vektora
+    for (int i = 0; i < a_nodes.size(); i++)
+    {
+        if (a_nodes[i]->id == nodeId)
+        {
+            delete a_nodes[i];                  // Zmazanie z pamate
+            a_nodes.erase(a_nodes.begin() + i); // Ostranenie uzla z vektora
+            break;
+        }
+    }
 }
 
 void Graph::removeEdge(const Edge &edge)
 {
+    // Prejdenie vsetkych hran
+    for (int i = 0; i < a_edges.size(); i++)
+    {
+        if (a_edges[i] == edge)
+        {
+            a_edges.erase(a_edges.begin() + i);
+            return;
+        }
+    }
+
+    throw std::out_of_range("Hrana neexistuje");
 }
 
 size_t Graph::nodeCount() const
@@ -166,6 +202,15 @@ void Graph::coloring()
 
 void Graph::clear()
 {
+    // Uvolnime vsetky uzly
+    for (int i = 0; i < a_nodes.size(); i++)
+    {
+        delete a_nodes[i];
+    }
+
+    // Vyprazdnenie vektorov
+    a_nodes.clear();
+    a_edges.clear();
 }
 
 /*** Konec souboru tdd_code.cpp ***/
