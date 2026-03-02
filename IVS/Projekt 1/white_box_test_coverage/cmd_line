@@ -1,0 +1,1 @@
+genhtml -o white_box_test_coverage '/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/white_box_test_coverage.info.cleaned' --rc branch_coverage=1

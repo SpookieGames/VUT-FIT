@@ -71,9 +71,9 @@ CMakeFiles/white_box_test_coverage:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Processing code coverage counters and generating report."
 	/usr/bin/lcov --directory . --zerocounters
 	"/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/build/white_box_test" || ( exit 0 )
-	/usr/bin/lcov --directory . --capture --output-file /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info
-	/usr/bin/lcov --remove /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info '*_tests.cpp' '/usr/*' '*/googletest-*/*' --output-file /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info.cleaned
-	/usr/bin/genhtml -o white_box_test_coverage /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info.cleaned
+	/usr/bin/lcov --directory . --capture --output-file /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info --ignore-errors mismatch,gcov --rc branch_coverage=1
+	/usr/bin/lcov --remove /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info '*_tests.cpp' '/usr/*' '*/googletest-*/*' --output-file /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info.cleaned --rc branch_coverage=1
+	/usr/bin/genhtml -o white_box_test_coverage /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info.cleaned --rc branch_coverage=1
 	/usr/bin/cmake -E remove /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info /mnt/c/Users/Spookie/Documents/VS\ Code/VUT\ FIT/build/white_box_test_coverage.info.cleaned
 
 white_box_test_coverage: CMakeFiles/white_box_test_coverage

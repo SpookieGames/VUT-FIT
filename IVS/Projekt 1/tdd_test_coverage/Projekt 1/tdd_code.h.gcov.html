@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - tdd_test_coverage.info.cleaned - Projekt 1/tdd_code.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Projekt 1</a> - tdd_code.h<span style="font-size: 80%;"> (source / <a href="tdd_code.h.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">tdd_test_coverage.info.cleaned</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-03-02 21:05:30</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : //======= Copyright (c) 2025, FIT VUT Brno, All rights reserved. ============//</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : //</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : // Purpose:     Test Driven Development - graph</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             : //</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             : // $NoKeywords: $ivs_project_1 $tdd_code.h</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             : // $Author:     Michal Holeša &lt;xholesm00@stud.fit.vutbr.cz&gt;</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             : // $Date:       2025-02-19</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             : //============================================================================//</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             : /**</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  * @file tdd_code.h</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             :  * @author Martin Dočekal</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             :  * @author Karel Ondřej</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             :  * @author Michal Holeša</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             :  *</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             :  * @brief Definice metod tridy reprezentujici graf.</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             :  */</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : #pragma once</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : </span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : #ifndef TDD_CODE_H_</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : #define TDD_CODE_H_</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : #include &lt;vector&gt;</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : #include &lt;stdexcept&gt;</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             : #include &lt;iostream&gt;</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             : </span>
+<span id="L26"><span class="lineNum">      26</span>                 :             : // Místo pro Vaše případné includy, používejte pouze standardní knihovnu tak, aby nebylo nutno upravovat CMake.</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : /**</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :  * @brief reprezentace uzlu</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :  */</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             : struct Node</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             : {</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :     size_t id;    ///&lt; jednoznačný identifikátor uzlu</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :     size_t color; ///&lt; celé číslo reprezentující barvu uzlu, výchozí barva je 0 a značí neobarveno</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :     // doplňte vhodné struktury, pokud potřebujete</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             : };</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             : </span>
+<span id="L38"><span class="lineNum">      38</span>                 :             : /**</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :  * @brief reprezentace hrany</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :  *</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :  * Jedná se o hotovou reprezentaci hrany a není nutný Váš zásah.</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :  * Třída umožňuje porovnání dvou hran tak, že i opačně orientované hrany mezi stejnými dvěma uzly jsou si rovny.</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :  */</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             : class Edge</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : {</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             : public:</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :     size_t a; ///&lt; id uzlu a</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :     size_t b; ///&lt; id uzlu b</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             : </span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     /**</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :      * @brief Konstruktor hrany</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :      * @param[in] a     Id uzlu a</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :      * @param[in] b     Id uzlu b</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :      */</span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC tlaBgGNC">         203 :     Edge(size_t a, size_t b) : a(a), b(b) {}</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : </span>
+<span id="L57"><span class="lineNum">      57</span>                 :             :     /**</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :      * @brief Porovnávání hran. Hrany jsou porovnávány podle id uzlů.</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :      * @param[in] other Druhá hrana.</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :      * @return True pokud jsou hrany stejné, jinak false.</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :      */</span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">         729 :     bool operator==(const Edge &amp;other) const</span></span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :     {</span>
+<span id="L64"><span class="lineNum">      64</span>   [<span class="tlaGBC" title="Branch 0 was taken 161 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 568 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 95 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 66 times"> + </span> :<span class="tlaGNC">         729 :         return (a == other.a &amp;&amp; b == other.b) || (a == other.b &amp;&amp; b == other.a);</span></span>
+<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 49 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 614 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 44 times"> + </span>]
+<span id="L65"><span class="lineNum">      65</span>                 :             :     }</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             : </span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :     /**</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :      * @brief Porovnávání hran. Hrany jsou porovnávány podle id uzlů.</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :      * @param[in] other Druhá hrana.</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :      * @return True pokud jsou hrany různé, jinak false.</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :      */</span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">           4 :     bool operator!=(const Edge &amp;other) const</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :     {</span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">           4 :         return !(*this == other);</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :     }</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             : </span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :     /**</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :      * @brief Vypíše hranu do streamu.</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :      * @param[in, out] os stream</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :      * @param[in] e hrana pro výpis</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :      * @return stream</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :      */</span>
+<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">           1 :     friend std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, const Edge &amp;e)</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :             :     {</span>
+<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">           1 :         return os &lt;&lt; &quot;{&quot; &lt;&lt; e.a &lt;&lt; &quot;, &quot; &lt;&lt; e.b &lt;&lt; &quot;}&quot;;</span></span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :     }</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             : };</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : </span>
+<span id="L89"><span class="lineNum">      89</span>                 :             : /**</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             :  * @brief Třída reprezentující neorientovaný graf bez smyček.</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             :  *</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             :  */</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             : class Graph</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             : {</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             : public:</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     /**</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             :      * @brief konstruktor prázdného grafu</span>
+<span id="L98"><span class="lineNum">      98</span>                 :             :      */</span>
+<span id="L99"><span class="lineNum">      99</span>                 :             :     Graph();</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             : </span>
+<span id="L101"><span class="lineNum">     101</span>                 :             :     /**</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             :      * @brief destruktor grafu</span>
+<span id="L103"><span class="lineNum">     103</span>                 :             :      */</span>
+<span id="L104"><span class="lineNum">     104</span>                 :             :     ~Graph();</span>
+<span id="L105"><span class="lineNum">     105</span>                 :             : </span>
+<span id="L106"><span class="lineNum">     106</span>                 :             :     /**</span>
+<span id="L107"><span class="lineNum">     107</span>                 :             :      * @return vektor ukazatelů na všechny uzly v grafu</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :      */</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             :     std::vector&lt;Node *&gt; nodes();</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             : </span>
+<span id="L111"><span class="lineNum">     111</span>                 :             :     /**</span>
+<span id="L112"><span class="lineNum">     112</span>                 :             :      * @return vektor všech hran v grafu</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             :      */</span>
+<span id="L114"><span class="lineNum">     114</span>                 :             :     std::vector&lt;Edge&gt; edges() const;</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             : </span>
+<span id="L116"><span class="lineNum">     116</span>                 :             :     /**</span>
+<span id="L117"><span class="lineNum">     117</span>                 :             :      * Přidá uzel s daným id do grafu a vrátí ukazatel na vytvořený uzel. Pokud uzel existuje vrátí nullptr.</span>
+<span id="L118"><span class="lineNum">     118</span>                 :             :      * Volající se nestárá o mazání uzlu.</span>
+<span id="L119"><span class="lineNum">     119</span>                 :             :      *</span>
+<span id="L120"><span class="lineNum">     120</span>                 :             :      * @param[in] nodeId Jednoznačný identifikátor uzlu</span>
+<span id="L121"><span class="lineNum">     121</span>                 :             :      * @return ukazatel na uzel nebo nullptr</span>
+<span id="L122"><span class="lineNum">     122</span>                 :             :      */</span>
+<span id="L123"><span class="lineNum">     123</span>                 :             :     Node *addNode(size_t nodeId);</span>
+<span id="L124"><span class="lineNum">     124</span>                 :             : </span>
+<span id="L125"><span class="lineNum">     125</span>                 :             :     /**</span>
+<span id="L126"><span class="lineNum">     126</span>                 :             :      * Přidá hranu do grafu. Smyčky a duplicitní hrany jsou ignorovány.</span>
+<span id="L127"><span class="lineNum">     127</span>                 :             :      * Pokud uzel definovaný hranou neexistuje, tak bude vytvořen.</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             :      *</span>
+<span id="L129"><span class="lineNum">     129</span>                 :             :      * @param[int] edge Hrana, která bude přidána do grafu.</span>
+<span id="L130"><span class="lineNum">     130</span>                 :             :      * @return True pokud byla hrana do grafu přidána, jinak false.</span>
+<span id="L131"><span class="lineNum">     131</span>                 :             :      */</span>
+<span id="L132"><span class="lineNum">     132</span>                 :             :     bool addEdge(const Edge &amp;edge);</span>
+<span id="L133"><span class="lineNum">     133</span>                 :             : </span>
+<span id="L134"><span class="lineNum">     134</span>                 :             :     /**</span>
+<span id="L135"><span class="lineNum">     135</span>                 :             :      * @brief Naplní graf z vektoru hran. Ignoruje duplicitní hrany a smyčk</span>
+<span id="L136"><span class="lineNum">     136</span>                 :             :      * Pokud uzel definovaný hranou neexistuje, tak bude vytvořen.</span>
+<span id="L137"><span class="lineNum">     137</span>                 :             :      *</span>
+<span id="L138"><span class="lineNum">     138</span>                 :             :      * @param[in] edges Vektor obsahující hrany.</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             :      */</span>
+<span id="L140"><span class="lineNum">     140</span>                 :             :     void addMultipleEdges(const std::vector&lt;Edge&gt; &amp;edges);</span>
+<span id="L141"><span class="lineNum">     141</span>                 :             : </span>
+<span id="L142"><span class="lineNum">     142</span>                 :             :     /**</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :      * @brief Vrátí ukazatel na uzel s daným id.</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             :      * @param[in] nodeId        Id uzlu.</span>
+<span id="L145"><span class="lineNum">     145</span>                 :             :      * @return Ukazatel na uzel nebo nullptr, pokud uzel neexistuje.</span>
+<span id="L146"><span class="lineNum">     146</span>                 :             :      */</span>
+<span id="L147"><span class="lineNum">     147</span>                 :             :     Node *getNode(size_t nodeId);</span>
+<span id="L148"><span class="lineNum">     148</span>                 :             : </span>
+<span id="L149"><span class="lineNum">     149</span>                 :             :     /**</span>
+<span id="L150"><span class="lineNum">     150</span>                 :             :      * @brief Zjistí, zda hrana existuje v grafu.</span>
+<span id="L151"><span class="lineNum">     151</span>                 :             :      * @param edge hrana, která nás zajímá</span>
+<span id="L152"><span class="lineNum">     152</span>                 :             :      * @return true pokud hrana existuje, jinak false</span>
+<span id="L153"><span class="lineNum">     153</span>                 :             :      */</span>
+<span id="L154"><span class="lineNum">     154</span>                 :             :     bool containsEdge(const Edge &amp;edge) const;</span>
+<span id="L155"><span class="lineNum">     155</span>                 :             : </span>
+<span id="L156"><span class="lineNum">     156</span>                 :             :     /**</span>
+<span id="L157"><span class="lineNum">     157</span>                 :             :      * odstraní uzel z grafu</span>
+<span id="L158"><span class="lineNum">     158</span>                 :             :      *</span>
+<span id="L159"><span class="lineNum">     159</span>                 :             :      * @param[in] nodeId id uzlu, který má být odstraněn</span>
+<span id="L160"><span class="lineNum">     160</span>                 :             :      * @exception out_of_range pokud uzel s daným id v grafu neexistuje</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             :      */</span>
+<span id="L162"><span class="lineNum">     162</span>                 :             :     void removeNode(size_t nodeId);</span>
+<span id="L163"><span class="lineNum">     163</span>                 :             : </span>
+<span id="L164"><span class="lineNum">     164</span>                 :             :     /**</span>
+<span id="L165"><span class="lineNum">     165</span>                 :             :      * odstraní hranu z grafu</span>
+<span id="L166"><span class="lineNum">     166</span>                 :             :      *</span>
+<span id="L167"><span class="lineNum">     167</span>                 :             :      * @param[in] edge hrana, která má být odstraněna</span>
+<span id="L168"><span class="lineNum">     168</span>                 :             :      * @exception out_of_range pokud hrana v grafu neexistuje</span>
+<span id="L169"><span class="lineNum">     169</span>                 :             :      */</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             :     void removeEdge(const Edge &amp;edge);</span>
+<span id="L171"><span class="lineNum">     171</span>                 :             : </span>
+<span id="L172"><span class="lineNum">     172</span>                 :             :     /**</span>
+<span id="L173"><span class="lineNum">     173</span>                 :             :      * @return počet uzlů v grafu</span>
+<span id="L174"><span class="lineNum">     174</span>                 :             :      */</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             :     size_t nodeCount() const;</span>
+<span id="L176"><span class="lineNum">     176</span>                 :             : </span>
+<span id="L177"><span class="lineNum">     177</span>                 :             :     /**</span>
+<span id="L178"><span class="lineNum">     178</span>                 :             :      * @return počet hran v grafu</span>
+<span id="L179"><span class="lineNum">     179</span>                 :             :      */</span>
+<span id="L180"><span class="lineNum">     180</span>                 :             :     size_t edgeCount() const;</span>
+<span id="L181"><span class="lineNum">     181</span>                 :             : </span>
+<span id="L182"><span class="lineNum">     182</span>                 :             :     /**</span>
+<span id="L183"><span class="lineNum">     183</span>                 :             :      * stupeň uzlu</span>
+<span id="L184"><span class="lineNum">     184</span>                 :             :      *</span>
+<span id="L185"><span class="lineNum">     185</span>                 :             :      * @param[in] nodeId id uzlu</span>
+<span id="L186"><span class="lineNum">     186</span>                 :             :      * @return počet hran, které mají tento uzel za svůj jeden koncový bod</span>
+<span id="L187"><span class="lineNum">     187</span>                 :             :      * @exception out_of_range pokud uzel v grafu neexistuje</span>
+<span id="L188"><span class="lineNum">     188</span>                 :             :      */</span>
+<span id="L189"><span class="lineNum">     189</span>                 :             :     size_t nodeDegree(size_t nodeId) const;</span>
+<span id="L190"><span class="lineNum">     190</span>                 :             : </span>
+<span id="L191"><span class="lineNum">     191</span>                 :             :     /**</span>
+<span id="L192"><span class="lineNum">     192</span>                 :             :      * @return maximální stupeň uzlu v grafu</span>
+<span id="L193"><span class="lineNum">     193</span>                 :             :      */</span>
+<span id="L194"><span class="lineNum">     194</span>                 :             :     size_t graphDegree() const;</span>
+<span id="L195"><span class="lineNum">     195</span>                 :             : </span>
+<span id="L196"><span class="lineNum">     196</span>                 :             :     /**</span>
+<span id="L197"><span class="lineNum">     197</span>                 :             :      * Provede obarvení uzlů v grafu. Obarvení je uloženo v atributu color v daném uzlu.</span>
+<span id="L198"><span class="lineNum">     198</span>                 :             :      * Nesmí se použít více než graphDegree + 1 barev.</span>
+<span id="L199"><span class="lineNum">     199</span>                 :             :      * Jaký algoritmus pro barvení zvolíte je na Vás. Může být použita heuristika nepřiřazující minimální počet barev,</span>
+<span id="L200"><span class="lineNum">     200</span>                 :             :      * ale musí být splněny testy.</span>
+<span id="L201"><span class="lineNum">     201</span>                 :             :      *</span>
+<span id="L202"><span class="lineNum">     202</span>                 :             :      * Barvením se rozumí, že přiřadíte každému uzlu barvu tak, že sousední uzly nemají stejnou barvu.</span>
+<span id="L203"><span class="lineNum">     203</span>                 :             :      */</span>
+<span id="L204"><span class="lineNum">     204</span>                 :             :     void coloring();</span>
+<span id="L205"><span class="lineNum">     205</span>                 :             : </span>
+<span id="L206"><span class="lineNum">     206</span>                 :             :     /**</span>
+<span id="L207"><span class="lineNum">     207</span>                 :             :      * Smazání všech uzlů a hran v grafu.</span>
+<span id="L208"><span class="lineNum">     208</span>                 :             :      */</span>
+<span id="L209"><span class="lineNum">     209</span>                 :             :     void clear();</span>
+<span id="L210"><span class="lineNum">     210</span>                 :             : </span>
+<span id="L211"><span class="lineNum">     211</span>                 :             : protected:</span>
+<span id="L212"><span class="lineNum">     212</span>                 :             :     // Vektor ukazatelov na uzly</span>
+<span id="L213"><span class="lineNum">     213</span>                 :             :     std::vector&lt;Node *&gt; a_nodes;</span>
+<span id="L214"><span class="lineNum">     214</span>                 :             :     // Vektor hran</span>
+<span id="L215"><span class="lineNum">     215</span>                 :             :     std::vector&lt;Edge&gt; a_edges;</span>
+<span id="L216"><span class="lineNum">     216</span>                 :             : };</span>
+<span id="L217"><span class="lineNum">     217</span>                 :             : </span>
+<span id="L218"><span class="lineNum">     218</span>                 :             : #endif // TDD_CODE_H_</span>
+<span id="L219"><span class="lineNum">     219</span>                 :             : </span>
+<span id="L220"><span class="lineNum">     220</span>                 :             : /*** Konec souboru tdd_code.h ***/</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
