@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(ivs_proj_1)
-
+if(POLICY CMP0135)
+  cmake_policy(SET CMP0135 NEW)
+endif()
 set(CMAKE_CXX_STANDARD 20)
 
 

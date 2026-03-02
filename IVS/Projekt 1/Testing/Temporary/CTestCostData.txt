@@ -1,0 +1,63 @@
+EmptyTree.InsertNode 2 0.0193844
+EmptyTree.DeleteNode 2 0.0197733
+EmptyTree.FindNode 2 0.0192893
+NonEmptyGraph.nodes 0 0
+NonEmptyGraph.edges 0 0
+NonEmptyGraph.addNode 0 0
+NonEmptyGraph.addEdge 0 0
+NonEmptyGraph.addMultipleEdges 0 0
+NonEmptyGraph.getNode 0 0
+NonEmptyGraph.containsEdge 0 0
+NonEmptyGraph.removeNode 0 0
+NonEmptyGraph.removeEdge 0 0
+NonEmptyGraph.nodeCount 0 0
+NonEmptyGraph.edgeCount 0 0
+NonEmptyGraph.nodeDegree 0 0
+NonEmptyGraph.graphDegree 0 0
+NonEmptyGraph.coloring 0 0
+NonEmptyGraph.clear 2 0.0331556
+EmptyGraph.nodes 2 0.0333244
+EmptyGraph.edges 2 0.0325749
+EmptyGraph.addNode 0 0
+EmptyGraph.addEdge 0 0
+EmptyGraph.addMultipleEdges 0 0
+EmptyGraph.getNode 2 0.0387232
+EmptyGraph.containsEdge 2 0.0355914
+EmptyGraph.removeNode 0 0
+EmptyGraph.removeEdge 0 0
+EmptyGraph.nodeCount 0 0
+EmptyGraph.edgeCount 0 0
+EmptyGraph.nodeDegree 0 0
+EmptyGraph.graphDegree 0 0
+EmptyGraph.coloring 2 0.0326467
+EmptyGraph.clear 2 0.032117
+Edges.equal 2 0.032085
+Edges.nonEqual 2 0.0318571
+Edges.toStringStream 2 0.0319274
+NonEmptyTree.InsertNode 1 0.039643
+NonEmptyTree.DeleteNode 1 0.0401106
+NonEmptyTree.FindNode 1 0.0396924
+---
+NonEmptyGraph.nodes
+NonEmptyGraph.edges
+NonEmptyGraph.addNode
+NonEmptyGraph.addEdge
+NonEmptyGraph.addMultipleEdges
+NonEmptyGraph.getNode
+NonEmptyGraph.containsEdge
+NonEmptyGraph.removeNode
+NonEmptyGraph.removeEdge
+NonEmptyGraph.nodeCount
+NonEmptyGraph.edgeCount
+NonEmptyGraph.nodeDegree
+NonEmptyGraph.graphDegree
+NonEmptyGraph.coloring
+EmptyGraph.addNode
+EmptyGraph.addEdge
+EmptyGraph.addMultipleEdges
+EmptyGraph.removeNode
+EmptyGraph.removeEdge
+EmptyGraph.nodeCount
+EmptyGraph.edgeCount
+EmptyGraph.nodeDegree
+EmptyGraph.graphDegree
