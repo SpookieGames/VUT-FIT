@@ -125,7 +125,25 @@ TEST_F(SuffixAutomatonTest, NextFunction)
 
     EXPECT_EQ(map.size(), 3);
 }
-// sort
+
+TEST_F(SuffixAutomatonTest, TopologicalSort)
+{
+    std::vector<size_t> sort = abc.topological_sort();
+
+    // Usporiadanie by malo mat rovnaky pocet prvkov ako je stavov
+    EXPECT_EQ(sort.size(), abc.size());
+}
+
+TEST_F(SuffixAutomatonTest, LongestDirectContinuation)
+{
+    // Automat s viacerymi prechodami
+    EXPECT_EQ(abc.longest_direct_continuation(0), "");
+
+    // Automat s 1 prechodom
+    empty.add_element('x');
+    EXPECT_TRUE(empty.contains("x"));
+    EXPECT_EQ(empty.longest_direct_continuation(0), "x");
+}
 
 //============================================================================//
 
