@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1"
+    "cmake.sourceDirectory": "${workspaceFolder}/IVS/Projekt 1",
+    "cmake.buildDirectory": "${sourceDirectory}/build"
 }

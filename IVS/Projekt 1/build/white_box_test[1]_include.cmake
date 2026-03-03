@@ -1,0 +1,5 @@
+if(EXISTS "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/build/white_box_test[1]_tests.cmake")
+  include("/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/build/white_box_test[1]_tests.cmake")
+else()
+  add_test(white_box_test_NOT_BUILT white_box_test_NOT_BUILT)
+endif()
