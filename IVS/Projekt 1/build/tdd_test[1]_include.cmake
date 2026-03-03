@@ -1,5 +1,0 @@
-if(EXISTS "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/build/tdd_test[1]_tests.cmake")
-  include("/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/build/tdd_test[1]_tests.cmake")
-else()
-  add_test(tdd_test_NOT_BUILT tdd_test_NOT_BUILT)
-endif()

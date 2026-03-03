@@ -1,1 +1,0 @@
-/usr/bin/g++  -g -O0 -fprofile-arcs -ftest-coverage -g CMakeFiles/black_box_test.dir/black_box_tests.cpp.o -o black_box_test  "/mnt/c/Users/Spookie/Documents/VS Code/VUT FIT/IVS/Projekt 1/libs/libblack_box_lib.a" lib/libgtest_main.a lib/libgmock_main.a lib/libgmock.a lib/libgtest.a 
