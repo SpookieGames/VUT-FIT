@@ -1,0 +1,7 @@
+build/
+bin/
+figures/
+lib/
+libs/
+Testing/
+.vscode/
