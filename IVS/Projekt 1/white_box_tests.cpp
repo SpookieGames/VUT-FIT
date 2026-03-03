@@ -20,16 +20,6 @@
 #include "white_box_code.h"
 
 //============================================================================//
-// ** ZDE DOPLNTE TESTY **
-//
-// Zde doplnte testy hasovaci tabulky, testujte nasledujici:
-// 1. Verejne rozhrani hasovaci tabulky
-//     - Vsechny funkce z white_box_code.h
-//     - Chovani techto metod testuje pro prazdnou i neprazdnou tabulku.
-// 2. Chovani tabulky v hranicnich pripadech
-//     - Otestujte chovani pri kolizich ruznych klicu se stejnym hashem
-//     - Otestujte chovani pri kolizich hashu namapovane na stejne misto v
-//       indexu
 
 class SuffixAutomatonTest : public ::testing::Test
 {
@@ -45,7 +35,7 @@ protected:
 
 TEST_F(SuffixAutomatonTest, EmptyAutomaton)
 {
-    EXPECT_EQ(empty.size(), 1); // Pociatocta velkost je 1
+    EXPECT_EQ(empty.size(), 1); // Pociatocna velkost je 1
 
     EXPECT_TRUE(empty.contains(""));
     EXPECT_FALSE(empty.contains("a"));
@@ -143,6 +133,21 @@ TEST_F(SuffixAutomatonTest, LongestDirectContinuation)
     empty.add_element('x');
     EXPECT_TRUE(empty.contains("x"));
     EXPECT_EQ(empty.longest_direct_continuation(0), "x");
+}
+
+TEST_F(SuffixAutomatonTest, ExpectThrow)
+{
+    // Vsade posleme invalid index a ocakavame ze to vyhodi exception
+    size_t next_state;
+    EXPECT_THROW(empty.get_state(67), std::out_of_range);
+    EXPECT_THROW(empty.step(67, 'a', next_state), std::out_of_range);
+    EXPECT_THROW(empty.next(67), std::out_of_range);
+    EXPECT_THROW(empty.longest_direct_continuation(67), std::out_of_range);
+
+    EXPECT_THROW(abc.get_state(67), std::out_of_range);
+    EXPECT_THROW(abc.step(67, 'a', next_state), std::out_of_range);
+    EXPECT_THROW(abc.next(67), std::out_of_range);
+    EXPECT_THROW(abc.longest_direct_continuation(67), std::out_of_range);
 }
 
 //============================================================================//
