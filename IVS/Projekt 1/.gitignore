@@ -5,4 +5,5 @@ lib/
 libs/
 Testing/
 _deps/
+CMakeFiles/
 .vscode/
