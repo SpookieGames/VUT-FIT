@@ -95,6 +95,38 @@ TEST_F(SuffixAutomatonTest, ComplexSequence)
     EXPECT_FALSE(complex.contains("odie"));
 }
 
+TEST_F(SuffixAutomatonTest, GetState)
+{
+    const State &test = abc.get_state(0);
+
+    EXPECT_EQ(test.len, 0);
+    EXPECT_FALSE(test.link.has_value());
+
+    const State &test2 = abc.get_state(1);
+
+    EXPECT_EQ(test2.len, 1);
+    EXPECT_TRUE(test2.link.has_value());
+}
+
+TEST_F(SuffixAutomatonTest, StepFunction)
+{
+    size_t next_state;
+
+    // Vieme ist cez 'a'
+    EXPECT_TRUE(abc.step(0, 'a', next_state));
+    // Ale nie cez 'x'
+    EXPECT_FALSE(abc.step(0, 'x', next_state));
+}
+
+TEST_F(SuffixAutomatonTest, NextFunction)
+{
+    // Pre 'abc' by mali byt v stave 0 3 prechody ('a', 'b', 'c')
+    auto map = abc.next(0);
+
+    EXPECT_EQ(map.size(), 3);
+}
+// sort
+
 //============================================================================//
 
 /*** Konec souboru white_box_tests.cpp ***/
