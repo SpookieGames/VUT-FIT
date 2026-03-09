@@ -182,6 +182,25 @@ void street_between_0_and_1_repaired_in_last_two_days(CNF *formula, unsigned num
  */
 void no_street_to_0_repaired_during_weekend(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    assert(formula != NULL);
 
-    // Místo pro řešení úlohy
+    for (int i = 0; i < num_of_days; i++)
+    {
+        if (i % 7 == 5 || i % 7 == 6)
+        {
+            for (int j = 0; j < num_of_streets; j++)
+            {
+                Street street = streets[j];
+
+                if (street.source == 0 || street.destination == 0)
+                {
+                    Clause *clause1 = create_new_clause(formula);
+                    add_literal_to_clause(clause1, false, FIRST_PHASE_FLAG, street.source, street.destination, i);
+
+                    Clause *clause2 = create_new_clause(formula);
+                    add_literal_to_clause(clause2, false, SECOND_PHASE_FLAG, street.source, street.destination, i);
+                }
+            }
+        }
+    }
 }
