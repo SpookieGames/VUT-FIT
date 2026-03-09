@@ -186,19 +186,22 @@ void no_street_to_0_repaired_during_weekend(CNF *formula, unsigned num_of_days, 
 
     for (int i = 0; i < num_of_days; i++)
     {
+        // Kontrola vikendu
         if (i % 7 == 5 || i % 7 == 6)
         {
             for (int j = 0; j < num_of_streets; j++)
             {
                 Street street = streets[j];
 
+                // Ak ulica zacina alebo konci v razcesti 0
                 if (street.source == 0 || street.destination == 0)
                 {
-                    Clause *clause1 = create_new_clause(formula);
-                    add_literal_to_clause(clause1, false, FIRST_PHASE_FLAG, street.source, street.destination, i);
-
-                    Clause *clause2 = create_new_clause(formula);
-                    add_literal_to_clause(clause2, false, SECOND_PHASE_FLAG, street.source, street.destination, i);
+                    // Nesmie sa opravovat v prvej ani druhej faze cez vikendy
+                    Clause *clause1 = create_new_clause(formula);                                                   //
+                    add_literal_to_clause(clause1, false, FIRST_PHASE_FLAG, street.source, street.destination, i);  //
+                                                                                                                    //
+                    Clause *clause2 = create_new_clause(formula);                                                   //
+                    add_literal_to_clause(clause2, false, SECOND_PHASE_FLAG, street.source, street.destination, i); //
                 }
             }
         }
