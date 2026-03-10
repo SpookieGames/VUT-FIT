@@ -112,6 +112,8 @@ void all_streets_min_one_day_of_first_phase_roadwork(CNF *formula, unsigned num_
  */
 void all_streets_max_one_day_of_first_phase_roadwork(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    assert(formula != NULL);
+
     // Prejde vsetky ulice
     for (int i = 0; i < num_of_streets; i++)
     {
@@ -154,8 +156,42 @@ void second_phase_follows_first_immediately(CNF *formula, unsigned num_of_days, 
  */
 void neighbour_streets_not_being_repaired_simultaneously(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    assert(formula != NULL);
 
-    // Místo pro řešení úlohy
+    for (int day = 0; day < num_of_days; day++)
+    {
+        for (int i = 0; i < num_of_streets; i++)         //
+        {                                                // Cyklus na porovnanie dvoch ulic aby sme zistili ci maju rovnake razcestie/a
+            for (int j = i + 1; j < num_of_streets; j++) //
+            {
+                Street street1 = streets[i];
+                Street street2 = streets[j];
+
+                if (street1.source == street2.source || street1.destination == street2.destination || street1.source == street2.destination || street1.destination == street2.source)
+                {
+                    // Faza 1 a faza 1
+                    Clause *clause1 = create_new_clause(formula);
+                    add_literal_to_clause(clause1, false, FIRST_PHASE_FLAG, street1.source, street1.destination, day);
+                    add_literal_to_clause(clause1, false, FIRST_PHASE_FLAG, street2.source, street2.destination, day);
+
+                    // Faza 2 a faza 2
+                    Clause *clause2 = create_new_clause(formula);
+                    add_literal_to_clause(clause2, false, SECOND_PHASE_FLAG, street1.source, street1.destination, day);
+                    add_literal_to_clause(clause2, false, SECOND_PHASE_FLAG, street2.source, street2.destination, day);
+
+                    // Faza 1 a faza 2
+                    Clause *clause3 = create_new_clause(formula);
+                    add_literal_to_clause(clause3, false, FIRST_PHASE_FLAG, street1.source, street1.destination, day);
+                    add_literal_to_clause(clause3, false, SECOND_PHASE_FLAG, street2.source, street2.destination, day);
+
+                    // Faza 2 a faza 1
+                    Clause *clause4 = create_new_clause(formula);
+                    add_literal_to_clause(clause4, false, SECOND_PHASE_FLAG, street1.source, street1.destination, day);
+                    add_literal_to_clause(clause4, false, FIRST_PHASE_FLAG, street2.source, street2.destination, day);
+                }
+            }
+        }
+    }
 }
 
 /** Funkce vytvářející klauzule ošetřující podmínku 5 ze zadání
@@ -168,6 +204,8 @@ void neighbour_streets_not_being_repaired_simultaneously(CNF *formula, unsigned 
  */
 void each_day_at_least_one_street_being_repaired(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    assert(formula != NULL);
+
     for (int day = 0; day < num_of_days; day++)
     {
         Clause *clause = create_new_clause(formula);
@@ -192,6 +230,9 @@ void each_day_at_least_one_street_being_repaired(CNF *formula, unsigned num_of_d
  */
 void street_between_0_and_1_repaired_in_last_two_days(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    assert(formula != NULL);
+    assert(num_of_days >= 2);
+
     // Ak je ulica medzi 0 a 1
     if (are_neighbours(neighbours, 0, 1))
     {
@@ -214,6 +255,7 @@ void street_between_0_and_1_repaired_in_last_two_days(CNF *formula, unsigned num
 void no_street_to_0_repaired_during_weekend(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
     assert(formula != NULL);
+    assert(num_of_days >= 5);
 
     for (int i = 0; i < num_of_days; i++)
     {
