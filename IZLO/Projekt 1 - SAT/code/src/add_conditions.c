@@ -119,7 +119,7 @@ void all_streets_max_one_day_of_first_phase_roadwork(CNF *formula, unsigned num_
     {
         Street street = streets[i];
 
-        for (int day = 0; i < num_of_days; day++)
+        for (int day = 0; day < num_of_days; day++)
         {
             for (int next_day = day + 1; next_day < num_of_days; next_day++)
             {
@@ -281,7 +281,6 @@ void street_between_0_and_1_repaired_in_last_two_days(CNF *formula, unsigned num
 void no_street_to_0_repaired_during_weekend(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
     assert(formula != NULL);
-    assert(num_of_days >= 5);
 
     for (int i = 0; i < num_of_days; i++)
     {
