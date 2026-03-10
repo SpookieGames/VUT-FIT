@@ -142,8 +142,34 @@ void all_streets_max_one_day_of_first_phase_roadwork(CNF *formula, unsigned num_
  */
 void second_phase_follows_first_immediately(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    assert(formula != NULL);
 
-    // Místo pro řešení úlohy
+    for (int idx = 0; idx < num_of_streets; idx++)
+    {
+        Street street = streets[idx];
+
+        // V posledny den nemoze byt prva faza
+        Clause *clause_first_phase_last_day = create_new_clause(formula);
+        add_literal_to_clause(clause_first_phase_last_day, false, FIRST_PHASE_FLAG, street.source, street.destination, num_of_days - 1);
+
+        // V prvy den nemoze byt druha faza
+        Clause *claus_second_phase_first_day = create_new_clause(formula);
+        add_literal_to_clause(claus_second_phase_first_day, false, SECOND_PHASE_FLAG, street.source, street.destination, 0);
+
+        for (int i = 0; i < num_of_days - 1; i++)
+        {
+            // Rozdelime si ekvivalenciu na dve klauzule
+            // Negovane A || B
+            Clause *clause1 = create_new_clause(formula);
+            add_literal_to_clause(clause1, false, FIRST_PHASE_FLAG, street.source, street.destination, i);
+            add_literal_to_clause(clause1, true, SECOND_PHASE_FLAG, street.source, street.destination, i + 1);
+
+            // A || negovane B
+            Clause *clause2 = create_new_clause(formula);
+            add_literal_to_clause(clause2, true, FIRST_PHASE_FLAG, street.source, street.destination, i);
+            add_literal_to_clause(clause2, false, SECOND_PHASE_FLAG, street.source, street.destination, i + 1);
+        }
+    }
 }
 
 /** Funkce vytvářející klauzule ošetřující podmínku 4 ze zadání
