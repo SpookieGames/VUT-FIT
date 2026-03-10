@@ -112,8 +112,21 @@ void all_streets_min_one_day_of_first_phase_roadwork(CNF *formula, unsigned num_
  */
 void all_streets_max_one_day_of_first_phase_roadwork(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    for (int i = 0; i < num_of_streets; i++)
+    {
+        Street street = streets[i];
 
-    // Místo pro řešení úlohy
+        for (int day = 0; i < num_of_days; day++)
+        {
+            for (int next_day = day + 1; next_day < num_of_days; next_day++)
+            {
+                Clause *clause = create_new_clause(formula);
+
+                add_literal_to_clause(clause, false, FIRST_PHASE_FLAG, street.source, street.destination, day);
+                add_literal_to_clause(clause, false, FIRST_PHASE_FLAG, street.source, street.destination, next_day);
+            }
+        }
+    }
 }
 
 /** Funkce vytvářející klauzule ošetřující podmínku 3 ze zadání
@@ -168,8 +181,14 @@ void each_day_at_least_one_street_being_repaired(CNF *formula, unsigned num_of_d
  */
 void street_between_0_and_1_repaired_in_last_two_days(CNF *formula, unsigned num_of_days, unsigned num_of_crossroads, unsigned num_of_streets, const NeighbourLists *neighbours, const Street *streets)
 {
+    if (are_neighbours(neighbours, 0, 1))
+    {
+        Clause *clause1 = create_new_clause(formula);
+        add_literal_to_clause(clause1, true, FIRST_PHASE_FLAG, 0, 1, num_of_days - 2);
 
-    // Místo pro řešení úlohy
+        Clause *clause2 = create_new_clause(formula);
+        add_literal_to_clause(clause2, true, SECOND_PHASE_FLAG, 0, 1, num_of_days - 1);
+    }
 }
 
 /** Funkce vytvářející klauzule ošetřující podmínku 7 ze zadání
