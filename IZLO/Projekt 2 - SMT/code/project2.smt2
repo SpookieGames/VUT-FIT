@@ -45,8 +45,18 @@
 
 ;; Formule 1
 (define-fun exclusive_resources () Bool
-  ; Zde nahraďte vaším řešením
-  false
+  (forall ((r Int) (p1 Int) (p2 Int))
+  (=>
+    (and
+      (is_resource r)
+      (is_process p1)
+      (is_process p2)
+      (owns p1 r)
+      (owns p2 r)
+    )
+    (= p1 p2)
+  )
+  )
 )
 
 ;; Formule 2
