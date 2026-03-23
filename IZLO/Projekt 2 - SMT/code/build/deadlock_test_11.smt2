@@ -36,35 +36,35 @@
       (is_resource r)
       (is_process p1)
       (is_process p2)
-      (owns p1 r)
-      (owns p2 r)
+      (owns p1 r) ; Proces p1 vlastni r
+      (owns p2 r) ; Proces p2 vlastni r
     )
-    (= p1 p2)
+    (= p1 p2) ; Z toho vypliva ze p1 a p2 su rovnaky proces co vlastni nejaky zdroj r
   )
-)
+  )
 )
 
 ;; Formule 2
 (define-fun finitely_many_processes () Bool
-  (exists ((min Int) (max Int))
+  (exists ((p1 Int) (p2 Int))
   (forall ((p Int))
     (=>
       (is_process p)
-      (and (<= min p) (<= p max))
+      (and (<= p1 p) (<= p p2)) ; p1 <= p a p <= p2
     )
   )
-)
+  )
 )
 
 ;; Formule 3
 (define-fun has_deadlock () Bool
   (and
-  ; Condition 1: The set contains at least one process
+  ; Mnozina obsahuje aspon jeden proces
   (exists ((p Int))
     (and (in_deadlock p) (is_process p))
   )
   
-  ; Condition 2: Every process in the set waits for a resource owned by another process in the set
+  ; Kazdy proces caka na zdroj vlastneny procesom v mnozine
   (forall ((p Int))
     (=>
       (and (in_deadlock p) (is_process p))
@@ -79,7 +79,7 @@
       )
     )
   )
-)
+  )
 )
 
 ;; ==================

@@ -73,8 +73,28 @@
 
 ;; Formule 3
 (define-fun has_deadlock () Bool
-  ; Zde nahraďte vaším řešením
-  false
+  (and
+  ; Mnozina obsahuje aspon jeden proces
+  (exists ((p Int))
+    (and (in_deadlock p) (is_process p))
+  )
+  
+  ; Kazdy proces caka na zdroj vlastneny procesom v mnozine
+  (forall ((p Int))
+    (=>
+      (and (in_deadlock p) (is_process p))
+      (exists ((r Int) (owner Int))
+        (and
+          (is_resource r)
+          (is_process owner)
+          (requests p r)
+          (owns owner r)
+          (in_deadlock owner)
+        )
+      )
+    )
+  )
+  )
 )
 
 ;; ==================
