@@ -51,18 +51,24 @@
       (is_resource r)
       (is_process p1)
       (is_process p2)
-      (owns p1 r)
-      (owns p2 r)
+      (owns p1 r) ; Proces p1 vlastni r
+      (owns p2 r) ; Proces p2 vlastni r
     )
-    (= p1 p2)
+    (= p1 p2) ; Z toho vypliva ze p1 a p2 su rovnaky proces co vlastni nejaky zdroj r
   )
   )
 )
 
 ;; Formule 2
 (define-fun finitely_many_processes () Bool
-  ; Zde nahraďte vaším řešením
-  false
+  (exists ((p1 Int) (p2 Int))
+  (forall ((p Int))
+    (=>
+      (is_process p)
+      (and (<= p1 p) (<= p p2)) ; p1 <= p a p <= p2
+    )
+  )
+  )
 )
 
 ;; Formule 3
