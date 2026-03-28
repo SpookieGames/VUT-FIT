@@ -20,7 +20,7 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-# Odstranenie medzier, pomplciek a dvojbodiek z datumu a casu pre nasledne porovnavanie
+# Odstranenie medzier, pomlciek a dvojbodiek z datumu a casu pre nasledne porovnavanie
 # -n kontroluje ci je premenna neprazdna
 if [ -n "$FILTER_AFTER" ]; then
     FILTER_AFTER=$(echo "$FILTER_AFTER" | sed 's/[- :]//g') # sed 's/old/new/g' g pretoze nechcem nahradit iba 1. symbol v riadku
@@ -133,5 +133,4 @@ case "$COMMAND" in
             for (i=0; i<count; i++) hashes = hashes "#";
             printf "%s (%d): %s\n", ip, count, hashes;
         }' ;;
-
 esac
