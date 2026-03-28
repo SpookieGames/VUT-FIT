@@ -8,6 +8,7 @@ FILTER_URI=""
 COMMAND=""
 FILES=""
 
+# Spracovanie argumentov a nasledne posunutie
 while [ $# -gt 0 ]; do
     case "$1" in
         -a) FILTER_AFTER="$2"; shift 2 ;;
@@ -19,3 +20,25 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+# Odstranenie medzier, pomplciek a dvojbodiek z datumu a casu pre nasledne porovnavanie
+if [ -n "$FILTER_AFTER" ]; then
+    FILTER_AFTER=$(echo "$FILTER_AFTER" | sed 's/[- :]//g') # sed 's/old/new/g' g pretoze nechcem nahradit iba 1. symbol v riadku
+fi
+if [ -n "$FILTER_BEFORE" ]; then
+    FILTER_BEFORE=$(echo "$FILTER_BEFORE" | sed 's/[- :]//g') #
+fi
+
+read_inputs() {
+    # Ak nemame zadane ziadne subory, citame zo standardneho vstupu pomocou "cat"
+    if [ -z "$FILES" ]; then
+        cat
+    else
+        for f in $FILES; do
+            if [[ "$f" == *.gz ]]; then
+                gzip -dc "$f" 2>/dev/null || zcat "$f"
+            else
+                cat "$f"
+            fi
+        done
+    fi
+}
