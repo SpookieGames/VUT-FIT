@@ -1,0 +1,21 @@
+#!/bin/bash
+
+// Inicializacia premennych
+FILTER_AFTER=""
+FILTER_BEFORE=""
+FILTER_IP=""
+FILTER_URI=""
+COMMAND=""
+FILES=""
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -a) FILTER_AFTER="$2"; shift 2 ;;
+        -b) FILTER_BEFORE="$2"; shift 2 ;;
+        -ip) FILTER_IP="$2"; shift 2 ;;
+        -uri) FILTER_URI="$2"; shift 2 ;;
+        list-ip|list-hosts|list-uri|hist-ip|hist-load) COMMAND="$1"; shift ;;
+        *) FILES="$FILES $1"; shift ;;
+    esac
+done
+
