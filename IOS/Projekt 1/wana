@@ -49,7 +49,8 @@ BEGIN {
     # Mesiac na cislo
     m["Jan"]="01"; m["Feb"]="02"; m["Mar"]="03"; m["Apr"]="04"; m["May"]="05"; m["Jun"]="06"; m["Jul"]="07"; m["Aug"]="08"; m["Sep"]="09"; m["Oct"]="10"; m["Nov"]="11"; m["Dec"]="12";
 }
-}
+
+{
     ip = $1
     uri = $7
 
@@ -111,20 +112,26 @@ case "$COMMAND" in
         done ;;
 
     hist-ip)
+        # sort zoradi riadky abecedne
+        # uniq -c zluci duplikaty a prida na zaciatok pocet vyskytov
+        # sort -nr zoradi ciselne (-n) a nasledne zoradi reverzne (-r)
         sort | uniq -c | sort -nr | awk '{
             count = $1;
-            category = $2;
+            ip = $2;
             hashes = "";
             for (i=0; i<count; i++) hashes = hashes "#";
-            printf "%s (%d): %s\n", category, count, hashes;
+            printf "%s (%d): %s\n", ip, count, hashes;
         }' ;;
 
     hist-load)
+        # sort zoradi IP abecedne
+        # uniq -c zluci duplikaty a prida na zaciatok pocet vyskytov
         sort | uniq -c | awk '{
             count = $1;
-            category = $2 " " $3; # Spojení data a času (YYYY-MM-DD HH:00)
+            ip = $2 " " $3; # Spojenie datumu a casu
             hashes = "";
             for (i=0; i<count; i++) hashes = hashes "#";
-            printf "%s (%d): %s\n", category, count, hashes;
+            printf "%s (%d): %s\n", ip, count, hashes;
         }' ;;
+
 esac
