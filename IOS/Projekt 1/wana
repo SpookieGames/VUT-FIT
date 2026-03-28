@@ -42,3 +42,24 @@ read_inputs() {
         done
     fi
 }
+
+read_inputs | awk -v after="$FILTER_AFTER" -v before="$FILTER_BEFORE" -v ip_fil="$FILTER_IP" -v uri_fil="$FILTER_URI" -v cmd="$COMMAND" '
+BEGIN 
+{
+    # Mesiac na cislo
+    m["Jan"]="01"; m["Feb"]="02"; m["Mar"]="03"; m["Apr"]="04"; m["May"]="05"; m["Jun"]="06"; m["Jul"]="07"; m["Aug"]="08"; m["Sep"]="09"; m["Oct"]="10"; m["Nov"]="11"; m["Dec"]="12";
+}
+    ip = $1
+    uri = $7
+
+[DD/Mon/YYYY:HH:MM:SS +TZ]
+    # Ostranenie [ z datumu
+    date_str = substr($4, 2)
+
+    # Rozdelenie na casti podla / a :
+    # d[1] = den, d[2] = mesiac, d[3] = rok, d[4] = hodina, d[5] = minuta, d[6] = sekunda
+    split(date_str, d, /[\/:]/)
+
+    date = log_date = d[3] m[d[2]] d[1] d[4] d[5] d[6]
+    log_final_date = d[3] "-" m[d[2]] "-" d[1] " " d[4] ":00"
+'
