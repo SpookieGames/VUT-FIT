@@ -1,6 +1,6 @@
 #!/bin/bash
 
-// Inicializacia premennych
+# Inicializacia premennych
 FILTER_AFTER=""
 FILTER_BEFORE=""
 FILTER_IP=""
