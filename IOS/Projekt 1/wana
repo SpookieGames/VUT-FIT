@@ -21,6 +21,7 @@ while [ $# -gt 0 ]; do
 done
 
 # Odstranenie medzier, pomplciek a dvojbodiek z datumu a casu pre nasledne porovnavanie
+# -n kontroluje ci je premenna neprazdna
 if [ -n "$FILTER_AFTER" ]; then
     FILTER_AFTER=$(echo "$FILTER_AFTER" | sed 's/[- :]//g') # sed 's/old/new/g' g pretoze nechcem nahradit iba 1. symbol v riadku
 fi
@@ -44,15 +45,14 @@ read_inputs() {
 }
 
 read_inputs | awk -v after="$FILTER_AFTER" -v before="$FILTER_BEFORE" -v ip_fil="$FILTER_IP" -v uri_fil="$FILTER_URI" -v cmd="$COMMAND" '
-BEGIN 
-{
+BEGIN {
     # Mesiac na cislo
     m["Jan"]="01"; m["Feb"]="02"; m["Mar"]="03"; m["Apr"]="04"; m["May"]="05"; m["Jun"]="06"; m["Jul"]="07"; m["Aug"]="08"; m["Sep"]="09"; m["Oct"]="10"; m["Nov"]="11"; m["Dec"]="12";
+}
 }
     ip = $1
     uri = $7
 
-[DD/Mon/YYYY:HH:MM:SS +TZ]
     # Ostranenie [ z datumu
     date_str = substr($4, 2)
 
@@ -62,4 +62,69 @@ BEGIN
 
     date = log_date = d[3] m[d[2]] d[1] d[4] d[5] d[6]
     log_final_date = d[3] "-" m[d[2]] "-" d[1] " " d[4] ":00"
-'
+
+    # Pri splneni, cize poruseni nejakej podmienky, pokracujeme na dalsi riadok a ignorujeme aktualny riadok
+    if (after != "" && log_date <= after) next;
+    if (before != "" && log_date >= before) next;
+    if (ip_fil != "" && ip != ip_fil) next;
+    if (uri_fil != "" && uri !~ uri_fil) next;
+
+    # Priprava pre prikazy mimo awk
+    if (cmd == "") {
+        print $0
+    } else if (cmd == "list-ip") {
+        print ip
+    } else if (cmd == "list-uri") {
+        print uri
+    } else if (cmd == "hist-ip") {
+        print ip
+    } else if (cmd == "hist-load") {
+        print log_final_date
+    } else if (cmd == "list-hosts") {
+        print ip
+    }
+}' | 
+case "$COMMAND" in
+    "")
+        cat ;;
+
+    list-ip|list-uri)
+        # sort zoradi IP/URI abecedne a nasledne -u zarucuje ze sa bude vyskytovat nejaka IP/URI iba raz
+        sort -u ;;
+
+    list-hosts)
+        # sort zoradi IP abecedne a nasledne -u zarucuje ze sa bude vyskytovat nejaka IP iba raz
+        sort -u | while read ip; do
+
+            # host je systemovy nastroj pre DNS zaznamy
+            # chybove hlasky zahodi
+            # grep vyfiltruje iba riadky ktore obsahuju "domain name pointer" teda to co potrebujeme
+            # awk '{print $NF}' vytiahne posledne slovo co je v nasom pripade samotna domain
+            host_info=$(host "$ip" 2>/dev/null | grep "domain name pointer" | awk '{print $NF}')
+
+            # -n kontroluje ci je premenna neprazdna
+            if [ -n "$host_info" ]; then
+                echo "$host_info"
+            else
+                echo "$ip"
+            fi
+        done ;;
+
+    hist-ip)
+        sort | uniq -c | sort -nr | awk '{
+            count = $1;
+            category = $2;
+            hashes = "";
+            for (i=0; i<count; i++) hashes = hashes "#";
+            printf "%s (%d): %s\n", category, count, hashes;
+        }' ;;
+
+    hist-load)
+        sort | uniq -c | awk '{
+            count = $1;
+            category = $2 " " $3; # Spojení data a času (YYYY-MM-DD HH:00)
+            hashes = "";
+            for (i=0; i<count; i++) hashes = hashes "#";
+            printf "%s (%d): %s\n", category, count, hashes;
+        }' ;;
+esac
