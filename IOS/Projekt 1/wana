@@ -11,10 +11,11 @@ FILES=""
 # Spracovanie argumentov a nasledne posunutie
 while [ $# -gt 0 ]; do
     case "$1" in
-        -a) FILTER_AFTER="$2"; shift 2 ;;
-        -b) FILTER_BEFORE="$2"; shift 2 ;;
-        -ip) FILTER_IP="$2"; shift 2 ;;
-        -uri) FILTER_URI="$2"; shift 2 ;;
+        # Pridanie ### medzi filtre pri zadani viacerych filtrov
+        -a) FILTER_AFTER="${FILTER_AFTER}${FILTER_AFTER:+###}$2"; shift 2 ;;
+        -b) FILTER_BEFORE="${FILTER_BEFORE}${FILTER_BEFORE:+###}$2"; shift 2 ;;
+        -ip) FILTER_IP="${FILTER_IP}${FILTER_IP:+###}$2"; shift 2 ;;
+        -uri) FILTER_URI="${FILTER_URI}${FILTER_URI:+###}$2"; shift 2 ;;
         list-ip|list-hosts|list-uri|hist-ip|hist-load) COMMAND="$1"; shift ;;
         *) FILES="$FILES $1"; shift ;;
     esac
@@ -52,6 +53,20 @@ read_inputs | awk -v after="$FILTER_AFTER" -v before="$FILTER_BEFORE" -v ip_fil=
 BEGIN {
     # Mesiac na cislo
     m["Jan"]="01"; m["Feb"]="02"; m["Mar"]="03"; m["Apr"]="04"; m["May"]="05"; m["Jun"]="06"; m["Jul"]="07"; m["Aug"]="08"; m["Sep"]="09"; m["Oct"]="10"; m["Nov"]="11"; m["Dec"]="12";
+
+    # Rozdelenie spojenych filtrov do poli podla oddelovaca ###
+    if (after != "") { 
+        split(after, afters, "###");
+    }
+    if (before != "") {
+        split(before, befores, "###");
+    }
+    if (ip_fil != "") {
+        split(ip_fil, ips, "###");
+    }
+    if (uri_fil != "") {
+        split(uri_fil, uris, "###");
+    }
 }
 
 {
@@ -69,23 +84,48 @@ BEGIN {
     log_final_date = d[3] "-" m[d[2]] "-" d[1] " " d[4] ":00"
 
     # Pri splneni, cize poruseni nejakej podmienky, pokracujeme na dalsi riadok a ignorujeme aktualny riadok
-    if (after != "" && log_date <= after) next;
-    if (before != "" && log_date >= before) next;
-    if (ip_fil != "" && ip != ip_fil) next;
-    if (uri_fil != "" && uri !~ uri_fil) next;
+    if (after != "") {
+        for (i in afters) {
+            if (log_date <= afters[i])
+                next;
+        }
+    }
+    if (before != "") {
+        for (i in befores) {
+            if (log_date >= befores[i]) 
+                next;
+        }
+    }
+    if (ip_fil != "") {
+        for (i in ips) {
+            if (ip != ips[i]) 
+                next;
+        }
+    }
+    if (uri_fil != "") {
+        for (i in uris) {
+            if (uri !~ uris[i]) 
+                next;
+        }
+    }
 
     # Priprava pre prikazy mimo awk
     if (cmd == "") {
         print $0
-    } else if (cmd == "list-ip") {
+    } 
+    else if (cmd == "list-ip") {
         print ip
-    } else if (cmd == "list-uri") {
+    } 
+    else if (cmd == "list-uri") {
         print uri
-    } else if (cmd == "hist-ip") {
+    } 
+    else if (cmd == "hist-ip") {
         print ip
-    } else if (cmd == "hist-load") {
+    } 
+    else if (cmd == "hist-load") {
         print log_final_date
-    } else if (cmd == "list-hosts") {
+    } 
+    else if (cmd == "list-hosts") {
         print ip
     }
 }' | 
