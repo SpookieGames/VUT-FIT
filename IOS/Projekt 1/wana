@@ -35,8 +35,12 @@ read_inputs() {
         cat
     else
         for f in $FILES; do
-            if [[ "$f" == *.gz ]]; then
-                gzip -dc "$f" 2>/dev/null || zcat "$f"
+            # Overenie ci je subor gzip compressed data subor
+            # Najskor som overoval ci sa subor konci na .gz ale sposobilo to ze sa niekedy pokazil vystup
+            # if [[ "$f" == *.gz ]]; then
+            #    gzip -dc "$f" 2>/dev/null || zcat "$f"
+            if file "$f" | grep -q "gzip compressed data"; then
+                zcat "$f"
             else
                 cat "$f"
             fi
