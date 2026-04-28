@@ -1,0 +1,4 @@
+xphamha00 100 (Matematická knihovna, Makefile, dokumentace - manuály a Doxygen, logika výpočtu, testování)
+xholesm00 100 (Matematická knihovna, GUI, instalátor, nejvíce se podílel na Mockup z ostatních, debugging)
+xduzekk00 100 (Matematická knihovna, Makefile, dokumentace - Doxygen, profiling, testování)
+xstania00 100 (Matematická knihovna, GUI, debugging, instalátor)

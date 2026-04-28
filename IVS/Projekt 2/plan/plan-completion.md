@@ -1,0 +1,12 @@
+- ✅ Vytvoření GitHub repozitáře - xphamha00
+- ✅ Návrh matematické knihovny - všichni
+- ✅ Návrh a vytvoření testů k TDD - xphamha00, xduzekk00
+- ✅ Naprogramování knihovny - všichni
+- ✅ Návrh a naprogramování GUI kalkulačky - xholesm00, xstania00
+- ✅ Návrh a vytvoření makefile - xphamha00, xduzekk00
+- ✅ Instalátor - xholesm00, xstania00
+- 🟡 Dokumentace - xphamha00, xduzekk00
+- ✅ Profiling - xphamha00, xduzekk00
+- ✅ Mock-ups - všichni
+- ✅ Debug - xholesm00, xstania00
+- ☐ Odevzdání projektu - xphamha00

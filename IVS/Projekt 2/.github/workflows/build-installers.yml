@@ -1,0 +1,215 @@
+name: Build OS Installers
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-installers:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: debian
+            artifact_name: INTERCALCULATOR-Ubuntu-Debian.deb
+          - os: windows-latest
+            target: windows
+            artifact_name: INTERCALCULATOR-Windows-Setup.exe
+          - os: macos-latest
+            target: macos
+            artifact_name: INTERCALCULATOR-macOS.dmg
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install PyInstaller and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r src/requirements.txt
+
+      - name: Build Executable with PyInstaller
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            SEP=";"
+            ICON_PATH="src/assets/icon.ico"
+          elif [ "$RUNNER_OS" = "macOS" ]; then
+            SEP=":"
+            ICON_PATH="src/assets/icon-512.icns"
+          else
+            SEP=":"
+            ICON_PATH="src/assets/icon-512.png"
+          fi
+          pyinstaller --noconfirm --onefile --windowed --name "INTERCALCULATOR" \
+            --icon "$ICON_PATH" \
+            --add-data "VERSION${SEP}." \
+            --add-data "src/assets${SEP}assets" \
+            src/gui.py
+
+      # ==========================================
+      # UBUNTU/DEBIAN: Create a .deb package
+      # ==========================================
+      - name: Create Ubuntu/Debian .deb installer
+        if: matrix.target == 'debian'
+        run: |
+          sudo apt-get install -y rubygems
+          sudo gem install fpm
+
+          VER=$(cat VERSION | tr -d '\n\r ')
+
+          mkdir -p package_root/usr/local/bin
+          cp "dist/INTERCALCULATOR" package_root/usr/local/bin/intercalculator
+          chmod +x package_root/usr/local/bin/intercalculator
+
+          mkdir -p package_root/usr/share/applications
+          cat <<EOF > package_root/usr/share/applications/intercalculator.desktop
+          [Desktop Entry]
+          Type=Application
+          Name=INTERCALCULATOR $VER
+          Exec=/usr/local/bin/intercalculator
+          Terminal=false
+          Categories=Utility;Calculator;
+          Icon=intercalculator
+          EOF
+
+          mkdir -p package_root/usr/share/icons/hicolor/512x512/apps
+          cp "src/assets/icon-512.png" package_root/usr/share/icons/hicolor/512x512/apps/intercalculator.png
+
+          fpm -s dir -t deb -n "intercalculator" -v "$VER" \
+            -d "libqt5gui5" \
+            -d "libqt5widgets5" \
+            -d "libqt5svg5" \
+            -d "libxcb-xinerama0" \
+            -d "libxcb-icccm4" \
+            -d "libxcb-image0" \
+            -d "libxcb-keysyms1" \
+            -d "libxcb-render-util0" \
+            -d "libxcb-shape0" \
+            -d "libxcb-randr0" \
+            -d "libxcb-xfixes0" \
+            -d "libx11-xcb1" \
+            -d "libxkbcommon-x11-0" \
+            -C package_root .
+
+          mv intercalculator_${VER}_amd64.deb INTERCALCULATOR-Ubuntu-Debian.deb
+
+      # ==========================================
+      # WINDOWS: Create a Setup Installer
+      # ==========================================
+      - name: Create Windows Setup Installer (Inno Setup)
+        if: matrix.target == 'windows'
+        shell: bash
+        run: |
+          VER=$(cat VERSION | tr -d '\n\r ')
+
+          echo '[Setup]' > installer.iss
+          echo 'AppName=INTERCALCULATOR' >> installer.iss
+          echo "AppVersion=$VER" >> installer.iss
+          echo "UninstallDisplayName=INTERCALCULATOR $VER" >> installer.iss
+          echo 'DefaultDirName={autopf}\INTERCALCULATOR' >> installer.iss
+          echo 'OutputDir=.' >> installer.iss
+          echo 'OutputBaseFilename=INTERCALCULATOR-Windows-Setup' >> installer.iss
+          echo 'Compression=lzma' >> installer.iss
+          echo 'SolidCompression=yes' >> installer.iss
+
+          echo '[Run]' >> installer.iss
+          echo 'Filename: "{app}\INTERCALCULATOR.exe"; Description: "{cm:LaunchProgram,INTERCALCULATOR}"; Flags: nowait postinstall skipifsilent' >> installer.iss
+
+          echo '[Tasks]' >> installer.iss
+          echo 'Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked' >> installer.iss
+
+          echo '[Files]' >> installer.iss
+          echo 'Source: "dist\INTERCALCULATOR.exe"; DestDir: "{app}"; Flags: ignoreversion' >> installer.iss
+
+          echo '[Icons]' >> installer.iss
+          echo 'Name: "{autoprograms}\INTERCALCULATOR"; Filename: "{app}\INTERCALCULATOR.exe"' >> installer.iss
+          echo 'Name: "{autodesktop}\INTERCALCULATOR"; Filename: "{app}\INTERCALCULATOR.exe"; Tasks: desktopicon' >> installer.iss
+
+          iscc installer.iss
+
+      # ==========================================
+      # MACOS: Create a .dmg image
+      # ==========================================
+      - name: Create macOS .dmg installer
+        if: matrix.target == 'macos'
+        run: |
+          brew install create-dmg
+          VER=$(cat VERSION | tr -d '\n\r ')
+
+          mv "dist/INTERCALCULATOR.app" "dist/INTERCALCULATOR $VER.app"
+
+          create-dmg \
+            --volname "INTERCALCULATOR v$VER Installer" \
+            --window-pos 200 120 \
+            --window-size 600 300 \
+            --icon-size 100 \
+            --app-drop-link 425 120 \
+            "INTERCALCULATOR-macOS.dmg" \
+            "dist/INTERCALCULATOR $VER.app"
+
+      # ==========================================
+      # UPLOAD ARTIFACTS
+      # ==========================================
+      - name: Upload Installer Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ matrix.artifact_name }}
+          retention-days: 5
+
+  # ==========================================
+  # NEW JOB: Create Release if VERSION changed
+  # ==========================================
+  create-release:
+    name: Create GitHub Release
+    needs: build-installers
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if VERSION file changed
+        id: check_version
+        run: |
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q "^VERSION$"; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            VER=$(cat VERSION | tr -d '\n\r ')
+            echo "version=$VER" >> $GITHUB_OUTPUT
+            echo "Version changed to $VER! Preparing release."
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "VERSION file did not change. Skipping release."
+          fi
+
+      - name: Download all OS artifacts
+        if: steps.check_version.outputs.changed == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          path: release_assets
+          merge-multiple: true
+
+      - name: Create Release and Upload Assets
+        if: steps.check_version.outputs.changed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.check_version.outputs.version }}
+          name: INTERCALCULATOR v${{ steps.check_version.outputs.version }}
+          generate_release_notes: true
+          files: release_assets/*

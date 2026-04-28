@@ -1,0 +1,121 @@
+/**
+@mainpage INTERCALCULATOR – IVS Project Documentation
+
+@image html icon-no-text.png width=96px
+
+---
+
+## Project Overview
+
+INTERCALCULATOR is a calculator with a graphical user interface developed as part of the IVS course.
+The application supports both basic and advanced mathematical operations, including factorial,
+root, power, and natural logarithm. Expressions are entered in infix notation
+and are internally converted to postfix form before evaluation.
+
+| | |
+|---|---|
+| **Version** | 1.0.1 |
+| **License** | GNU General Public License v3.0 |
+| **Platforms** | Windows 10/11 · macOS 15+ · Ubuntu 24.04+ |
+| **GitHub** | https://github.com/honzakralem/ivs-project-2 |
+
+---
+
+## Architecture
+
+The project consists of three main modules that cooperate in a linear
+expression processing pipeline:
+
+```
+  [ User ]
+     │  enters expression
+     ▼
+  [ gui.py ]          ← PyQt5 graphical interface
+     │  infix expression string
+     ▼
+  [ infixtopost.py ]  ← infix → postfix conversion + evaluation
+     │  operation calls
+     ▼
+  [ mathlib.py ]      ← math library
+```
+
+---
+
+## Modules
+
+### @ref mathlib.py "mathlib – math library"
+Implements elementary mathematical functions with no external dependencies
+(except the standard `math` module). All functions are fully covered by unit tests.
+
+| Function | Description |
+|----------|-------------|
+| `add(a, b)` | Addition |
+| `sub(a, b)` | Subtraction |
+| `mul(a, b)` | Multiplication |
+| `div(a, b)` | Division; raises `ZeroDivisionError` when `b == 0` |
+| `mod(a, b)` | Modulo; raises `ZeroDivisionError` when `b == 0` |
+| `pow(a, b)` | Power |
+| `sqt(a, b)` | b-th root; handles negative and zero inputs |
+| `fac(n)` | Factorial; requires a non-negative integer |
+| `ln(a)` | Natural logarithm; raises `ValueError` when `a ≤ 0` |
+
+---
+
+### @ref infixtopost.py "infixtopost – expression conversion and evaluation"
+Implements the Shunting-yard algorithm to convert infix notation to postfix,
+then evaluates the resulting expression using functions from `mathlib`.
+
+Supported operators and their precedence:
+
+| Precedence | Operators |
+|------------|-----------|
+| 1 | `+` `-` |
+| 2 | `*` `/` `%` |
+| 3 | `^` |
+| 4 | `ln` `sqt` `fac` |
+
+---
+
+### @ref gui.py "gui – graphical interface (PyQt5)"
+Forms the layer between the user and the computation core. Implemented using PyQt5,
+supporting both basic and advanced display modes.
+
+Key features:
+- Expression history display
+- Keyboard shortcuts
+- Dynamic version detection from the `VERSION` file
+- PyInstaller compatibility (frozen environment)
+
+---
+
+### Other Files
+
+| File | Description |
+|------|-------------|
+| `mathlib_test.py` | Unit tests for the math library |
+| `infixtopost_test.py` | Unit tests for expression conversion |
+| `profiling.py` | Performance measurement script |
+| `setup.py` | Dependency installation and virtual environment setup |
+| `generate.py` | Auxiliary generator script |
+
+---
+
+## Authors
+
+The project was developed by **TEAM INTERNATIONATIONAL**:
+
+| Name | Login |
+|------|-------|
+| Ha Pham | xphamha00 |
+| Kristián Dúžek | xduzekk00 |
+| Michal Holeša | xholesm00 |
+| Adrián Staník | xstania00 |
+
+---
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0**.
+The full license text is available in the `LICENSE` file in the root of the repository.
+
+*/

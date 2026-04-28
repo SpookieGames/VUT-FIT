@@ -1,0 +1,22 @@
+PLÁN
+19.3. Vytvoření GitHub repozitáře - xphamha00
+20.3. Návrh matematické knihovny - všichni
+21.3. Návrh a vytvoření testů k TDD - xphamha00, xduzekk00
+24.3. Naprogramování knihovny - všichni
+27.3. Návrh a naprogramování GUI kalkulačky - xholesm00, xstania00
+10.4. Návrh a vytvoření makefile - xphamha00, xduzekk00
+17.4. Instalátor - xholesm00, xstania00
+17.4. Dokumentace - xphamha00, xduzekk00
+24.4. Profiling - xphamha00, xduzekk00
+24.4. Mock-ups - všichni
+25.4. Debug - xholesm00, xstania00
+30.4. Odevzdání projektu - xphamha00
+
+KOMUNIKAČNÍ KANÁLY
+-Discord
+-Telefon via Instagram
+
+VERZOVACÍ SYSTÉM
+-GitHub
+https://github.com/honzakralem/ivs-project-2
+
