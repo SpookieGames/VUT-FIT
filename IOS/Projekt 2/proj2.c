@@ -142,7 +142,8 @@ void dispatcher_process(int N, int K, int O, int V)
 
 void cart_process(int idV, int TV)
 {
-    srand((unsigned int)getpid() ^ (unsigned int)time(NULL)); // Inicializacia generatora nahodnych cisel
+    // Generator nahodnych cisel
+    srand((unsigned int)getpid());
     log_action("V %d: started", idV);
 
     while (1)
@@ -206,7 +207,7 @@ void cart_process(int idV, int TV)
 void visitor_process(int idN, int TN)
 {
     // Generator nahodnych cisel
-    srand((unsigned int)getpid() ^ (unsigned int)time(NULL));
+    srand((unsigned int)getpid());
     log_action("N %d: started", idN);
 
     // Simulacia trvania cesty do fronty

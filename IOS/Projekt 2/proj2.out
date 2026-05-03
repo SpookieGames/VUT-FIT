@@ -1,52 +1,52 @@
 1: D: started
-2: N 7: started
+2: V 1: started
 3: N 1: started
 4: N 2: started
-5: N 4: started
-6: N 3: started
-7: N 5: started
-8: N 6: started
-9: V 1: started
-10: V 2: started
+5: N 3: started
+6: N 4: started
+7: V 2: started
+8: N 5: started
+9: N 6: started
+10: N 7: started
 11: N 8: started
 12: N 9: started
 13: N 10: started
-14: N 7: queue
-15: N 1: queue
-16: N 2: queue
+14: N 1: queue
+15: N 2: queue
+16: N 3: queue
 17: N 4: queue
-18: N 3: queue
-19: N 5: queue
-20: N 6: queue
+18: N 5: queue
+19: N 6: queue
+20: N 7: queue
 21: N 8: queue
 22: N 9: queue
 23: N 10: queue
 24: D: next cart
 25: V 1: boarding started
-26: N 7: boarding
-27: N 1: boarding
-28: N 2: boarding
-29: N 4: boarding
+26: N 1: boarding
+27: N 2: boarding
+28: N 4: boarding
+29: N 3: boarding
 30: V 1: boarding complete
 31: V 1: leaving started
 32: D: next cart
-33: N 7: leaving
-34: N 1: leaving
-35: N 2: leaving
-36: N 4: leaving
+33: N 1: leaving
+34: N 4: leaving
+35: N 3: leaving
+36: N 2: leaving
 37: V 2: boarding started
 38: V 1: leaving complete
-39: N 3: boarding
-40: N 5: boarding
-41: N 6: boarding
-42: N 8: boarding
+39: N 5: boarding
+40: N 7: boarding
+41: N 8: boarding
+42: N 6: boarding
 43: V 2: boarding complete
 44: V 2: leaving started
 45: D: next cart
-46: N 3: leaving
-47: N 5: leaving
-48: N 6: leaving
-49: N 8: leaving
+46: N 5: leaving
+47: N 7: leaving
+48: N 8: leaving
+49: N 6: leaving
 50: V 1: boarding started
 51: V 2: leaving complete
 52: N 9: boarding
