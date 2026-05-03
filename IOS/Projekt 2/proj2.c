@@ -177,12 +177,11 @@ void cart_process(int idV, int TV)
         sem_post(&shm->cart_departed); // Odchod zo stanice
 
         // Jazda po drahe [TV/2, TV] mikrosekund
-        {
-            int half = TV / 2;
-            int range = TV - half + 1;
-            int ride = half + rand() % range;
-            usleep((unsigned int)ride);
-        }
+
+        int half = TV / 2;
+        int range = TV - half + 1;
+        int ride = half + rand() % range;
+        usleep((unsigned int)ride);
 
         // Uvolnenie stanice
         sem_wait(&shm->output_station);
@@ -251,47 +250,43 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Validacia argumentov pomocou strtol
-    char *endp;
-
-    long lV = strtol(argv[1], &endp, 10);
-    if (*endp != '\0' || lV <= 0 || lV >= 10)
+    // Validacia argumentov
+    int V = atoi(argv[1]);
+    if (V <= 0 || V >= 10)
     {
         fprintf(stderr, "Error: invalid V (0 < V < 10)\n");
         return 1;
     }
-    long lN = strtol(argv[2], &endp, 10);
-    if (*endp != '\0' || lN <= 0 || lN >= 10000)
+    int N = atoi(argv[2]);
+    if (N <= 0 || N >= 10000)
     {
         fprintf(stderr, "Error: invalid N (0 < N < 10000)\n");
         return 1;
     }
-    long lK = strtol(argv[3], &endp, 10);
-    if (*endp != '\0' || lK < 4 || lK > 40)
+    int K = atoi(argv[3]);
+    if (K < 4 || K > 40)
     {
         fprintf(stderr, "Error: invalid K (4 <= K <= 40)\n");
         return 1;
     }
-    long lTV = strtol(argv[4], &endp, 10);
-    if (*endp != '\0' || lTV < 0 || lTV > 1000)
+    int TV = atoi(argv[4]);
+    if (TV < 0 || TV > 1000)
     {
         fprintf(stderr, "Error: invalid TV (0 <= TV <= 1000)\n");
         return 1;
     }
-    long lTN = strtol(argv[5], &endp, 10);
-    if (*endp != '\0' || lTN < 0 || lTN > 1000)
+    int TN = atoi(argv[5]);
+    if (TN < 0 || TN > 1000)
     {
         fprintf(stderr, "Error: invalid TN (0 <= TN <= 1000)\n");
         return 1;
     }
-    long lO = strtol(argv[6], &endp, 10);
-    if (*endp != '\0' || lO <= 0 || lO > 100)
+    int O = atoi(argv[6]);
+    if (O <= 0 || O > 100)
     {
         fprintf(stderr, "Error: invalid O (0 < O <= 100)\n");
         return 1;
     }
-
-    int V = lV, N = lN, K = lK, TV = lTV, TN = lTN, O = lO; // Priradenie hodnot do premennych
 
     // Otvorenie vystupneho suboru
     f = fopen(FILE_NAME, "w");
