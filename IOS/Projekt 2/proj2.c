@@ -1,3 +1,4 @@
+// Nacitanie potrebnych kniznic
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -7,7 +8,15 @@
 #include <semaphore.h>
 #include <sys/mman.h>
 
+// Definicia nazvu vystupneho suboru
 #define FILE_NAME "proj2.out"
+
+// Deklaracia pouzitych funkcii
+void log_action(const char *fmt, ...);
+void cleanup(void);
+void dispatcher_process(int N, int K, int O, int V);
+void cart_process(int idV, int TV);
+void visitor_process(int idN, int TN);
 
 typedef struct
 {
@@ -17,135 +26,156 @@ typedef struct
     int is_closing;
     int current_capacity;
 
-    sem_t mutex;
-    sem_t cart_ready;
-    sem_t visitor_queue;
-    sem_t all_boarded;
-    sem_t output_station;
-    sem_t leaving_sem;
-    sem_t all_left;
-    sem_t cart_departed;
-    sem_t visitor_arrived;
-} SharedData;
+    sem_t mutex;           // Chrani vsetky zdielane data
+    sem_t cart_ready;      // Voziky cakaju na pokyn dispecera
+    sem_t visitor_queue;   // Navstevnici cakaju na nastup do vozika
+    sem_t all_boarded;     // Vozik caka cap-krat
+    sem_t output_station;  // Mutex vystupnej stanice - len 1 vozik naraz
+    sem_t leaving_sem;     // Navstevnici cakaju na vystup z vozika
+    sem_t all_left;        // Vozik caka cap krat
+    sem_t cart_departed;   // Dispecer caka
+    sem_t visitor_arrived; // Dispecer caka ked je fronta prazdna
+} SharedMem;
 
-static FILE *pfile = NULL;
-static SharedData *shd = NULL;
+static FILE *f = NULL;
+static SharedMem *shm = NULL;
 
 void log_action(const char *fmt, ...)
 {
     va_list ap;
-    sem_wait(&shd->mutex);
-    fprintf(pfile, "%d: ", shd->action_counter++);
+    sem_wait(&shm->mutex);
+    fprintf(f, "%d: ", shm->action_counter++); // Vypis cisla akcie a inkrementacia citaca
     va_start(ap, fmt);
-    vfprintf(pfile, fmt, ap);
+    vfprintf(f, fmt, ap); // Vypis
     va_end(ap);
-    fputc('\n', pfile);
-    fflush(pfile);
-    sem_post(&shd->mutex);
+    fputc('\n', f);
+    fflush(f); // Okamzite zapisanie do suboru
+    sem_post(&shm->mutex);
 }
 
 void cleanup(void)
 {
-    if (shd != NULL)
+    if (shm != NULL)
     {
-        sem_destroy(&shd->mutex);
-        sem_destroy(&shd->cart_ready);
-        sem_destroy(&shd->visitor_queue);
-        sem_destroy(&shd->all_boarded);
-        sem_destroy(&shd->output_station);
-        sem_destroy(&shd->leaving_sem);
-        sem_destroy(&shd->all_left);
-        sem_destroy(&shd->cart_departed);
-        sem_destroy(&shd->visitor_arrived);
-        (void)munmap(shd, sizeof(SharedData));
-        shd = NULL;
+        sem_destroy(&shm->mutex);
+        sem_destroy(&shm->cart_ready);
+        sem_destroy(&shm->visitor_queue);
+        sem_destroy(&shm->all_boarded);
+        sem_destroy(&shm->output_station);
+        sem_destroy(&shm->leaving_sem);
+        sem_destroy(&shm->all_left);
+        sem_destroy(&shm->cart_departed);
+        sem_destroy(&shm->visitor_arrived);
+        munmap(shm, sizeof(SharedMem));
+        shm = NULL;
     }
-    if (pfile != NULL)
+    if (f != NULL)
     {
-        fclose(pfile);
-        pfile = NULL;
+        fclose(f); // Zatvorenie vystupneho suboru
+        f = NULL;
     }
 }
 
 void dispatcher_process(int N, int K, int O, int V)
 {
+    // Generator nahodnych cisel
     srand((unsigned int)getpid());
     log_action("D: started");
 
-    while (1)
-    {
-        sem_wait(&shd->mutex);
-        while (1)
-        {
-            if (shd->visitors_announced == N && shd->queue_size == 0)
-            {
-                sem_post(&shd->mutex);
-                goto closing;
-            }
-            if (shd->queue_size >= K)
-                break;
-            if (shd->visitors_announced == N && shd->queue_size > 0)
-                break;
+    int should_close = 0;
 
-            sem_post(&shd->mutex);
-            sem_wait(&shd->visitor_arrived);
-            sem_wait(&shd->mutex);
+    while (!should_close)
+    {
+        sem_wait(&shm->mutex);
+
+        int ready = 0;
+        while (!ready)
+        {
+            if (shm->visitors_announced == N && shm->queue_size == 0)
+            {
+                should_close = 1;
+                ready = 1;
+            }
+            else if (shm->queue_size >= K)
+            {
+                ready = 1;
+            }
+            else if (shm->visitors_announced == N && shm->queue_size > 0)
+            {
+                ready = 1;
+            }
+            else
+            {
+                sem_post(&shm->mutex);
+                sem_wait(&shm->visitor_arrived);
+                sem_wait(&shm->mutex);
+            }
         }
 
-        int cap = (shd->queue_size < K) ? shd->queue_size : K;
-        shd->current_capacity = cap;
-        shd->queue_size -= cap;
-        sem_post(&shd->mutex);
+        sem_post(&shm->mutex);
+
+        // Ak sa ma zatvorit tak vyskocime z cyklu
+        if (should_close)
+            break;
+
+        // Kapacita
+        sem_wait(&shm->mutex);
+        int cap = (shm->queue_size < K) ? shm->queue_size : K;
+        shm->current_capacity = cap;
+        shm->queue_size -= cap;
+        sem_post(&shm->mutex);
 
         log_action("D: next cart");
-        sem_post(&shd->cart_ready);
-        sem_wait(&shd->cart_departed);
+        sem_post(&shm->cart_ready);
+        sem_wait(&shm->cart_departed); // Odchod z nastupnej stanice
         usleep((unsigned int)O);
     }
 
-closing:
     log_action("D: closing");
-    sem_wait(&shd->mutex);
-    shd->is_closing = 1;
-    sem_post(&shd->mutex);
+    sem_wait(&shm->mutex);
+    shm->is_closing = 1;
+    sem_post(&shm->mutex);
     for (int i = 0; i < V; i++)
-        sem_post(&shd->cart_ready);
+        sem_post(&shm->cart_ready);
     exit(EXIT_SUCCESS);
 }
 
 void cart_process(int idV, int TV)
 {
-    srand((unsigned int)getpid() ^ (unsigned int)time(NULL));
+    srand((unsigned int)getpid() ^ (unsigned int)time(NULL)); // Inicializacia generatora nahodnych cisel
     log_action("V %d: started", idV);
 
     while (1)
     {
-        sem_wait(&shd->cart_ready);
+        sem_wait(&shm->cart_ready);
 
-        sem_wait(&shd->mutex);
-        int closing = shd->is_closing;
-        int cap = shd->current_capacity;
-        sem_post(&shd->mutex);
+        sem_wait(&shm->mutex);
+        int closing = shm->is_closing;
+        int cap = shm->current_capacity;
+        sem_post(&shm->mutex);
 
+        // Atrakcia je zatvorena
         if (closing)
         {
             log_action("V %d: closed", idV);
             exit(EXIT_SUCCESS);
         }
 
+        // Nastup navstevnikov do vozika
         log_action("V %d: boarding started", idV);
         for (int i = 0; i < cap; i++)
         {
-            sem_post(&shd->visitor_queue);
+            sem_post(&shm->visitor_queue); // Vyzvanie navstevnikov k nastupeniu
         }
         for (int i = 0; i < cap; i++)
         {
-            sem_wait(&shd->all_boarded);
+            sem_wait(&shm->all_boarded); // Potvrdenie nastupu
         }
         log_action("V %d: boarding complete", idV);
 
-        sem_post(&shd->cart_departed);
+        sem_post(&shm->cart_departed); // Odchod zo stanice
 
+        // Jazda po drahe [TV/2, TV] mikrosekund
         {
             int half = TV / 2;
             int range = TV - half + 1;
@@ -153,68 +183,74 @@ void cart_process(int idV, int TV)
             usleep((unsigned int)ride);
         }
 
-        sem_wait(&shd->output_station);
+        // Uvolnenie stanice
+        sem_wait(&shm->output_station);
 
+        // Vystup navstevnikov z vozika
         log_action("V %d: leaving started", idV);
-
         for (int i = 0; i < cap; i++)
         {
-            sem_post(&shd->leaving_sem);
+            sem_post(&shm->leaving_sem); // Vyzvanie navstevnikov k vystupeniu
         }
         for (int i = 0; i < cap; i++)
         {
-            sem_wait(&shd->all_left);
+            sem_wait(&shm->all_left); // Potvrdenie vystupu
         }
-
         log_action("V %d: leaving complete", idV);
 
-        sem_post(&shd->output_station);
+        // Uvolnenie stanice
+        sem_post(&shm->output_station);
     }
 }
 
 void visitor_process(int idN, int TN)
 {
+    // Generator nahodnych cisel
     srand((unsigned int)getpid() ^ (unsigned int)time(NULL));
     log_action("N %d: started", idN);
 
+    // Simulacia trvania cesty do fronty
     usleep((unsigned int)(rand() % (TN + 1)));
 
-    sem_wait(&shd->mutex);
-    shd->visitors_announced++;
-    shd->queue_size++;
-    fprintf(pfile, "%d: N %d: queue\n", shd->action_counter++, idN);
-    fflush(pfile);
-    sem_post(&shd->mutex);
-    sem_post(&shd->visitor_arrived);
+    // Vstup do fronty
+    sem_wait(&shm->mutex);
+    shm->visitors_announced++; // Navstevnik dorazil do fronty
+    shm->queue_size++;         // Zvysime pocet navstevnikov vo fronte
+    fprintf(f, "%d: N %d: queue\n", shm->action_counter++, idN);
+    fflush(f);
+    sem_post(&shm->mutex);
+    sem_post(&shm->visitor_arrived);
 
-    sem_wait(&shd->visitor_queue);
+    sem_wait(&shm->visitor_queue);
 
-    sem_wait(&shd->mutex);
-    fprintf(pfile, "%d: N %d: boarding\n", shd->action_counter++, idN);
-    fflush(pfile);
-    sem_post(&shd->mutex);
-    sem_post(&shd->all_boarded);
+    // Nastup do vozika
+    sem_wait(&shm->mutex);
+    fprintf(f, "%d: N %d: boarding\n", shm->action_counter++, idN);
+    fflush(f);
+    sem_post(&shm->mutex);
+    sem_post(&shm->all_boarded); // Potvrdenie nastupenia
 
-    sem_wait(&shd->leaving_sem);
+    sem_wait(&shm->leaving_sem);
 
-    sem_wait(&shd->mutex);
-    fprintf(pfile, "%d: N %d: leaving\n", shd->action_counter++, idN);
-    fflush(pfile);
-    sem_post(&shd->mutex);
-    sem_post(&shd->all_left);
+    sem_wait(&shm->mutex);
+    fprintf(f, "%d: N %d: leaving\n", shm->action_counter++, idN);
+    fflush(f);
+    sem_post(&shm->mutex);
+    sem_post(&shm->all_left);
 
     exit(EXIT_SUCCESS);
 }
 
 int main(int argc, char *argv[])
 {
-
+    // Overenie poctu argumentov
     if (argc != 7)
     {
         fprintf(stderr, "Usage: %s V N K TV TN O\n", argv[0]);
         return 1;
     }
 
+    // Validacia argumentov pomocou strtol
     char *endp;
 
     long lV = strtol(argv[1], &endp, 10);
@@ -254,46 +290,43 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    int V = lV, N = lN, K = lK, TV = lTV, TN = lTN, O = lO;
+    int V = lV, N = lN, K = lK, TV = lTV, TN = lTN, O = lO; // Priradenie hodnot do premennych
 
-    pfile = fopen(FILE_NAME, "w");
-    if (pfile == NULL)
+    // Otvorenie vystupneho suboru
+    f = fopen(FILE_NAME, "w");
+    if (f == NULL)
     {
         fprintf(stderr, "Error: cannot open output file %s\n", FILE_NAME);
         return 1;
     }
 
-    shd = mmap(NULL, sizeof(SharedData),
+    // Alokovanie zdielanej pamate
+    shm = mmap(NULL, sizeof(SharedMem),
                PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-    if (shd == MAP_FAILED)
+    if (shm == MAP_FAILED)
     {
         fprintf(stderr, "Error: mmap failed\n");
-        fclose(pfile);
+        fclose(f);
         return 1;
     }
 
-    shd->action_counter = 1;
-    shd->queue_size = 0;
-    shd->visitors_announced = 0;
-    shd->is_closing = 0;
-    shd->current_capacity = 0;
+    // Inicializacia zdielanych premennych na vychodzi stav
+    shm->action_counter = 1;
+    shm->queue_size = 0;
+    shm->visitors_announced = 0;
+    shm->is_closing = 0;
+    shm->current_capacity = 0;
 
-    if (sem_init(&shd->mutex, 1, 1) != 0 ||
-        sem_init(&shd->cart_ready, 1, 0) != 0 ||
-        sem_init(&shd->visitor_queue, 1, 0) != 0 ||
-        sem_init(&shd->all_boarded, 1, 0) != 0 ||
-        sem_init(&shd->output_station, 1, 1) != 0 ||
-        sem_init(&shd->leaving_sem, 1, 0) != 0 ||
-        sem_init(&shd->all_left, 1, 0) != 0 ||
-        sem_init(&shd->cart_departed, 1, 0) != 0 ||
-        sem_init(&shd->visitor_arrived, 1, 0) != 0)
+    // Inicializacia vsetkych semaforov
+    if (sem_init(&shm->mutex, 1, 1) != 0 || sem_init(&shm->cart_ready, 1, 0) != 0 || sem_init(&shm->visitor_queue, 1, 0) != 0 || sem_init(&shm->all_boarded, 1, 0) != 0 || sem_init(&shm->output_station, 1, 1) != 0 || sem_init(&shm->leaving_sem, 1, 0) != 0 || sem_init(&shm->all_left, 1, 0) != 0 || sem_init(&shm->cart_departed, 1, 0) != 0 || sem_init(&shm->visitor_arrived, 1, 0) != 0)
     {
         fprintf(stderr, "Error: sem_init failed\n");
-        (void)munmap(shd, sizeof(SharedData));
-        fclose(pfile);
+        munmap(shm, sizeof(SharedMem));
+        fclose(f);
         return 1;
     }
 
+    // Vytvorenie procesu dispecera pomocou fork()
     pid_t pid = fork();
     if (pid < 0)
     {
@@ -302,8 +335,9 @@ int main(int argc, char *argv[])
         return 1;
     }
     if (pid == 0)
-        dispatcher_process(N, K, O, V);
+        dispatcher_process(N, K, O, V); // Potomok sa nikdy nevracia
 
+    // Vytvorenie V procesov vozikov pomocou fork()
     for (int i = 0; i < V; i++)
     {
         pid = fork();
@@ -314,9 +348,10 @@ int main(int argc, char *argv[])
             return 1;
         }
         if (pid == 0)
-            cart_process(i + 1, TV);
+            cart_process(i + 1, TV); // Potomok sa nikdy nevracia
     }
 
+    // Vytvorenie N procesov navstevnikov pomocou fork()
     for (int i = 0; i < N; i++)
     {
         pid = fork();
@@ -327,7 +362,7 @@ int main(int argc, char *argv[])
             return 1;
         }
         if (pid == 0)
-            visitor_process(i + 1, TN);
+            visitor_process(i + 1, TN); // Potomok sa nikdy nevracia
     }
 
     while (wait(NULL) > 0)
