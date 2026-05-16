@@ -1,6 +1,6 @@
 # 📚 VUT FIT – Školské projekty
 
-Repozitár obsahuje projekty a úlohy z predmetov prvého ročníka bakalárskeho štúdia na **VUT FIT v Brne**.
+Repozitár obsahuje projekty a úlohy z bakalárskeho štúdia na **VUT FIT v Brne**.
 
 ---
 
