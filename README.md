@@ -16,7 +16,7 @@ Každý priečinok zodpovedá jednému predmetu.
 | `IOS`     | Operační systémy                       | Shell skripty, synchronizácia procesov      |
 | `INC`     | Návrh číslicových systémů              | Prijímač UART (RX) ako FSM vo VHDL          |
 | `IVH`     | Seminář VHDL                           | BCD čítač 8×8 na doske PYNQ-Z2              |
-| `IVS`     | Praktické aspekty vývoje software      | Tímový projekt, testovanie                  |
+| `IVS`     | Praktické aspekty vývoje software      | [Tímový projekt](https://github.com/honzakralem/ivs-project-2), testovanie |
 
 ## Použité technológie
 
